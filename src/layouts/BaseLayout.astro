@@ -1,6 +1,26 @@
 ---
+/*
+ * Latin and Latin Extended only. The bare entrypoints also ship Cyrillic,
+ * Greek and Vietnamese, which no locale here uses; latin-ext is the subset
+ * carrying the Icelandic, Polish and Latvian diacritics.
+ */
+import '@fontsource/zilla-slab/latin-700.css';
+import '@fontsource/zilla-slab/latin-ext-700.css';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-ext-400.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-sans/latin-ext-600.css';
 import '../styles/global.css';
-import { localeNames, localePath, locales, routes, useTranslations, type Locale } from '../i18n/ui';
+
+import { company, formatAddress } from '../config/company';
+import {
+  localeNames,
+  localePath,
+  locales,
+  sections,
+  useTranslations,
+  type Locale,
+} from '../i18n/ui';
 
 interface Props {
   locale: Locale;
@@ -19,6 +39,7 @@ const t = useTranslations(locale);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <meta name="theme-color" content="#1e2219" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     {
       /* Tell search engines about every translation of this page. */
@@ -27,20 +48,36 @@ const t = useTranslations(locale);
       ))
     }
   </head>
-  <body class="bg-ground text-ink font-sans">
-    <header class="border-b border-rule">
-      <nav class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-4">
-        <a href={localePath(locale)} class="font-semibold">Bergverk</a>
-        <ul class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
+  <body class="bg-ground text-ink font-sans antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:m-2 focus:bg-rust focus:px-3 focus:py-2"
+    >
+      {t('a11y.skip')}
+    </a>
+
+    <header class="stratum">
+      <nav
+        class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-5"
+        aria-label={company.name}
+      >
+        <a href={localePath(locale)} class="font-display text-lg tracking-tight">
+          {company.name}
+        </a>
+
+        <ul class="flex flex-wrap gap-x-5 gap-y-1 text-sm">
           {
-            routes.map((route) => (
+            sections.map((section) => (
               <li>
-                <a href={localePath(locale, route)}>{t(`nav.${route}`)}</a>
+                <a href={`#${section}`} class="text-muted hover:text-ink">
+                  {t(`nav.${section}`)}
+                </a>
               </li>
             ))
           }
         </ul>
-        <ul class="ms-auto flex gap-x-2 text-sm">
+
+        <ul class="ms-auto flex gap-x-3 text-sm" aria-label="Language">
           {
             locales.map((alt) => (
               <li>
@@ -48,7 +85,7 @@ const t = useTranslations(locale);
                   href={localePath(alt)}
                   hreflang={alt}
                   aria-current={alt === locale ? 'true' : undefined}
-                  class={alt === locale ? 'font-semibold' : 'text-muted'}
+                  class={alt === locale ? 'font-semibold text-ink' : 'text-muted hover:text-ink'}
                 >
                   {alt.toUpperCase()}
                   <span class="sr-only"> — {localeNames[alt]}</span>
@@ -60,13 +97,38 @@ const t = useTranslations(locale);
       </nav>
     </header>
 
-    <main class="mx-auto max-w-5xl px-4 py-12">
+    <main id="main">
       <slot />
     </main>
 
-    <footer class="border-t border-rule">
-      <div class="mx-auto max-w-5xl px-4 py-8 text-sm text-muted">
-        Bergverk ehf. — {t('site.tagline')}
+    <footer class="stratum--raised">
+      <div
+        class="mx-auto grid max-w-5xl gap-6 px-5 py-10 text-sm text-muted sm:grid-cols-2 lg:grid-cols-4"
+      >
+        <div>
+          <p class="font-display text-base text-ink">{company.name}</p>
+          <p class="mt-1">{t('site.tagline')}</p>
+        </div>
+
+        <div>
+          <p class="text-ink">{t('contact.address')}</p>
+          <p class="mt-1">{formatAddress()}</p>
+        </div>
+
+        <div>
+          <p class="text-ink">{t('contact.phone')}</p>
+          <p class="mt-1">
+            <a href={`tel:${company.phone.href}`} class="hover:text-ink">{company.phone.label}</a>
+          </p>
+          <p class="mt-2">
+            <a href={`mailto:${company.email}`} class="hover:text-ink">{company.email}</a>
+          </p>
+        </div>
+
+        <div>
+          <p>{t('footer.kennitala')} {company.kennitala}</p>
+          <p class="mt-1">{t('footer.vsk')} {company.vsk}</p>
+        </div>
       </div>
     </footer>
   </body>

@@ -1,6 +1,7 @@
 ---
 // The root path carries no locale. Send visitors to the default one;
 // hreflang tags in BaseLayout handle discovery of the other translations.
+import { company } from '../config/company';
 import { defaultLocale, localePath } from '../i18n/ui';
 
 const target = localePath(defaultLocale);
@@ -12,9 +13,9 @@ const target = localePath(defaultLocale);
     <meta charset="utf-8" />
     <meta http-equiv="refresh" content={`0; url=${target}`} />
     <link rel="canonical" href={new URL(target, Astro.site)} />
-    <title>Bergverk</title>
+    <title>{company.name}</title>
   </head>
   <body>
-    <a href={target}>Bergverk</a>
+    <a href={target}>{company.name}</a>
   </body>
 </html>

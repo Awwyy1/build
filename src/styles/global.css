@@ -1,16 +1,70 @@
 @import "tailwindcss";
 
 /*
- * Design tokens are intentionally neutral for now. The brand palette and
- * typefaces land here once a moodboard direction is chosen.
+ * Direction 03 "Torf" — the Icelandic turf house: peat, moss, stone, rust.
+ *
+ * The palette lives on dark earth. Lightening the ground breaks the
+ * direction, so there is no light variant here by design.
  */
 @theme {
-  --color-ground: #ffffff;
-  --color-ink: #16181c;
-  --color-muted: #666d76;
-  --color-rule: #d3d6db;
+  /* Palette */
+  --color-ground: #1e2219; /* Mold — earth, page background */
+  --color-surface: #2a3022; /* Svörður — turf, raised bands */
+  --color-moss: #5f7048; /* Mosi — moss, backgrounds and rules */
+  --color-rust: #9c4e2c; /* Ryð — rust, button fills only */
+  --color-ink: #d6cfc0; /* Birki — birch, body text */
+
+  /*
+   * Rust at full strength reaches only 2.2:1 on the earth ground, so it
+   * cannot carry text. This lightened tint clears 4.7:1 and is what dates
+   * and inline accents use; --color-rust stays for filled buttons, where
+   * ink-on-rust measures 4.9:1.
+   */
+  --color-rust-text: #c97a4e;
+
+  /* Birch dimmed for secondary text — 6.1:1 on the ground. */
+  --color-muted: #a29c8b;
+
+  /* Hairlines read as moss in shadow rather than grey. */
+  --color-rule: #3b4431;
+
+  --font-display: "Zilla Slab", ui-serif, Georgia, serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
   -webkit-text-size-adjust: 100%;
+  background-color: var(--color-ground);
+}
+
+/*
+ * Turf is laid in courses, so the page reads as horizontal strata. Each
+ * band declares its own ground and the seam between them is a moss line.
+ */
+.stratum {
+  border-block-end: 1px solid var(--color-rule);
+}
+
+.stratum--raised {
+  background-color: var(--color-surface);
+}
+
+/* Stone courses: a moss seam that breaks alignment row to row. */
+.course > * + * {
+  border-block-start: 1px solid var(--color-rule);
+}
+
+/*
+ * Torfhleðsla — courses of cut turf. Stands in for the before/after
+ * photographs so an unfilled slot still reads as part of the direction
+ * rather than a broken image. Delete once real photos land.
+ */
+.tex-strata {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #323a2a 0 7px,
+    #272d20 7px 12px,
+    #3a4430 12px 15px,
+    #2a3022 15px 24px
+  );
 }
