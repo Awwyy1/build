@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens are intentionally neutral for now. The brand palette and
+ * typefaces land here once a moodboard direction is chosen.
+ */
+@theme {
+  --color-ground: #ffffff;
+  --color-ink: #16181c;
+  --color-muted: #666d76;
+  --color-rule: #d3d6db;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}

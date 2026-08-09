@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { locales, useTranslations, type Locale } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const locale = Astro.params.lang as Locale;
+const t = useTranslations(locale);
+---
+
+<BaseLayout locale={locale} title={`Bergverk — ${t('site.tagline')}`} description={t('wip.body')}>
+  <h1 class="text-3xl font-semibold">{t('wip.title')}</h1>
+  <p class="mt-4 text-muted">{t('wip.body')}</p>
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import { localeNames, localePath, locales, routes, useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description?: string;
+}
+
+const { locale, title, description = '' } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {
+      /* Tell search engines about every translation of this page. */
+      locales.map((alt) => (
+        <link rel="alternate" hreflang={alt} href={new URL(localePath(alt), Astro.site)} />
+      ))
+    }
+  </head>
+  <body class="bg-ground text-ink font-sans">
+    <header class="border-b border-rule">
+      <nav class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-4">
+        <a href={localePath(locale)} class="font-semibold">Bergverk</a>
+        <ul class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
+          {
+            routes.map((route) => (
+              <li>
+                <a href={localePath(locale, route)}>{t(`nav.${route}`)}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <ul class="ms-auto flex gap-x-2 text-sm">
+          {
+            locales.map((alt) => (
+              <li>
+                <a
+                  href={localePath(alt)}
+                  hreflang={alt}
+                  aria-current={alt === locale ? 'true' : undefined}
+                  class={alt === locale ? 'font-semibold' : 'text-muted'}
+                >
+                  {alt.toUpperCase()}
+                  <span class="sr-only"> — {localeNames[alt]}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-4 py-12">
+      <slot />
+    </main>
+
+    <footer class="border-t border-rule">
+      <div class="mx-auto max-w-5xl px-4 py-8 text-sm text-muted">
+        Bergverk ehf. — {t('site.tagline')}
+      </div>
+    </footer>
+  </body>
+</html>
