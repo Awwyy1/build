@@ -145,11 +145,39 @@ html {
 /* ---- Mobile navigation ---------------------------------------------- */
 
 /*
- * The panel is display:none until opened, so its links stay out of the tab
- * order while hidden. Above the breakpoint it never applies at all.
+ * The panel overlays the page rather than expanding the header, which used
+ * to push the hero down as it opened. Fixed below the 4rem header and
+ * scrollable, so a long menu still reaches its last item.
+ *
+ * display:none while closed keeps its links out of the tab order.
  */
+.nav-panel {
+  position: fixed;
+  inset-block-start: 4rem;
+  inset-block-end: 0;
+  inset-inline: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background-color: var(--color-ground);
+}
+
+/*
+ * The panel lives inside the sticky header, which has its own stacking
+ * context — a z-index on the panel itself cannot escape it and the consent
+ * banner showed straight through. Raise the whole header instead, and only
+ * while the menu is open so it otherwise stays under the banner.
+ */
+.nav-open header {
+  z-index: 60;
+}
+
 .nav-panel[hidden] {
   display: none;
+}
+
+/* Holds the page still behind the open overlay. */
+.nav-open {
+  overflow: hidden;
 }
 
 .nav-burger {
@@ -164,4 +192,26 @@ html {
   display: block;
   block-size: 2px;
   background-color: currentColor;
+  transition:
+    transform 200ms ease,
+    opacity 150ms ease;
+}
+
+/* Burger folds into a cross. The bars meet in the middle, then rotate. */
+#nav-toggle[aria-expanded='true'] .nav-burger > span:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+#nav-toggle[aria-expanded='true'] .nav-burger > span:nth-child(2) {
+  opacity: 0;
+}
+
+#nav-toggle[aria-expanded='true'] .nav-burger > span:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-burger > span {
+    transition: none;
+  }
 }

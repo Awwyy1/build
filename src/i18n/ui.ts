@@ -134,6 +134,21 @@ export const ui: Record<Locale, Strings> = {
     'footer.kennitala': 'Kennitala',
     'footer.vsk': 'VSK-nr.',
     'footer.rights': 'Allur réttur áskilinn',
+
+    'cookies.text':
+      'Veldu „Samþykkja allt“ til að samþykkja notkun okkar á vefkökum og sambærilegri tækni til að bæta upplifun þína, öryggi, greiningar og sérstillingar. Veldu „Stjórna vefkökum“ til að velja nánar eða hafna.',
+    'cookies.accept': 'Samþykkja allt',
+    'cookies.decline': 'Hafna öllu',
+    'cookies.manage': 'Stjórna vefkökum',
+    'cookies.settings': 'Stillingar vefkaka',
+    'cookies.necessary.title': 'Nauðsynlegar',
+    'cookies.necessary.body': 'Þarf til að vefurinn virki. Ekki er hægt að slökkva á þeim.',
+    'cookies.analytics.title': 'Greiningar',
+    'cookies.analytics.body': 'Hjálpa okkur að sjá hvernig vefurinn er notaður.',
+    'cookies.marketing.title': 'Markaðssetning',
+    'cookies.marketing.body': 'Notaðar til að birta efni sem á betur við þig.',
+    'cookies.always': 'Alltaf virkt',
+    'cookies.save': 'Vista val',
   },
 
   en: {
@@ -234,6 +249,21 @@ export const ui: Record<Locale, Strings> = {
     'footer.kennitala': 'Company ID',
     'footer.vsk': 'VAT no.',
     'footer.rights': 'All rights reserved',
+
+    'cookies.text':
+      'Select "Accept all" to agree to our use of cookies and similar technologies to enhance your browsing experience, security, analytics and customization. Select "Manage cookies" to make more choices or opt out.',
+    'cookies.accept': 'Accept all',
+    'cookies.decline': 'Decline all',
+    'cookies.manage': 'Manage cookies',
+    'cookies.settings': 'Cookie settings',
+    'cookies.necessary.title': 'Necessary',
+    'cookies.necessary.body': 'Required for the site to work. These cannot be turned off.',
+    'cookies.analytics.title': 'Analytics',
+    'cookies.analytics.body': 'Help us see how the site is used.',
+    'cookies.marketing.title': 'Marketing',
+    'cookies.marketing.body': 'Used to show content that is more relevant to you.',
+    'cookies.always': 'Always on',
+    'cookies.save': 'Save choices',
   },
 
   pl: {
@@ -332,6 +362,21 @@ export const ui: Record<Locale, Strings> = {
     'footer.kennitala': 'Numer firmy',
     'footer.vsk': 'Nr VAT',
     'footer.rights': 'Wszelkie prawa zastrzeżone',
+
+    'cookies.text':
+      'Wybierz „Akceptuj wszystkie”, aby zgodzić się na używanie przez nas plików cookie i podobnych technologii w celu poprawy komfortu przeglądania, bezpieczeństwa, analityki i personalizacji. Wybierz „Zarządzaj plikami cookie”, aby dokonać innych wyborów lub zrezygnować.',
+    'cookies.accept': 'Akceptuj wszystkie',
+    'cookies.decline': 'Odrzuć wszystkie',
+    'cookies.manage': 'Zarządzaj plikami cookie',
+    'cookies.settings': 'Ustawienia plików cookie',
+    'cookies.necessary.title': 'Niezbędne',
+    'cookies.necessary.body': 'Wymagane do działania strony. Nie można ich wyłączyć.',
+    'cookies.analytics.title': 'Analityka',
+    'cookies.analytics.body': 'Pomagają nam zobaczyć, jak korzystasz ze strony.',
+    'cookies.marketing.title': 'Marketing',
+    'cookies.marketing.body': 'Służą do pokazywania treści lepiej dopasowanych do Ciebie.',
+    'cookies.always': 'Zawsze aktywne',
+    'cookies.save': 'Zapisz wybór',
   },
 
   lv: {
@@ -429,6 +474,21 @@ export const ui: Record<Locale, Strings> = {
     'footer.kennitala': 'Reģistrācijas nr.',
     'footer.vsk': 'PVN nr.',
     'footer.rights': 'Visas tiesības aizsargātas',
+
+    'cookies.text':
+      'Izvēlieties “Pieņemt visas”, lai piekristu sīkdatņu un līdzīgu tehnoloģiju izmantošanai, kas uzlabo pārlūkošanas pieredzi, drošību, analītiku un personalizāciju. Izvēlieties “Pārvaldīt sīkdatnes”, lai izdarītu citu izvēli vai atteiktos.',
+    'cookies.accept': 'Pieņemt visas',
+    'cookies.decline': 'Noraidīt visas',
+    'cookies.manage': 'Pārvaldīt sīkdatnes',
+    'cookies.settings': 'Sīkdatņu iestatījumi',
+    'cookies.necessary.title': 'Nepieciešamās',
+    'cookies.necessary.body': 'Vajadzīgas vietnes darbībai. Tās nevar izslēgt.',
+    'cookies.analytics.title': 'Analītika',
+    'cookies.analytics.body': 'Palīdz mums saprast, kā vietne tiek lietota.',
+    'cookies.marketing.title': 'Mārketings',
+    'cookies.marketing.body': 'Izmanto, lai rādītu tev atbilstošāku saturu.',
+    'cookies.always': 'Vienmēr aktīvas',
+    'cookies.save': 'Saglabāt izvēli',
   },
 };
 

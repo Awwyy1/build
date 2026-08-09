@@ -1,0 +1,192 @@
+---
+/**
+ * Consent banner.
+ *
+ * The site currently sets no analytics or marketing cookies at all, so this
+ * records a choice rather than gating anything today. Before adding any
+ * script that does set them, read the stored consent and gate on it:
+ *
+ *   if (window.bergverkConsent?.analytics) { ...load analytics... }
+ *
+ * The `consent:change` event fires whenever the visitor decides, so a
+ * script can react without a reload.
+ */
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const categories = [
+  { id: 'necessary', locked: true },
+  { id: 'analytics', locked: false },
+  { id: 'marketing', locked: false },
+] as const;
+---
+
+{/* Hidden until the script confirms no choice is stored, so returning
+    visitors never see it flash. */}
+<div
+  id="cookie-banner"
+  class="fixed inset-x-0 bottom-0 z-50 border-t border-rule bg-surface"
+  role="dialog"
+  aria-modal="false"
+  aria-label={t('cookies.settings')}
+  hidden
+>
+  <div class="mx-auto max-w-6xl px-5 py-5">
+    <p class="max-w-4xl text-sm leading-relaxed text-muted">{t('cookies.text')}</p>
+
+    <div id="cookie-options" class="mt-5 grid gap-5 border-t border-rule pt-5 sm:grid-cols-3" hidden>
+      {
+        categories.map((category) => (
+          <div>
+            <label class="flex items-start gap-3">
+              <input
+                type="checkbox"
+                name={category.id}
+                checked={category.locked}
+                disabled={category.locked}
+                class="mt-1 accent-rust"
+              />
+              <span>
+                <span class="block text-sm text-ink">{t(`cookies.${category.id}.title`)}</span>
+                <span class="mt-1 block text-xs text-muted">
+                  {t(`cookies.${category.id}.body`)}
+                </span>
+                {category.locked && (
+                  <span class="mt-1 block text-xs text-moss">{t('cookies.always')}</span>
+                )}
+              </span>
+            </label>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-5 flex flex-wrap gap-3">
+      <button
+        type="button"
+        data-consent="all"
+        class="bg-rust px-5 py-2.5 text-sm font-semibold text-ink transition hover:brightness-110"
+      >
+        {t('cookies.accept')}
+      </button>
+      <button
+        type="button"
+        data-consent="none"
+        class="border border-rule px-5 py-2.5 text-sm transition hover:border-moss"
+      >
+        {t('cookies.decline')}
+      </button>
+      <button
+        type="button"
+        id="cookie-manage"
+        class="border border-rule px-5 py-2.5 text-sm transition hover:border-moss"
+        aria-expanded="false"
+        aria-controls="cookie-options"
+      >
+        {t('cookies.manage')}
+      </button>
+      <button
+        type="button"
+        id="cookie-save"
+        class="border border-moss px-5 py-2.5 text-sm transition hover:border-ink"
+        hidden
+      >
+        {t('cookies.save')}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'bergverk.consent';
+
+  const banner = document.getElementById('cookie-banner');
+  const options = document.getElementById('cookie-options');
+  const manage = document.getElementById('cookie-manage');
+  const save = document.getElementById('cookie-save');
+
+  type Consent = {
+    necessary: true;
+    analytics: boolean;
+    marketing: boolean;
+    at: string;
+  };
+
+  function read(): Consent | null {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? (JSON.parse(raw) as Consent) : null;
+    } catch {
+      // Private mode or storage disabled — treat as undecided.
+      return null;
+    }
+  }
+
+  function publish(consent: Consent) {
+    (window as unknown as { bergverkConsent?: Consent }).bergverkConsent = consent;
+    window.dispatchEvent(new CustomEvent('consent:change', { detail: consent }));
+  }
+
+  function write(analytics: boolean, marketing: boolean) {
+    const consent: Consent = {
+      necessary: true,
+      analytics,
+      marketing,
+      at: new Date().toISOString(),
+    };
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+    } catch {
+      // Nothing to store into; the choice still applies to this page view.
+    }
+    publish(consent);
+    if (banner) banner.hidden = true;
+  }
+
+  if (banner && options && manage && save) {
+    const stored = read();
+
+    if (stored) {
+      publish(stored);
+    } else {
+      banner.hidden = false;
+    }
+
+    banner.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((button) =>
+      button.addEventListener('click', () => {
+        const all = button.dataset.consent === 'all';
+        write(all, all);
+      })
+    );
+
+    manage.addEventListener('click', () => {
+      const open = manage.getAttribute('aria-expanded') === 'true';
+      manage.setAttribute('aria-expanded', String(!open));
+      options.hidden = open;
+      save.hidden = open;
+    });
+
+    save.addEventListener('click', () => {
+      const checked = (name: string) =>
+        options.querySelector<HTMLInputElement>(`input[name="${name}"]`)?.checked ?? false;
+      write(checked('analytics'), checked('marketing'));
+    });
+  }
+
+  /* Lets the footer link reopen the banner after a choice was made. */
+  document.querySelectorAll('[data-cookie-reopen]').forEach((link) =>
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (banner) {
+        banner.hidden = false;
+        banner.scrollIntoView({ block: 'end' });
+      }
+    })
+  );
+</script>

@@ -111,6 +111,18 @@ const t = useTranslations(locale);
     document.addEventListener('visibilitychange', () => (document.hidden ? stop() : play()));
     still.addEventListener('change', play);
 
+    /*
+     * Once the hero has scrolled away there is nothing to see, but the timer
+     * kept crossfading a viewport-sized layer the whole way down the page.
+     * Stop entirely until it comes back.
+     */
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(
+        ([entry]) => (entry.isIntersecting ? play() : stop()),
+        { threshold: 0 }
+      ).observe(root);
+    }
+
     // Hand the crossfade over to the script only now that it can drive it.
     root.classList.add('is-ready');
     show(0);

@@ -12,6 +12,7 @@ import '@fontsource/ibm-plex-sans/latin-600.css';
 import '@fontsource/ibm-plex-sans/latin-ext-600.css';
 import '../styles/global.css';
 
+import CookieBanner from '../components/CookieBanner.astro';
 import { company } from '../config/company';
 import {
   homeSections,
@@ -74,7 +75,12 @@ const year = new Date().getFullYear();
       {t('a11y.skip')}
     </a>
 
-    <header class="sticky top-0 z-40 border-b border-rule bg-ground/95 backdrop-blur">
+    {/*
+      Opaque rather than translucent-and-blurred: against this palette the
+      blur was invisible, and a backdrop-filter on a sticky element is a
+      known source of scroll stutter on real phones.
+    */}
+    <header class="sticky top-0 z-40 border-b border-rule bg-ground">
       {/* Height is fixed at 4rem so `.screen` can subtract it exactly. */}
       <div class="mx-auto flex h-16 max-w-6xl items-center gap-4 px-5">
         <a href={home} class="font-display text-lg tracking-tight">{company.name}</a>
@@ -170,9 +176,14 @@ const year = new Date().getFullYear();
         <span>© {year} {company.name}</span>
         <span>{t('footer.kennitala')} {company.kennitala}</span>
         <span>{t('footer.vsk')} {company.vsk}</span>
+        <button type="button" data-cookie-reopen class="underline transition hover:text-ink">
+          {t('cookies.settings')}
+        </button>
         <span class="ms-auto">{t('footer.rights')}</span>
       </div>
     </footer>
+
+    <CookieBanner locale={locale} />
 
     <script>
       const toggle = document.getElementById('nav-toggle');
@@ -182,6 +193,8 @@ const year = new Date().getFullYear();
         const setOpen = (open: boolean) => {
           panel.hidden = !open;
           toggle.setAttribute('aria-expanded', String(open));
+          // The panel overlays the page; stop the page scrolling underneath.
+          document.documentElement.classList.toggle('nav-open', open);
         };
 
         toggle.addEventListener('click', () =>
