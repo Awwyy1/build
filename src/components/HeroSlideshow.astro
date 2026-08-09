@@ -1,0 +1,119 @@
+---
+/**
+ * Full-bleed hero slideshow.
+ *
+ * Renders only the imagery — the headline is overlaid by the page. Slides
+ * crossfade on a timer, with dots for manual control. Autoplay is skipped
+ * for anyone who asked for reduced motion, and the whole thing degrades to
+ * the first slide without JavaScript.
+ */
+import Photo from './Photo.astro';
+import { heroSlideDurationMs, heroSlides } from '../config/media';
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<div class="hero-slides absolute inset-0" data-duration={heroSlideDurationMs}>
+  {
+    heroSlides.map((slide, i) => (
+      <div class="hero-slide" data-slide={i} aria-hidden={i === 0 ? undefined : 'true'}>
+        <Photo
+          src={slide.src}
+          alt={t(`hero.${slide.id}.alt`)}
+          placeholder={t('media.placeholder')}
+          eager={i === 0}
+        />
+      </div>
+    ))
+  }
+
+  {/* Keeps the headline legible over any photograph. */}
+  <div class="hero-scrim absolute inset-0"></div>
+
+  {
+    heroSlides.length > 1 && (
+      <div class="absolute bottom-6 left-0 right-0 z-20">
+        <div class="mx-auto flex max-w-5xl gap-3 px-5">
+          {heroSlides.map((_, i) => (
+            <button
+              type="button"
+              class="hero-dot"
+              data-dot={i}
+              aria-label={`${t('a11y.slide')} ${i + 1}`}
+              aria-current={i === 0 ? 'true' : undefined}
+            />
+          ))}
+        </div>
+      </div>
+    )
+  }
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>('.hero-slides');
+
+  if (root) {
+    const slides = [...root.querySelectorAll<HTMLElement>('.hero-slide')];
+    const dots = [...root.querySelectorAll<HTMLElement>('.hero-dot')];
+    const duration = Number(root.dataset.duration) || 6000;
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    let current = 0;
+    let timer: number | undefined;
+
+    function show(next: number) {
+      current = (next + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => {
+        const active = i === current;
+        slide.classList.toggle('is-active', active);
+        // Hide the off-screen slides from assistive tech as well as the eye.
+        if (active) slide.removeAttribute('aria-hidden');
+        else slide.setAttribute('aria-hidden', 'true');
+      });
+
+      dots.forEach((dot, i) => {
+        if (i === current) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    }
+
+    function play() {
+      stop();
+      if (!still.matches && slides.length > 1) {
+        timer = window.setInterval(() => show(current + 1), duration);
+      }
+    }
+
+    function stop() {
+      if (timer !== undefined) window.clearInterval(timer);
+      timer = undefined;
+    }
+
+    dots.forEach((dot, i) =>
+      dot.addEventListener('click', () => {
+        show(i);
+        play();
+      })
+    );
+
+    // Don't animate against a reader, and don't burn cycles off-screen.
+    root.addEventListener('pointerenter', stop);
+    root.addEventListener('pointerleave', play);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', play);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : play()));
+    still.addEventListener('change', play);
+
+    // Hand the crossfade over to the script only now that it can drive it.
+    root.classList.add('is-ready');
+    show(0);
+    play();
+  }
+</script>

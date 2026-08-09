@@ -12,12 +12,12 @@ import '@fontsource/ibm-plex-sans/latin-600.css';
 import '@fontsource/ibm-plex-sans/latin-ext-600.css';
 import '../styles/global.css';
 
-import { company, formatAddress } from '../config/company';
+import { company } from '../config/company';
 import {
+  homeSections,
   localeNames,
   localePath,
   locales,
-  sections,
   useTranslations,
   type Locale,
 } from '../i18n/ui';
@@ -26,10 +26,28 @@ interface Props {
   locale: Locale;
   title: string;
   description?: string;
+  /** Marks the current nav item. Use 'careers' on the Careers page. */
+  active?: string;
 }
 
-const { locale, title, description = '' } = Astro.props;
+const { locale, title, description = '', active } = Astro.props;
 const t = useTranslations(locale);
+const home = localePath(locale);
+
+/*
+ * Section links are absolute rather than bare fragments, so the same nav
+ * works from Careers, which is a page of its own.
+ */
+const navLinks = [
+  ...homeSections.map((section) => ({
+    id: section,
+    href: `${home}#${section}`,
+    label: t(`nav.${section}`),
+  })),
+  { id: 'careers', href: localePath(locale, 'careers'), label: t('nav.careers') },
+];
+
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -51,33 +69,38 @@ const t = useTranslations(locale);
   <body class="bg-ground text-ink font-sans antialiased">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:m-2 focus:bg-rust focus:px-3 focus:py-2"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-2 focus:bg-rust focus:px-3 focus:py-2"
     >
       {t('a11y.skip')}
     </a>
 
-    <header class="stratum">
-      <nav
-        class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-5"
-        aria-label={company.name}
-      >
-        <a href={localePath(locale)} class="font-display text-lg tracking-tight">
-          {company.name}
-        </a>
+    <header class="sticky top-0 z-40 border-b border-rule bg-ground/95 backdrop-blur">
+      {/* Height is fixed at 4rem so `.screen` can subtract it exactly. */}
+      <div class="mx-auto flex h-16 max-w-6xl items-center gap-4 px-5">
+        <a href={home} class="font-display text-lg tracking-tight">{company.name}</a>
 
-        <ul class="flex flex-wrap gap-x-5 gap-y-1 text-sm">
-          {
-            sections.map((section) => (
-              <li>
-                <a href={`#${section}`} class="text-muted hover:text-ink">
-                  {t(`nav.${section}`)}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
+        {/* Desktop navigation. */}
+        <nav class="ms-auto hidden lg:block" aria-label={company.name}>
+          <ul class="flex gap-x-6 text-sm">
+            {
+              navLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    aria-current={link.id === active ? 'page' : undefined}
+                    class={
+                      link.id === active ? 'text-ink' : 'text-muted transition-colors hover:text-ink'
+                    }
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
 
-        <ul class="ms-auto flex gap-x-3 text-sm" aria-label="Language">
+        <ul class="ms-auto flex gap-x-3 text-sm lg:ms-6" aria-label="Language">
           {
             locales.map((alt) => (
               <li>
@@ -85,10 +108,45 @@ const t = useTranslations(locale);
                   href={localePath(alt)}
                   hreflang={alt}
                   aria-current={alt === locale ? 'true' : undefined}
-                  class={alt === locale ? 'font-semibold text-ink' : 'text-muted hover:text-ink'}
+                  class={
+                    alt === locale ? 'font-semibold text-ink' : 'text-muted transition-colors hover:text-ink'
+                  }
                 >
                   {alt.toUpperCase()}
                   <span class="sr-only"> — {localeNames[alt]}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        {/* Mobile trigger. Hidden from desktop, where the full nav shows. */}
+        <button
+          type="button"
+          id="nav-toggle"
+          class="flex items-center gap-2 border border-rule px-3 py-2 text-sm lg:hidden"
+          aria-expanded="false"
+          aria-controls="nav-panel"
+        >
+          <span class="nav-burger" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span class="sr-only">{t('a11y.menu')}</span>
+        </button>
+      </div>
+
+      {/* Mobile panel. */}
+      <nav id="nav-panel" class="nav-panel border-t border-rule lg:hidden" aria-label={company.name} hidden>
+        <ul class="mx-auto max-w-6xl px-5 py-2">
+          {
+            navLinks.map((link) => (
+              <li class="border-b border-rule last:border-b-0">
+                <a
+                  href={link.href}
+                  aria-current={link.id === active ? 'page' : undefined}
+                  class={`block py-4 ${link.id === active ? 'text-ink' : 'text-muted'}`}
+                >
+                  {link.label}
                 </a>
               </li>
             ))
@@ -101,35 +159,53 @@ const t = useTranslations(locale);
       <slot />
     </main>
 
-    <footer class="stratum--raised">
+    {/*
+      Legal strip only. Contact details live in the contact section on the
+      home page and in the apply block on Careers, so nothing is repeated.
+    */}
+    <footer class="border-t border-rule bg-surface">
       <div
-        class="mx-auto grid max-w-5xl gap-6 px-5 py-10 text-sm text-muted sm:grid-cols-2 lg:grid-cols-4"
+        class="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-2 px-5 py-6 text-xs text-muted"
       >
-        <div>
-          <p class="font-display text-base text-ink">{company.name}</p>
-          <p class="mt-1">{t('site.tagline')}</p>
-        </div>
-
-        <div>
-          <p class="text-ink">{t('contact.address')}</p>
-          <p class="mt-1">{formatAddress()}</p>
-        </div>
-
-        <div>
-          <p class="text-ink">{t('contact.phone')}</p>
-          <p class="mt-1">
-            <a href={`tel:${company.phone.href}`} class="hover:text-ink">{company.phone.label}</a>
-          </p>
-          <p class="mt-2">
-            <a href={`mailto:${company.email}`} class="hover:text-ink">{company.email}</a>
-          </p>
-        </div>
-
-        <div>
-          <p>{t('footer.kennitala')} {company.kennitala}</p>
-          <p class="mt-1">{t('footer.vsk')} {company.vsk}</p>
-        </div>
+        <span>© {year} {company.name}</span>
+        <span>{t('footer.kennitala')} {company.kennitala}</span>
+        <span>{t('footer.vsk')} {company.vsk}</span>
+        <span class="ms-auto">{t('footer.rights')}</span>
       </div>
     </footer>
+
+    <script>
+      const toggle = document.getElementById('nav-toggle');
+      const panel = document.getElementById('nav-panel');
+
+      if (toggle && panel) {
+        const setOpen = (open: boolean) => {
+          panel.hidden = !open;
+          toggle.setAttribute('aria-expanded', String(open));
+        };
+
+        toggle.addEventListener('click', () =>
+          setOpen(toggle.getAttribute('aria-expanded') !== 'true')
+        );
+
+        // Tapping a link navigates within the page; close so it is visible.
+        panel.addEventListener('click', (event) => {
+          if ((event.target as HTMLElement).closest('a')) setOpen(false);
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && !panel.hidden) {
+            setOpen(false);
+            toggle.focus();
+          }
+        });
+
+        // Leaving mobile width must not strand the panel open.
+        const wide = window.matchMedia('(min-width: 1024px)');
+        wide.addEventListener('change', (event) => {
+          if (event.matches) setOpen(false);
+        });
+      }
+    </script>
   </body>
 </html>

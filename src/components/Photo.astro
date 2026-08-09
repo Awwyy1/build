@@ -1,0 +1,44 @@
+---
+/**
+ * A photograph, or a labelled placeholder while none exists yet.
+ *
+ * Fills its container, so the parent controls the shape. Pass `eager` for
+ * imagery above the fold — everything else loads lazily.
+ */
+import type { PhotoSrc } from '../config/media';
+
+interface Props {
+  src: PhotoSrc;
+  /** Translated alt text. Also labels the placeholder for screen readers. */
+  alt: string;
+  /** Translated word for "photograph", shown on the empty slot. */
+  placeholder: string;
+  eager?: boolean;
+}
+
+const { src, alt, placeholder, eager = false } = Astro.props;
+---
+
+{
+  src ? (
+    <img
+      src={src}
+      alt={alt}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      class="h-full w-full object-cover"
+    />
+  ) : (
+    <div class="tex-strata relative h-full w-full" role="img" aria-label={alt}>
+      {/*
+        Cornered rather than centred: the hero slot is the full viewport and
+        a centred label would land on top of the headline.
+      */}
+      <span
+        class="absolute bottom-3 end-3 border border-rule bg-ground/70 px-2 py-1 text-[0.65rem] tracking-wide text-muted uppercase"
+      >
+        {placeholder}
+      </span>
+    </div>
+  )
+}

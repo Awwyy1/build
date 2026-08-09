@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSlideshow from '../../components/HeroSlideshow.astro';
+import Photo from '../../components/Photo.astro';
 import { company, formatAddress } from '../../config/company';
-import { locales, projects, services, useTranslations, type Locale } from '../../i18n/ui';
+import { projectPhotos, sectionPhotos } from '../../config/media';
+import { locales, localePath, projects, services, useTranslations, type Locale } from '../../i18n/ui';
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
@@ -10,12 +13,12 @@ export function getStaticPaths() {
 const locale = Astro.params.lang as Locale;
 const t = useTranslations(locale);
 
-/*
- * Placeholder imagery. The direction leans on real before/after photos, so
- * these stand in as labelled slots rather than stock pictures — swap each
- * one for a photograph of an actual job.
- */
-const beforeAfter = 'tex-strata aspect-[4/3]';
+/** Placeholder figures until the real ones are supplied. */
+const stats = [
+  { value: String(new Date().getFullYear() - company.founded), label: t('about.stat1') },
+  { value: '40+', label: t('about.stat2') },
+  { value: '11', label: t('about.stat3') },
+];
 ---
 
 <BaseLayout
@@ -23,69 +26,81 @@ const beforeAfter = 'tex-strata aspect-[4/3]';
   title={`${company.name} — ${t('site.tagline')}`}
   description={t('hero.body')}
 >
-  {/* ---- Hero ---------------------------------------------------------- */}
-  <section class="stratum">
-    <div class="mx-auto max-w-5xl px-5 py-20 lg:py-28">
+  {/* ---- Hero: full screen, photography behind the headline ------------ */}
+  <section class="relative flex screen items-center overflow-hidden">
+    <HeroSlideshow locale={locale} />
+
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24">
       <p class="text-sm tracking-wide text-rust-text uppercase">{t('hero.eyebrow')}</p>
       <h1 class="mt-4 max-w-3xl font-display text-4xl leading-tight sm:text-5xl lg:text-6xl">
         {t('hero.title')}
       </h1>
-      <p class="mt-6 max-w-2xl text-lg text-muted">{t('hero.body')}</p>
+      <p class="mt-6 max-w-xl text-lg text-muted">{t('hero.body')}</p>
 
       <div class="mt-10 flex flex-wrap gap-4">
         <a
           href="#contact"
-          class="bg-rust px-6 py-3 font-semibold text-ink hover:brightness-110"
+          class="bg-rust px-6 py-3 font-semibold text-ink transition hover:brightness-110"
         >
           {t('hero.cta')}
         </a>
-        <a href="#projects" class="border border-rule px-6 py-3 hover:border-moss">
+        <a
+          href="#projects"
+          class="border border-rule px-6 py-3 transition hover:border-moss"
+        >
           {t('hero.cta2')}
         </a>
       </div>
     </div>
   </section>
 
-  {/* ---- Services: stone courses --------------------------------------- */}
-  <section id="services" class="stratum stratum--raised">
-    <div class="mx-auto max-w-5xl px-5 py-16">
-      <h2 class="font-display text-3xl">{t('services.title')}</h2>
+  {/* ---- Services: full screen, photo alongside the trades ------------- */}
+  <section id="services" class="stratum stratum--raised scroll-mt-16">
+    <div class="mx-auto grid screen max-w-6xl items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:gap-16">
+      <div class="order-2 h-full min-h-[22rem] lg:order-1">
+        <Photo
+          src={sectionPhotos.services}
+          alt={t('services.photo.alt')}
+          placeholder={t('media.placeholder')}
+        />
+      </div>
 
-      <div class="course mt-8">
-        {
-          services.map((service) => (
-            <article class="grid gap-2 py-6 sm:grid-cols-[14rem_1fr] sm:gap-8">
-              <h3 class="font-display text-xl">{t(`service.${service}.title`)}</h3>
-              <p class="text-muted">{t(`service.${service}.body`)}</p>
-            </article>
-          ))
-        }
+      <div class="order-1 lg:order-2">
+        <h2 class="font-display text-3xl sm:text-4xl">{t('services.title')}</h2>
+        <p class="mt-3 text-muted">{t('services.lead')}</p>
+
+        <div class="course mt-8">
+          {
+            services.map((service) => (
+              <article class="py-5">
+                <h3 class="font-display text-xl">{t(`service.${service}.title`)}</h3>
+                <p class="mt-2 text-muted">{t(`service.${service}.body`)}</p>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </div>
   </section>
 
-  {/* ---- Projects: before / after -------------------------------------- */}
-  <section id="projects" class="stratum">
-    <div class="mx-auto max-w-5xl px-5 py-16">
-      <h2 class="font-display text-3xl">{t('projects.title')}</h2>
+  {/* ---- Projects: full screen, three jobs ----------------------------- */}
+  <section id="projects" class="stratum scroll-mt-16">
+    <div class="mx-auto flex screen max-w-6xl flex-col justify-center px-5 py-20">
+      <div>
+        <h2 class="font-display text-3xl sm:text-4xl">{t('projects.title')}</h2>
+        <p class="mt-3 text-muted">{t('projects.lead')}</p>
+      </div>
 
-      <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {
           projects.map((project) => (
             <article>
-              <div class="grid grid-cols-2 gap-px bg-rule">
-                <figure>
-                  <div class={beforeAfter} />
-                  <figcaption class="bg-surface px-2 py-1 text-xs text-muted">
-                    {t('projects.before')}
-                  </figcaption>
-                </figure>
-                <figure>
-                  <div class={beforeAfter} />
-                  <figcaption class="bg-surface px-2 py-1 text-xs text-muted">
-                    {t('projects.after')}
-                  </figcaption>
-                </figure>
+              <div class="aspect-[4/3]">
+                <Photo
+                  src={projectPhotos[project]}
+                  alt={t(`project.${project}.title`)}
+                  placeholder={t('media.placeholder')}
+                />
               </div>
 
               <p class="mt-4 text-xs tracking-wide text-moss uppercase">
@@ -93,6 +108,7 @@ const beforeAfter = 'tex-strata aspect-[4/3]';
               </p>
               <h3 class="mt-1 font-display text-lg">{t(`project.${project}.title`)}</h3>
               <p class="mt-1 text-sm text-rust-text">{t(`project.${project}.meta`)}</p>
+              <p class="mt-3 text-sm text-muted">{t(`project.${project}.body`)}</p>
             </article>
           ))
         }
@@ -100,54 +116,83 @@ const beforeAfter = 'tex-strata aspect-[4/3]';
     </div>
   </section>
 
-  {/* ---- About --------------------------------------------------------- */}
-  <section id="about" class="stratum stratum--raised">
-    <div class="mx-auto max-w-5xl px-5 py-16">
-      <h2 class="font-display text-3xl">{t('about.title')}</h2>
-      <p class="mt-6 max-w-2xl text-lg text-muted">{t('about.body')}</p>
+  {/* ---- About: full screen, team photograph --------------------------- */}
+  <section id="about" class="stratum stratum--raised scroll-mt-16">
+    <div class="mx-auto grid screen max-w-6xl items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <h2 class="font-display text-3xl sm:text-4xl">{t('about.title')}</h2>
+        <p class="mt-6 text-lg text-muted">{t('about.body')}</p>
+        <p class="mt-4 text-lg text-muted">{t('about.body2')}</p>
+
+        <dl class="mt-10 grid grid-cols-3 gap-6">
+          {
+            stats.map((stat) => (
+              <div>
+                <dt class="sr-only">{stat.label}</dt>
+                <dd>
+                  <span class="block font-display text-3xl text-ink">{stat.value}</span>
+                  <span class="mt-1 block text-xs tracking-wide text-muted uppercase">
+                    {stat.label}
+                  </span>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <div class="h-full min-h-[22rem]">
+        <Photo
+          src={sectionPhotos.about}
+          alt={t('about.photo.alt')}
+          placeholder={t('media.placeholder')}
+        />
+      </div>
     </div>
   </section>
 
-  {/* ---- Careers ------------------------------------------------------- */}
-  <section id="careers" class="stratum">
-    <div class="mx-auto max-w-5xl px-5 py-16">
-      <h2 class="font-display text-3xl">{t('careers.title')}</h2>
-      <p class="mt-6 max-w-2xl text-lg text-muted">{t('careers.body')}</p>
-      <a
-        href={`mailto:${company.emailCareers}`}
-        class="mt-8 inline-block bg-rust px-6 py-3 font-semibold text-ink hover:brightness-110"
-      >
-        {t('careers.cta')}
-      </a>
-    </div>
-  </section>
+  {/* ---- Contact: the page's only copy of the details ------------------ */}
+  <section id="contact" class="scroll-mt-16">
+    <div class="mx-auto max-w-6xl px-5 py-20">
+      <h2 class="font-display text-3xl sm:text-4xl">{t('contact.title')}</h2>
+      <p class="mt-4 max-w-2xl text-lg text-muted">{t('contact.body')}</p>
 
-  {/* ---- Contact ------------------------------------------------------- */}
-  <section id="contact" class="stratum stratum--raised">
-    <div class="mx-auto max-w-5xl px-5 py-16">
-      <h2 class="font-display text-3xl">{t('contact.title')}</h2>
-      <p class="mt-6 max-w-2xl text-lg text-muted">{t('contact.body')}</p>
-
-      <dl class="mt-10 grid gap-6 sm:grid-cols-3">
+      <dl class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <dt class="text-sm text-muted">{t('contact.phone')}</dt>
-          <dd class="mt-1">
-            <a href={`tel:${company.phone.href}`} class="hover:text-rust-text">
+          <dt class="text-xs tracking-wide text-muted uppercase">{t('contact.phone')}</dt>
+          <dd class="mt-2">
+            <a href={`tel:${company.phone.href}`} class="transition hover:text-rust-text">
               {company.phone.label}
             </a>
           </dd>
         </div>
         <div>
-          <dt class="text-sm text-muted">{t('contact.email')}</dt>
-          <dd class="mt-1">
-            <a href={`mailto:${company.email}`} class="hover:text-rust-text">{company.email}</a>
+          <dt class="text-xs tracking-wide text-muted uppercase">{t('contact.email')}</dt>
+          <dd class="mt-2">
+            <a href={`mailto:${company.email}`} class="transition hover:text-rust-text">
+              {company.email}
+            </a>
           </dd>
         </div>
         <div>
-          <dt class="text-sm text-muted">{t('contact.address')}</dt>
-          <dd class="mt-1">{formatAddress()}</dd>
+          <dt class="text-xs tracking-wide text-muted uppercase">{t('contact.address')}</dt>
+          <dd class="mt-2">{formatAddress()}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-wide text-muted uppercase">{t('contact.hours')}</dt>
+          <dd class="mt-2">{t('contact.hours.value')}</dd>
         </div>
       </dl>
+
+      <div class="mt-12 flex flex-wrap items-center gap-4 border-t border-rule pt-8">
+        <p class="text-muted">{t('careers.teaser')}</p>
+        <a
+          href={localePath(locale, 'careers')}
+          class="border border-rule px-5 py-2 text-sm transition hover:border-moss"
+        >
+          {t('nav.careers')}
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

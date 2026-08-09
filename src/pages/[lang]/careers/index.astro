@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Photo from '../../../components/Photo.astro';
+import { company } from '../../../config/company';
+import { sectionPhotos } from '../../../config/media';
+import { localePath, locales, roles, useTranslations, type Locale } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const locale = Astro.params.lang as Locale;
+const t = useTranslations(locale);
+
+/*
+ * Pre-filling the subject keeps applications out of the general inbox and
+ * saves the applicant from inventing one.
+ */
+const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
+  `${t('careers.cta')} — ${company.name}`
+)}`;
+---
+
+<BaseLayout
+  locale={locale}
+  active="careers"
+  title={`${t('careers.title')} — ${company.name}`}
+  description={t('careers.lead')}
+>
+  {/* ---- Intro, over the crew photograph ------------------------------- */}
+  <section class="stratum">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <h1 class="font-display text-4xl leading-tight sm:text-5xl">{t('careers.title')}</h1>
+        <p class="mt-6 text-lg text-muted">{t('careers.lead')}</p>
+
+        <a
+          href={applyHref}
+          class="mt-8 inline-block bg-rust px-6 py-3 font-semibold text-ink transition hover:brightness-110"
+        >
+          {t('careers.cta')}
+        </a>
+      </div>
+
+      <div class="h-full min-h-[20rem]">
+        <Photo
+          src={sectionPhotos.careers}
+          alt={t('careers.photo.alt')}
+          placeholder={t('media.placeholder')}
+          eager
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* ---- Open roles ---------------------------------------------------- */}
+  <section class="stratum stratum--raised">
+    <div class="mx-auto max-w-6xl px-5 py-20">
+      <h2 class="font-display text-3xl sm:text-4xl">{t('careers.roles.title')}</h2>
+
+      <div class="course mt-10">
+        {
+          roles.map((role) => (
+            <article class="grid gap-2 py-6 sm:grid-cols-[16rem_1fr] sm:gap-8">
+              <h3 class="font-display text-xl">{t(`role.${role}.title`)}</h3>
+              <p class="text-muted">{t(`role.${role}.body`)}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ---- How to apply. Carries its own contact details, so the home
+         page's contact section is not repeated here. -------------------- */}
+  <section>
+    <div class="mx-auto max-w-6xl px-5 py-20">
+      <h2 class="font-display text-3xl sm:text-4xl">{t('careers.how.title')}</h2>
+      <p class="mt-6 max-w-2xl text-lg text-muted">{t('careers.how.body')}</p>
+
+      <dl class="mt-10 grid gap-8 sm:grid-cols-2">
+        <div>
+          <dt class="text-xs tracking-wide text-muted uppercase">{t('contact.email')}</dt>
+          <dd class="mt-2">
+            <a href={applyHref} class="transition hover:text-rust-text">
+              {company.emailCareers}
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-wide text-muted uppercase">{t('contact.phone')}</dt>
+          <dd class="mt-2">
+            <a href={`tel:${company.phone.href}`} class="transition hover:text-rust-text">
+              {company.phone.label}
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <p class="mt-12">
+        <a href={localePath(locale)} class="text-muted transition hover:text-ink">
+          ← {t('careers.back')}
+        </a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
