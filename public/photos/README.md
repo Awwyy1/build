@@ -1,54 +1,67 @@
 # Photographs
 
-Anything in `public/` is copied to the site root as-is, so a file saved here
-as `hero-1.jpg` is served at `/photos/hero-1.jpg`.
+Drop a file in this folder named after its slot. That is the whole
+procedure — no code needs editing. A slot with no matching file shows a
+labelled placeholder instead.
 
-Dropping a file in is not enough on its own — each slot has to be pointed at
-it in `src/config/media.ts`. Until then the slot renders a labelled turf
-texture, which is why the site currently shows "Ljósmynd" boxes.
+The folder is read when the site builds, so after copying a photo in,
+restart `npm run dev` (or rebuild) for it to appear.
 
-## The nine slots
+## File names
 
-| Where | Field in `src/config/media.ts` | Shape |
-|---|---|---|
-| Hero, slide 1 | `heroSlides[0].src` | wide, landscape |
-| Hero, slide 2 | `heroSlides[1].src` | wide, landscape |
-| Hero, slide 3 | `heroSlides[2].src` | wide, landscape |
-| Services | `sectionPhotos.services` | tall, portrait |
-| About | `sectionPhotos.about` | tall, portrait |
-| Careers | `sectionPhotos.careers` | landscape |
-| Project — Vesturbær | `projectPhotos.vesturbaer` | 4:3 |
-| Project — Akranes | `projectPhotos.akranes` | 4:3 |
-| Project — Hlíðar | `projectPhotos.hlidar` | 4:3 |
+| Name the file | Where it appears |
+|---|---|
+| `hero-1` | Hero, first slide |
+| `hero-2` | Hero, second slide |
+| `hero-3` | Hero, third slide |
+| `services` | Services section |
+| `about` | About section |
+| `careers` | Careers page |
+| `vesturbaer` | Project card — Vesturbær |
+| `akranes` | Project card — Akranes |
+| `hlidar` | Project card — Hlíðar |
 
-## Example
+Extension can be `.jpg`, `.jpeg`, `.png`, `.webp` or `.avif`.
 
-Save the file:
+So `about.jpg` becomes the About photo. Capitalisation does not matter.
 
-    public/photos/hero-1.jpg
+A descriptive prefix before a dot is ignored, so
+`projectPhotos.vesturbaer.jpg` and `vesturbaer.jpg` both fill the same
+slot. Only the part after the last dot is matched.
 
-Then in `src/config/media.ts`:
+## Shapes
+
+| Slot | Works best as |
+|---|---|
+| Hero slides | wide landscape |
+| Services, About | tall portrait |
+| Careers | landscape |
+| Project cards | 4:3 |
+
+Every slot uses `object-fit: cover`: the image fills its frame and is
+cropped to fit, never stretched. Keep the subject away from the edges.
+
+Hero images sit behind the headline, which occupies the left half on wide
+screens — a photo with a busy left side will fight it.
+
+Export at roughly 2000px on the long edge and compress. Files are served
+exactly as they are, with no resizing at build time.
+
+## Alt text
+
+Alt text is not set here. It is translated into all four languages and
+lives in `src/i18n/ui.ts` under keys such as `hero.slide1.alt` and
+`about.photo.alt`. Edit it there if a photo shows something other than
+what the existing description says.
+
+## Overriding a slot by hand
+
+If a file needs a name that does not match, point the slot straight at it
+in `src/config/media.ts`, replacing the `pick(...)` call with a path:
 
 ```ts
-export const heroSlides = [
-  { id: 'slide1', src: '/photos/hero-1.jpg' },   // was: null
-  { id: 'slide2', src: null },
-  { id: 'slide3', src: null },
-];
+export const projectPhotos = {
+  vesturbaer: '/photos/whatever-you-called-it.jpg',
+  ...
+};
 ```
-
-Slots are independent, so filling one at a time is fine — the rest keep
-their placeholders.
-
-## Practical notes
-
-- Every slot is rendered with `object-fit: cover`, so the image fills its
-  frame and is cropped, never stretched. Keep the subject away from the
-  edges.
-- Hero images sit behind the headline, which occupies the left half on wide
-  screens. Pictures with a busy left side will fight it.
-- Export at roughly 2000px on the long edge and compress; these are served
-  as-is, with no build-time resizing.
-- Alt text is **not** set here. It lives in `src/i18n/ui.ts` under keys like
-  `hero.slide1.alt`, already translated into all four languages — edit it
-  there if a photo shows something other than what the text describes.
