@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Byggingakerfi">
+  <!--
+    Courses of cut turf, the same motif the site is built on, reduced until
+    it still reads at 16px: peat ground, birch courses, one rust seam.
+  -->
+  <rect width="32" height="32" fill="#1e2219"/>
+  <rect x="4" y="6"  width="24" height="4" fill="#d6cfc0"/>
+  <rect x="4" y="14" width="24" height="4" fill="#9c4e2c"/>
+  <rect x="4" y="22" width="24" height="4" fill="#5f7048"/>
+</svg>

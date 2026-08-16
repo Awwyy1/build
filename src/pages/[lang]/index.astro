@@ -100,22 +100,34 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
         <p class="mt-3 text-muted">{t('projects.lead')}</p>
       </div>
 
-      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {/*
+        Stacked on a phone, a photo-then-caption card leaves every block of
+        text sitting between two photographs, and it stops being obvious
+        which one it belongs to. Below `sm` the heading leads instead, so
+        each card opens with an unmistakable marker, and a rule separates
+        one card from the next. Side by side there is no ambiguity, so the
+        photograph goes back on top.
+      */}
+      <div class="mt-10 grid gap-12 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
         {
           projects.map((project) => (
-            <article>
-              <ProjectGallery
-                locale={locale}
-                photos={projectPhotos[project]}
-                label={t(`project.${project}.title`)}
-              />
+            <article class="flex flex-col gap-4 border-t border-rule pt-10 first:border-t-0 first:pt-0 sm:gap-0 sm:border-t-0 sm:pt-0">
+              <div class="order-2 sm:order-1">
+                <ProjectGallery
+                  locale={locale}
+                  photos={projectPhotos[project]}
+                  label={t(`project.${project}.title`)}
+                />
+              </div>
 
-              <p class="mt-4 text-xs tracking-wide text-moss uppercase">
-                {t(`project.${project}.kind`)}
-              </p>
-              <h3 class="mt-1 font-display text-lg">{t(`project.${project}.title`)}</h3>
-              <p class="mt-1 text-sm text-rust-text">{t(`project.${project}.status`)}</p>
-              <p class="mt-3 text-sm text-muted">{t(`project.${project}.body`)}</p>
+              <div class="order-1 sm:order-2 sm:mt-4">
+                <p class="text-xs tracking-wide text-moss uppercase">
+                  {t(`project.${project}.kind`)}
+                </p>
+                <h3 class="mt-1 font-display text-lg">{t(`project.${project}.title`)}</h3>
+                <p class="mt-1 text-sm text-rust-text">{t(`project.${project}.status`)}</p>
+                <p class="mt-3 text-sm text-muted">{t(`project.${project}.body`)}</p>
+              </div>
             </article>
           ))
         }

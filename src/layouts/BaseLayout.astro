@@ -81,6 +81,11 @@ const year = new Date().getFullYear();
         if (meta) meta.setAttribute('content', dark ? '#1e2219' : '#efebe0');
       })();
     </script>
+    {/*
+      Without this the browser asks for /favicon.ico on its own and logs a
+      404 when it is not there.
+    */}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     {
       /* Tell search engines about every translation of this page. */
