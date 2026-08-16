@@ -17,12 +17,12 @@ restart `npm run dev` (or rebuild) for it to appear.
 | `services` | Services section |
 | `about` | About section |
 | `careers` | Careers page |
-| `kringlan-1`, `-2`, `-3` | Project card — Kringlan |
-| `atnorth-1`, `-2`, `-3` | Project card — atNorth |
-| `hlidar-1`, `-2`, `-3` | Project card — Hlíðar |
+| `kringlan-1`, `-2`, `-3` | Project card, Kringlan |
+| `atnorth-1`, `-2`, `-3` | Project card, atNorth |
+| `house-1`, `-2`, `-3` | Project card, private house |
 
 Each project card is a swipeable gallery of three slides. Fill them in any
-order — `atnorth-2.jpg` alone lands on the second slide and the other two
+order — `atnorth-2.jpg` on its own lands on the second slide and the other two
 keep their placeholders. The first slide also answers to the bare project
 name, so `kringlan.jpg` works in place of `kringlan-1.jpg`.
 
