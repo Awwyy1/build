@@ -23,8 +23,8 @@ restart `npm run dev` (or rebuild) for it to appear.
 | `services` | Services section |
 | `about` | About section |
 | `careers` | Careers section and Careers page |
-| `kringlan-1`, `-2`, `-3` | Project card, Kringlan |
-| `atnorth-1`, `-2`, `-3` | Project card, atNorth |
+| `kringlan-1` … `kringlan-5` | Project card, Kringlan |
+| `atnorth-1` … `atnorth-5` | Project card, atNorth |
 | `house-1`, `-2`, `-3` | Project card, private house |
 
 Extension can be `.jpg`, `.jpeg`, `.png`, `.webp` or `.avif`.
@@ -35,13 +35,14 @@ A descriptive prefix before a dot is ignored, so `projectPhotos.house.jpg`
 and `house.jpg` both fill the same slot. Only the part after the last dot
 is matched.
 
-Each project card is a swipeable gallery of three slides. Fill them in any
-order: `atnorth-2.jpg` on its own lands on the second slide and the other
-two keep their placeholders. The first slide also answers to the bare
-project name, so `kringlan.jpg` works in place of `kringlan-1.jpg`.
+Each project card is a swipeable gallery. Fill the slides in any order:
+`atnorth-4.jpg` on its own lands on the fourth slide and the rest keep
+their placeholders. The first slide also answers to the bare project name,
+so `kringlan.jpg` works in place of `kringlan-1.jpg`.
 
-To change how many slides a card has, edit `projectSlideCount` in
-`src/config/media.ts`.
+Kringlan and atNorth carry five slides each, the private house three. To
+change a count, edit `projectSlideCounts` in `src/config/media.ts`; the
+extra slots appear as placeholders straight away.
 
 ## Shapes
 

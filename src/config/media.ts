@@ -76,15 +76,22 @@ export const sectionPhotos: Record<'services' | 'about' | 'careers', PhotoSrc> =
   careers: pick('careers'),
 };
 
-/** How many slides each project card carries. */
-export const projectSlideCount = 3;
+/**
+ * How many slides each project card carries. Raise a number and the extra
+ * slots appear as placeholders straight away, waiting for their files; the
+ * indicator bars divide the same width, so a longer run simply reads as
+ * thinner rules.
+ */
+export const projectSlideCounts: Record<string, number> = {
+  kringlan: 5,
+  atnorth: 5,
+  house: 3,
+};
 
 /** A gallery per project. Keys match the `projects` list in the i18n module. */
-export const projectPhotos: Record<string, PhotoSrc[]> = {
-  kringlan: gallery('kringlan', projectSlideCount),
-  atnorth: gallery('atnorth', projectSlideCount),
-  house: gallery('house', projectSlideCount),
-};
+export const projectPhotos: Record<string, PhotoSrc[]> = Object.fromEntries(
+  Object.entries(projectSlideCounts).map(([name, count]) => [name, gallery(name, count)])
+);
 
 /** How long each hero slide holds, in milliseconds. */
 export const heroSlideDurationMs = 6000;
