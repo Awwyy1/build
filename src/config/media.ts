@@ -94,7 +94,7 @@ export const projectSlideCount = 3;
 export const projectPhotos: Record<string, PhotoSrc[]> = {
   kringlan: gallery('kringlan', projectSlideCount),
   atnorth: gallery('atnorth', projectSlideCount),
-  hlidar: gallery('hlidar', projectSlideCount),
+  house: gallery('house', projectSlideCount),
 };
 
 /** How long each hero slide holds, in milliseconds. */

@@ -10,9 +10,6 @@ export const company = {
   name: 'Bergverk ehf.',
   /** Placeholder. Icelandic company kennitalar carry +40 on the day field. */
   kennitala: '540719-1130',
-  /** Placeholder VAT registration number. */
-  vsk: '128456',
-
   address: {
     street: 'Súðarvogur 7',
     postcode: '104',

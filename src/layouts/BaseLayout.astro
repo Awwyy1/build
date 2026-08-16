@@ -37,16 +37,13 @@ const home = localePath(locale);
 
 /*
  * Section links are absolute rather than bare fragments, so the same nav
- * works from Careers, which is a page of its own.
+ * works from Careers, which also exists as a page of its own.
  */
-const navLinks = [
-  ...homeSections.map((section) => ({
-    id: section,
-    href: `${home}#${section}`,
-    label: t(`nav.${section}`),
-  })),
-  { id: 'careers', href: localePath(locale, 'careers'), label: t('nav.careers') },
-];
+const navLinks = homeSections.map((section) => ({
+  id: section,
+  href: `${home}#${section}`,
+  label: t(`nav.${section}`),
+}));
 
 const year = new Date().getFullYear();
 ---
@@ -58,7 +55,9 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    <meta name="theme-color" content="#1e2219" />
+    {/* Daylight is the default; the dark value only applies where the system asks for it. */}
+    <meta name="theme-color" content="#efebe0" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1e2219" media="(prefers-color-scheme: dark)" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     {
       /* Tell search engines about every translation of this page. */
@@ -70,7 +69,7 @@ const year = new Date().getFullYear();
   <body class="bg-ground text-ink font-sans antialiased">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-2 focus:bg-rust focus:px-3 focus:py-2"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-2 focus:bg-rust focus:px-3 focus:py-2 focus:text-on-rust"
     >
       {t('a11y.skip')}
     </a>
@@ -119,7 +118,7 @@ const year = new Date().getFullYear();
                   }
                 >
                   {alt.toUpperCase()}
-                  <span class="sr-only"> — {localeNames[alt]}</span>
+                  <span class="sr-only">, {localeNames[alt]}</span>
                 </a>
               </li>
             ))
@@ -175,7 +174,6 @@ const year = new Date().getFullYear();
       >
         <span>© {year} {company.name}</span>
         <span>{t('footer.kennitala')} {company.kennitala}</span>
-        <span>{t('footer.vsk')} {company.vsk}</span>
         <button type="button" data-cookie-reopen class="underline transition hover:text-ink">
           {t('cookies.settings')}
         </button>

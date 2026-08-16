@@ -16,19 +16,23 @@ const t = useTranslations(locale);
 
 /*
  * Figures the company can stand behind today. Deliberately no "years in
- * business" — the company is young, and its case is the work it is on, not
- * how long it has been at it.
+ * business": the company is young, and its case is the work it has done,
+ * not how long it has been at it.
  */
 const stats = [
-  { value: '21', label: t('about.stat1') },
-  { value: String(services.length), label: t('about.stat2') },
-  { value: '2', label: t('about.stat3') },
+  { value: '20+', label: t('about.stat1') },
+  { value: '20+', label: t('about.stat2') },
 ];
+
+/* Pre-fills the subject so applications stay out of the general inbox. */
+const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
+  `${t('careers.cta')} ${company.name}`
+)}`;
 ---
 
 <BaseLayout
   locale={locale}
-  title={`${company.name} — ${t('site.tagline')}`}
+  title={`${company.name}, ${t('site.tagline')}`}
   description={t('hero.body')}
 >
   {/* ---- Hero: full screen, photography behind the headline ------------ */}
@@ -50,7 +54,7 @@ const stats = [
       <div class="mt-10 flex flex-wrap gap-4">
         <a
           href="#projects"
-          class="bg-rust px-6 py-3 font-semibold text-ink transition hover:brightness-110"
+          class="bg-rust px-6 py-3 font-semibold text-on-rust transition hover:brightness-110"
         >
           {t('hero.cta2')}
         </a>
@@ -126,7 +130,7 @@ const stats = [
         <p class="mt-6 text-lg text-muted">{t('about.body')}</p>
         <p class="mt-4 text-lg text-muted">{t('about.body2')}</p>
 
-        <dl class="mt-10 grid grid-cols-3 gap-6">
+        <dl class="mt-10 flex flex-wrap gap-x-12 gap-y-6">
           {
             stats.map((stat) => (
               <div>
@@ -153,8 +157,42 @@ const stats = [
     </div>
   </section>
 
+  {/* ---- Careers: on the landing, ahead of contact --------------------- */}
+  <section id="careers" class="stratum scroll-mt-16">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <h2 class="font-display text-3xl sm:text-4xl">{t('careers.title')}</h2>
+        <p class="mt-6 text-lg text-muted">{t('careers.lead')}</p>
+        <p class="mt-4 text-muted">{t('careers.teaser')}</p>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href={applyHref}
+            class="bg-rust px-6 py-3 font-semibold text-on-rust transition hover:brightness-110"
+          >
+            {t('careers.cta')}
+          </a>
+          <a
+            href={localePath(locale, 'careers')}
+            class="border border-rule px-6 py-3 transition hover:border-moss"
+          >
+            {t('careers.more')}
+          </a>
+        </div>
+      </div>
+
+      <div class="h-full min-h-[20rem]">
+        <Photo
+          src={sectionPhotos.careers}
+          alt={t('careers.photo.alt')}
+          placeholder={t('media.placeholder')}
+        />
+      </div>
+    </div>
+  </section>
+
   {/* ---- Contact: the page's only copy of the details ------------------ */}
-  <section id="contact" class="scroll-mt-16">
+  <section id="contact" class="stratum--raised scroll-mt-16">
     <div class="mx-auto max-w-6xl px-5 py-20">
       <h2 class="font-display text-3xl sm:text-4xl">{t('contact.title')}</h2>
       <p class="mt-4 max-w-2xl text-lg text-muted">{t('contact.body')}</p>
@@ -186,15 +224,6 @@ const stats = [
         </div>
       </dl>
 
-      <div class="mt-12 flex flex-wrap items-center gap-4 border-t border-rule pt-8">
-        <p class="text-muted">{t('careers.teaser')}</p>
-        <a
-          href={localePath(locale, 'careers')}
-          class="border border-rule px-5 py-2 text-sm transition hover:border-moss"
-        >
-          {t('nav.careers')}
-        </a>
-      </div>
     </div>
   </section>
 </BaseLayout>

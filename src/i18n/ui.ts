@@ -3,6 +3,9 @@
  *
  * Icelandic is the source language: when a string is missing from another
  * locale, `t()` falls back to Icelandic rather than rendering a blank.
+ *
+ * House style: no dashes in running copy. Where a dash would normally join
+ * two thoughts, the sentence is split or rebuilt instead.
  */
 
 export const locales = ['is', 'en', 'pl', 'lv'] as const;
@@ -21,16 +24,17 @@ export const localeNames: Record<Locale, string> = {
 /**
  * Sections of the home page, in navigation order. These are anchors, and
  * the nav links to them absolutely (`/is/#services`) so they also work
- * from Careers, which is a page of its own.
+ * from the Careers page. Careers sits before Contact so that contact
+ * details, and then the footer, close the page.
  */
-export const homeSections = ['services', 'projects', 'about', 'contact'] as const;
+export const homeSections = ['services', 'projects', 'about', 'careers', 'contact'] as const;
 export type HomeSection = (typeof homeSections)[number];
 
 /** Service rows, in display order. */
 export const services = ['roofs', 'cladding', 'fitout', 'general'] as const;
 
 /** Project cards, in display order. */
-export const projects = ['kringlan', 'atnorth', 'hlidar'] as const;
+export const projects = ['kringlan', 'atnorth', 'house'] as const;
 
 /** Open roles listed on the Careers page. */
 export const roles = ['roofer', 'cladder', 'carpenter'] as const;
@@ -56,7 +60,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.eyebrow': 'Frá gagnaverum að einbýlishúsum',
     'hero.title': 'Þök á verslunarmiðstöðvar, veggir í gagnaver',
     'hero.body':
-      'Við erum verktakafyrirtæki í Reykjavík með tuttugu og einn starfsmann og okkar eigin vinnuflokka. Stór verk og þröng tímamörk — og sömu flokkar skipta um þak á húsinu þínu.',
+      'Við erum verktakafyrirtæki í Reykjavík. Við tökum að okkur stór verk, vinnum þau vel og skilum á þröngum tíma. Sömu flokkar skipta um þak á húsinu þínu.',
     'hero.cta': 'Fá tilboð',
     'hero.cta2': 'Sjá verkefni',
     'hero.slide1.alt': 'Þakskipti í Kringlunni',
@@ -64,7 +68,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.slide3.alt': 'Vinnuflokkur á staðnum',
 
     'services.title': 'Þjónusta',
-    'services.lead': 'Fjögur svið sem við vinnum mest í. Listinn er ekki takmörkun — spurðu okkur.',
+    'services.lead': 'Fjögur svið sem við vinnum mest í. Listinn er ekki takmörkun. Spurðu okkur.',
     'services.photo.alt': 'Vinna á staðnum',
     'service.roofs.title': 'Þök',
     'service.roofs.body':
@@ -74,10 +78,10 @@ export const ui: Record<Locale, Strings> = {
       'Samlokueiningar á iðnaðarhús og gagnaver. Þétt, rétt og á áætlun.',
     'service.fitout.title': 'Milliveggir og innréttingar',
     'service.fitout.body':
-      'Innveggir, milliveggir og frágangur — hlutinn sem flestir verktakar senda áfram. Við höldum honum hjá okkur.',
+      'Innveggir, milliveggir og frágangur. Þetta er hlutinn sem flestir verktakar senda áfram. Við höldum honum hjá okkur.',
     'service.general.title': 'Hús og almenn verktaka',
     'service.general.body':
-      'Viðbyggingar, viðgerðir, tréverk og steypuvinna. Ef þetta er byggingarvinna, spurðu — og við segjum hreint út ef verkið á ekki heima hjá okkur.',
+      'Sökklar, steypuvinna, viðbyggingar, viðgerðir og tréverk. Ef þetta er byggingarvinna, spurðu okkur.',
 
     'projects.title': 'Verkefni',
     'projects.lead': 'Það sem við erum í núna.',
@@ -91,26 +95,26 @@ export const ui: Record<Locale, Strings> = {
     'project.atnorth.status': 'Í vinnslu',
     'project.atnorth.body':
       'Uppsetning samlokueininga, milliveggir og önnur verk á byggingarstað.',
-    'project.hlidar.kind': 'Einbýlishús',
-    'project.hlidar.title': 'Þakskipti, Hlíðar',
-    'project.hlidar.status': 'Lokið',
-    'project.hlidar.body':
-      'Þakskipti og viðgerðir utanhúss á einbýlishúsi — sami flokkur og vinnur stóru verkin.',
+    'project.house.kind': 'Einbýlishús',
+    'project.house.title': 'Steypt plata við einbýlishús',
+    'project.house.status': 'Lokið',
+    'project.house.body':
+      'Uppsláttur móta, járnabinding, lagnir fyrir snjóbræðslu og steypa á plötu við einbýlishús.',
 
     'about.title': 'Um okkur',
     'about.body':
-      'Bergverk er ungt fyrirtæki með tuttugu og einn starfsmann. Við erum ný og vinnum eftir því: við mætum, höldum verkinu gangandi og þögnum ekki milli áfanga.',
+      'Bergverk er ungt og framsækið byggingarfyrirtæki með rúmlega tuttugu starfsmenn. Við tökum að okkur allar tegundir byggingarvinnu.',
     'about.body2':
-      'Öll fögin eru okkar eigin. Þeir sem verðleggja verkið standa sjálfir í því, og þess vegna getum við staðið við tilboðið.',
+      'Þeir sem verðleggja verkið vinna sjálfir í því. Þess vegna getum við ábyrgst bæði nákvæmni tilboðsins og tæknilegt eftirlit með framkvæmdinni.',
     'about.photo.alt': 'Vinnuflokkur Bergverks',
     'about.stat1': 'Starfsmenn',
-    'about.stat2': 'Fög innanhúss',
-    'about.stat3': 'Verk í gangi',
+    'about.stat2': 'Verk unnin',
 
     'careers.title': 'Störf',
     'careers.lead':
-      'Við erum að stækka hratt og ráðum til okkar. Bergverk vinnur á verslunarmiðstöðvum, í gagnaverum og við einbýlishús á höfuðborgarsvæðinu, og okkur vantar fólk sem gengur í verkin án þess að staðið sé yfir því.',
+      'Við erum að stækka hratt og ráðum til okkar. Bergverk vinnur á verslunarmiðstöðvum, í gagnaverum og við einbýlishús á höfuðborgarsvæðinu. Okkur vantar fólk sem gengur í verkin án þess að staðið sé yfir því.',
     'careers.teaser': 'Við ráðum þaksmiði, einingamenn og smiði.',
+    'careers.more': 'Sjá laus störf',
     'careers.photo.alt': 'Vinnuflokkur á staðnum',
     'careers.roles.title': 'Laus störf',
     'role.roofer.title': 'Þaksmiður',
@@ -129,15 +133,15 @@ export const ui: Record<Locale, Strings> = {
     'careers.back': 'Til baka á forsíðu',
 
     'contact.title': 'Hafa samband',
-    'contact.body': 'Segðu okkur frá húsinu. Við komum, skoðum og sendum verð.',
+    'contact.body':
+      'Segðu okkur frá verkinu. Við komum á staðinn, skoðum aðstæður og höfum samband með næstu skref.',
     'contact.phone': 'Sími',
     'contact.email': 'Netfang',
     'contact.address': 'Heimilisfang',
     'contact.hours': 'Opnunartími',
-    'contact.hours.value': 'Mánudaga til föstudaga, 8–17',
+    'contact.hours.value': 'Mánudaga til föstudaga, 8 til 17',
 
     'footer.kennitala': 'Kennitala',
-    'footer.vsk': 'VSK-nr.',
     'footer.rights': 'Allur réttur áskilinn',
 
     'cookies.text':
@@ -174,7 +178,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.eyebrow': 'From data centres to private homes',
     'hero.title': 'Roofs on shopping centres, walls in data centres',
     'hero.body':
-      'We are a Reykjavík contractor with twenty-one people and our own crews. Large envelopes and tight programmes — and the same crews will re-roof your house.',
+      'We are a Reykjavík contractor. We take on large volumes of work, build them properly and deliver to tight deadlines. The same crews will re-roof your house.',
     'hero.cta': 'Request a quote',
     'hero.cta2': 'See projects',
     'hero.slide1.alt': 'Roof replacement at Kringlan',
@@ -182,7 +186,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.slide3.alt': 'A crew on site',
 
     'services.title': 'Services',
-    'services.lead': 'The four things we do most. The list is not a limit — ask.',
+    'services.lead': 'The four things we do most. The list is not a limit. Ask us.',
     'services.photo.alt': 'Work on site',
     'service.roofs.title': 'Roofing',
     'service.roofs.body':
@@ -192,10 +196,10 @@ export const ui: Record<Locale, Strings> = {
       'Sandwich panel envelopes for industrial buildings and data centres. Sealed, square and to programme.',
     'service.fitout.title': 'Partitions and fit-out',
     'service.fitout.body':
-      'Internal walls, partitions and finishing — the part most contractors hand to somebody else. We keep it in-house.',
+      'Internal walls, partitions and finishing. This is the part most contractors hand to somebody else. We keep it in-house.',
     'service.general.title': 'Houses and general building',
     'service.general.body':
-      'Extensions, repairs, joinery, concrete work. If it is building work, ask — and we will say plainly when a job is not for us.',
+      'Foundations, concrete work, extensions, repairs and joinery. If it is building work, ask us.',
 
     'projects.title': 'Projects',
     'projects.lead': 'What we are on right now.',
@@ -209,26 +213,26 @@ export const ui: Record<Locale, Strings> = {
     'project.atnorth.status': 'In progress',
     'project.atnorth.body':
       'Sandwich panel installation, internal partitions and further works on site.',
-    'project.hlidar.kind': 'Private home',
-    'project.hlidar.title': 'House re-roof, Hlíðar',
-    'project.hlidar.status': 'Completed',
-    'project.hlidar.body':
-      'A full re-roof and exterior repairs on a family house — the same crew that works the large sites.',
+    'project.house.kind': 'Private home',
+    'project.house.title': 'Concrete slab at a private house',
+    'project.house.status': 'Completed',
+    'project.house.body':
+      'Formwork, reinforcement mesh, snow melting pipework and the concrete pour for a slab at a private house.',
 
     'about.title': 'About us',
     'about.body':
-      'Bergverk is a young company with twenty-one people on the books. We are new and we work like it: we turn up, we keep the site moving, and we do not go quiet between stages.',
+      'Bergverk is a young, forward-looking construction company with more than twenty people on staff. We carry out every kind of construction work.',
     'about.body2':
-      'Every trade is our own. The people who price a job are the people standing on it, which is why we can answer for what we quote.',
+      'The people who price a job are the people who work on it. That is why we can stand behind both the accuracy of our estimates and the technical supervision on site.',
     'about.photo.alt': 'The Bergverk crew',
     'about.stat1': 'People on staff',
-    'about.stat2': 'Trades in-house',
-    'about.stat3': 'Sites running now',
+    'about.stat2': 'Projects delivered',
 
     'careers.title': 'Careers',
     'careers.lead':
-      'We are growing fast and hiring. Bergverk works on shopping centres, data centres and private houses around Reykjavík, and we need people who get on with the work without being watched.',
+      'We are growing fast and hiring. Bergverk works on shopping centres, data centres and private houses around Reykjavík. We need people who get on with the work without being watched.',
     'careers.teaser': 'We are hiring roofers, panel fitters and carpenters.',
+    'careers.more': 'See open roles',
     'careers.photo.alt': 'A crew on site',
     'careers.roles.title': 'Open roles',
     'role.roofer.title': 'Roofer',
@@ -247,15 +251,15 @@ export const ui: Record<Locale, Strings> = {
     'careers.back': 'Back to the home page',
 
     'contact.title': 'Contact',
-    'contact.body': 'Tell us about the building. We come out, look at it and send a price.',
+    'contact.body':
+      'Tell us about the project. We come out, look at the site and get back to you with the next steps.',
     'contact.phone': 'Phone',
     'contact.email': 'Email',
     'contact.address': 'Address',
     'contact.hours': 'Opening hours',
-    'contact.hours.value': 'Monday to Friday, 8–17',
+    'contact.hours.value': 'Monday to Friday, 8 to 17',
 
     'footer.kennitala': 'Company ID',
-    'footer.vsk': 'VAT no.',
     'footer.rights': 'All rights reserved',
 
     'cookies.text':
@@ -292,7 +296,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.eyebrow': 'Od centrów danych po domy prywatne',
     'hero.title': 'Dachy na centrach handlowych, ściany w centrach danych',
     'hero.body':
-      'Jesteśmy firmą budowlaną z Reykjavíku — dwadzieścia jeden osób i własne ekipy. Duże obiekty i napięte terminy, a te same ekipy wymienią dach w Twoim domu.',
+      'Jesteśmy firmą budowlaną z Reykjavíku. Bierzemy duże zakresy prac, wykonujemy je solidnie i oddajemy w krótkich terminach. Te same ekipy wymienią dach w Twoim domu.',
     'hero.cta': 'Poproś o wycenę',
     'hero.cta2': 'Zobacz realizacje',
     'hero.slide1.alt': 'Wymiana dachu w Kringlan',
@@ -300,20 +304,20 @@ export const ui: Record<Locale, Strings> = {
     'hero.slide3.alt': 'Ekipa na budowie',
 
     'services.title': 'Usługi',
-    'services.lead': 'Cztery rzeczy, które robimy najczęściej. Ta lista nie jest granicą — pytaj.',
+    'services.lead': 'Cztery rzeczy, które robimy najczęściej. Ta lista nie jest granicą. Pytaj.',
     'services.photo.alt': 'Praca na budowie',
     'service.roofs.title': 'Dachy',
     'service.roofs.body':
-      'Pełna wymiana pokrycia dachowego na centrach handlowych, blokach i domach. Stare zdejmujemy, nowe kładziemy, szczelnie — zanim zejdziemy z budowy.',
+      'Pełna wymiana pokrycia dachowego na centrach handlowych, blokach i domach. Stare zdejmujemy, nowe kładziemy, szczelnie, zanim zejdziemy z budowy.',
     'service.cladding.title': 'Okładziny i płyty warstwowe',
     'service.cladding.body':
       'Obudowy z płyt warstwowych dla obiektów przemysłowych i centrów danych. Szczelnie, równo i w terminie.',
     'service.fitout.title': 'Ścianki działowe i wykończenia',
     'service.fitout.body':
-      'Ściany wewnętrzne, ścianki działowe i wykończenia — część, którą większość firm oddaje podwykonawcom. My robimy ją sami.',
+      'Ściany wewnętrzne, ścianki działowe i wykończenia. To część, którą większość firm oddaje podwykonawcom. My robimy ją sami.',
     'service.general.title': 'Domy i prace ogólnobudowlane',
     'service.general.body':
-      'Rozbudowy, remonty, stolarka, betony. Jeśli to prace budowlane — pytaj, a powiemy wprost, kiedy coś nie jest dla nas.',
+      'Fundamenty, betony, rozbudowy, remonty i stolarka. Jeśli to prace budowlane, pytaj.',
 
     'projects.title': 'Realizacje',
     'projects.lead': 'Nad czym pracujemy teraz.',
@@ -327,26 +331,26 @@ export const ui: Record<Locale, Strings> = {
     'project.atnorth.status': 'W trakcie',
     'project.atnorth.body':
       'Montaż płyt warstwowych, ścianek działowych i pozostałe prace na obiekcie.',
-    'project.hlidar.kind': 'Dom prywatny',
-    'project.hlidar.title': 'Wymiana dachu, Hlíðar',
-    'project.hlidar.status': 'Ukończono',
-    'project.hlidar.body':
-      'Pełna wymiana dachu i naprawy elewacji domu jednorodzinnego — ta sama ekipa, co na dużych obiektach.',
+    'project.house.kind': 'Dom prywatny',
+    'project.house.title': 'Płyta betonowa przy domu prywatnym',
+    'project.house.status': 'Ukończono',
+    'project.house.body':
+      'Montaż szalunków, zbrojenie, instalacja ogrzewania przeciwoblodzeniowego i wylanie betonu przy domu prywatnym.',
 
     'about.title': 'O nas',
     'about.body':
-      'Bergverk to młoda firma zatrudniająca dwadzieścia jeden osób. Jesteśmy nowi i tak właśnie pracujemy: przyjeżdżamy, pilnujemy tempa i nie znikamy między etapami.',
+      'Bergverk to młoda, nowoczesna firma budowlana zatrudniająca ponad dwadzieścia osób. Wykonujemy wszystkie rodzaje prac budowlanych.',
     'about.body2':
-      'Wszystkie branże mamy u siebie. Ludzie, którzy wyceniają robotę, stoją potem na budowie — dlatego możemy za nią odpowiadać.',
+      'Wyceny przygotowują ci, którzy potem pracują na budowie. Dlatego możemy ręczyć zarówno za dokładność kosztorysu, jak i za nadzór techniczny nad realizacją.',
     'about.photo.alt': 'Ekipa Bergverk',
     'about.stat1': 'Osób w firmie',
-    'about.stat2': 'Branż u siebie',
-    'about.stat3': 'Budów w toku',
+    'about.stat2': 'Zrealizowanych obiektów',
 
     'careers.title': 'Praca',
     'careers.lead':
       'Szybko rośniemy i rekrutujemy. Bergverk pracuje na centrach handlowych, w centrach danych i przy domach prywatnych w rejonie Reykjavíku. Szukamy ludzi, którzy robią swoje bez pilnowania.',
     'careers.teaser': 'Szukamy dekarzy, monterów płyt i cieśli.',
+    'careers.more': 'Zobacz oferty pracy',
     'careers.photo.alt': 'Ekipa na budowie',
     'careers.roles.title': 'Otwarte stanowiska',
     'role.roofer.title': 'Dekarz',
@@ -365,15 +369,15 @@ export const ui: Record<Locale, Strings> = {
     'careers.back': 'Powrót na stronę główną',
 
     'contact.title': 'Kontakt',
-    'contact.body': 'Opowiedz nam o budynku. Przyjedziemy, obejrzymy i wyślemy wycenę.',
+    'contact.body':
+      'Opowiedz nam o projekcie. Przyjedziemy, obejrzymy obiekt i wrócimy do Ciebie z kolejnymi krokami.',
     'contact.phone': 'Telefon',
     'contact.email': 'E-mail',
     'contact.address': 'Adres',
     'contact.hours': 'Godziny otwarcia',
-    'contact.hours.value': 'Poniedziałek–piątek, 8–17',
+    'contact.hours.value': 'Od poniedziałku do piątku, 8 do 17',
 
     'footer.kennitala': 'Numer firmy',
-    'footer.vsk': 'Nr VAT',
     'footer.rights': 'Wszelkie prawa zastrzeżone',
 
     'cookies.text':
@@ -410,7 +414,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.eyebrow': 'No datu centriem līdz privātmājām',
     'hero.title': 'Jumti tirdzniecības centriem, sienas datu centriem',
     'hero.body':
-      'Mēs esam būvuzņēmums Reikjavīkā — divdesmit viens cilvēks un savas brigādes. Lieli objekti un saspringti termiņi, un tās pašas brigādes nomainīs jumtu tavai mājai.',
+      'Mēs esam būvuzņēmums Reikjavīkā. Uzņemamies lielus darba apjomus, izpildām tos kvalitatīvi un nododam saspringtos termiņos. Tās pašas brigādes nomainīs jumtu tavai mājai.',
     'hero.cta': 'Pieprasīt tāmi',
     'hero.cta2': 'Skatīt projektus',
     'hero.slide1.alt': 'Jumta nomaiņa Kringlan',
@@ -418,7 +422,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.slide3.alt': 'Brigāde objektā',
 
     'services.title': 'Pakalpojumi',
-    'services.lead': 'Četri virzieni, ko darām visbiežāk. Saraksts nav robeža — jautā.',
+    'services.lead': 'Četri virzieni, ko darām visbiežāk. Saraksts nav robeža. Jautā mums.',
     'services.photo.alt': 'Darbs objektā',
     'service.roofs.title': 'Jumti',
     'service.roofs.body':
@@ -428,10 +432,10 @@ export const ui: Record<Locale, Strings> = {
       'Sendviča paneļu apvalki rūpnieciskām ēkām un datu centriem. Hermētiski, precīzi un laikā.',
     'service.fitout.title': 'Starpsienas un iekšdarbi',
     'service.fitout.body':
-      'Iekšējās sienas, starpsienas un apdare — daļa, ko lielākā daļa uzņēmumu nodod apakšuzņēmējiem. Mēs to paturam pie sevis.',
+      'Iekšējās sienas, starpsienas un apdare. Šo daļu lielākā daļa uzņēmumu nodod apakšuzņēmējiem. Mēs to paturam pie sevis.',
     'service.general.title': 'Mājas un vispārējie būvdarbi',
     'service.general.body':
-      'Piebūves, remonti, kokdarbi, betona darbi. Ja tie ir būvdarbi — jautā, un mēs godīgi pateiksim, ja darbs nav mūsu.',
+      'Pamati, betona darbi, piebūves, remonti un kokdarbi. Ja tie ir būvdarbi, jautā mums.',
 
     'projects.title': 'Projekti',
     'projects.lead': 'Pie kā strādājam šobrīd.',
@@ -445,26 +449,26 @@ export const ui: Record<Locale, Strings> = {
     'project.atnorth.status': 'Procesā',
     'project.atnorth.body':
       'Sendviča paneļu montāža, starpsienas un citi darbi objektā.',
-    'project.hlidar.kind': 'Privātmāja',
-    'project.hlidar.title': 'Jumta nomaiņa, Hlíðar',
-    'project.hlidar.status': 'Pabeigts',
-    'project.hlidar.body':
-      'Pilnīga jumta nomaiņa un fasādes remonts ģimenes mājai — tā pati brigāde, kas strādā lielajos objektos.',
+    'project.house.kind': 'Privātmāja',
+    'project.house.title': 'Betona plātne pie privātmājas',
+    'project.house.status': 'Pabeigts',
+    'project.house.body':
+      'Veidņu montāža, stiegrojums, pretapledošanas sildīšanas cauruļu ieklāšana un betona liešana pie privātmājas.',
 
     'about.title': 'Par mums',
     'about.body':
-      'Bergverk ir jauns uzņēmums ar divdesmit vienu darbinieku. Mēs esam jauni un arī strādājam tā: ierodamies, turam objektu kustībā un nepazūdam starp posmiem.',
+      'Bergverk ir jauns un progresīvs būvuzņēmums ar vairāk nekā divdesmit darbiniekiem. Mēs veicam visu veidu būvdarbus.',
     'about.body2':
-      'Visi amati ir mūsu pašu. Tie, kas sastāda tāmi, paši arī stāv objektā — tāpēc mēs varam par to atbildēt.',
+      'Tāmes sagatavo tie paši cilvēki, kas strādā objektā. Tāpēc mēs varam galvot gan par tāmes precizitāti, gan par tehnisko uzraudzību būvlaukumā.',
     'about.photo.alt': 'Bergverk brigāde',
     'about.stat1': 'Darbinieki',
-    'about.stat2': 'Amati uzņēmumā',
-    'about.stat3': 'Objekti procesā',
+    'about.stat2': 'Pabeigti objekti',
 
     'careers.title': 'Karjera',
     'careers.lead':
-      'Mēs strauji augam un pieņemam darbā. Bergverk strādā tirdzniecības centros, datu centros un pie privātmājām Reikjavīkas apkaimē, un mums vajag cilvēkus, kas dara savu darbu bez uzraudzības.',
+      'Mēs strauji augam un pieņemam darbā. Bergverk strādā tirdzniecības centros, datu centros un pie privātmājām Reikjavīkas apkaimē. Mums vajag cilvēkus, kas dara savu darbu bez uzraudzības.',
     'careers.teaser': 'Meklējam jumiķus, paneļu montētājus un namdarus.',
+    'careers.more': 'Skatīt vakances',
     'careers.photo.alt': 'Brigāde objektā',
     'careers.roles.title': 'Vakances',
     'role.roofer.title': 'Jumiķis',
@@ -483,15 +487,15 @@ export const ui: Record<Locale, Strings> = {
     'careers.back': 'Atpakaļ uz sākumlapu',
 
     'contact.title': 'Kontakti',
-    'contact.body': 'Pastāsti mums par ēku. Mēs atbrauksim, apskatīsim un nosūtīsim cenu.',
+    'contact.body':
+      'Pastāsti mums par projektu. Mēs atbrauksim, apskatīsim objektu un sazināsimies ar nākamajiem soļiem.',
     'contact.phone': 'Tālrunis',
     'contact.email': 'E-pasts',
     'contact.address': 'Adrese',
     'contact.hours': 'Darba laiks',
-    'contact.hours.value': 'Pirmdiena–piektdiena, 8–17',
+    'contact.hours.value': 'No pirmdienas līdz piektdienai, 8 līdz 17',
 
     'footer.kennitala': 'Reģistrācijas nr.',
-    'footer.vsk': 'PVN nr.',
     'footer.rights': 'Visas tiesības aizsargātas',
 
     'cookies.text':

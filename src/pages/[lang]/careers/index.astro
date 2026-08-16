@@ -17,14 +17,14 @@ const t = useTranslations(locale);
  * saves the applicant from inventing one.
  */
 const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
-  `${t('careers.cta')} — ${company.name}`
+  `${t('careers.cta')}, ${company.name}`
 )}`;
 ---
 
 <BaseLayout
   locale={locale}
   active="careers"
-  title={`${t('careers.title')} — ${company.name}`}
+  title={`${t('careers.title')}, ${company.name}`}
   description={t('careers.lead')}
 >
   {/* ---- Intro, over the crew photograph ------------------------------- */}
@@ -36,7 +36,7 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
 
         <a
           href={applyHref}
-          class="mt-8 inline-block bg-rust px-6 py-3 font-semibold text-ink transition hover:brightness-110"
+          class="mt-8 inline-block bg-rust px-6 py-3 font-semibold text-on-rust transition hover:brightness-110"
         >
           {t('careers.cta')}
         </a>
@@ -99,7 +99,7 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
 
       <p class="mt-12">
         <a href={localePath(locale)} class="text-muted transition hover:text-ink">
-          ← {t('careers.back')}
+          {t('careers.back')}
         </a>
       </p>
     </div>

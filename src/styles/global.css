@@ -3,38 +3,82 @@
 /*
  * Direction 03 "Torf" — the Icelandic turf house: peat, moss, stone, rust.
  *
- * The palette lives on dark earth. Lightening the ground breaks the
- * direction, so there is no light variant here by design.
+ * Daylight is the primary theme: birch paper as the ground, peat as the
+ * text. The dark variant is the same materials the other way round and is
+ * served to anyone whose system asks for dark.
+ *
+ * Every token below is a reference to a plain custom property, so the theme
+ * swaps by redefining those properties and no component has to know.
  */
 @theme {
-  /* Palette */
-  --color-ground: #1e2219; /* Mold — earth, page background */
-  --color-surface: #2a3022; /* Svörður — turf, raised bands */
-  --color-moss: #5f7048; /* Mosi — moss, backgrounds and rules */
-  --color-rust: #9c4e2c; /* Ryð — rust, button fills only */
-  --color-ink: #d6cfc0; /* Birki — birch, body text */
-
-  /*
-   * Rust at full strength reaches only 2.2:1 on the earth ground, so it
-   * cannot carry text. This lightened tint clears 4.7:1 and is what dates
-   * and inline accents use; --color-rust stays for filled buttons, where
-   * ink-on-rust measures 4.9:1.
-   */
-  --color-rust-text: #c97a4e;
-
-  /* Birch dimmed for secondary text — 6.1:1 on the ground. */
-  --color-muted: #a29c8b;
-
-  /* Hairlines read as moss in shadow rather than grey. */
-  --color-rule: #3b4431;
+  --color-ground: var(--torf-ground);
+  --color-surface: var(--torf-surface);
+  --color-moss: var(--torf-moss);
+  --color-rust: var(--torf-rust);
+  --color-rust-text: var(--torf-rust-text);
+  --color-on-rust: var(--torf-on-rust);
+  --color-ink: var(--torf-ink);
+  --color-muted: var(--torf-muted);
+  --color-rule: var(--torf-rule);
 
   --font-display: "Zilla Slab", ui-serif, Georgia, serif;
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* ---- Daylight: the default ------------------------------------------ */
+:root {
+  --torf-ground: #efebe0; /* Birki — birch paper */
+  --torf-surface: #e2ddce; /* raised bands */
+  --torf-ink: #1e2219; /* Mold — peat, now the text */
+  --torf-muted: #5c6350; /* 5.3:1 on the ground */
+  --torf-rule: #c7c1ae;
+  --torf-moss: #4a5a34; /* darkened from the dark theme to hold 6.3:1 */
+  --torf-rust: #9c4e2c;
+
+  /*
+   * On paper, rust carries text on its own at 5.0:1, so this is simply
+   * rust. It only diverges in the dark theme, where full-strength rust
+   * reaches 2.2:1 and cannot be read.
+   */
+  --torf-rust-text: #9c4e2c;
+
+  /*
+   * Text sitting on a rust fill. Neither ink nor ground works in both
+   * themes: on paper, ink on rust is 2.4:1, and in the dark theme the
+   * ground on rust is the same. Each theme needs its own light value.
+   */
+  --torf-on-rust: #efebe0;
+
+  /* Courses of cut turf, in birch tones. */
+  --torf-strata-1: #e7e2d4;
+  --torf-strata-2: #dcd6c5;
+  --torf-strata-3: #eeeade;
+  --torf-strata-4: #e2ddce;
+}
+
+/* ---- Dark: offered to systems that ask for it ----------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --torf-ground: #1e2219;
+    --torf-surface: #2a3022;
+    --torf-ink: #d6cfc0;
+    --torf-muted: #a29c8b;
+    --torf-rule: #3b4431;
+    --torf-moss: #5f7048;
+    --torf-rust: #9c4e2c;
+    --torf-rust-text: #c97a4e; /* 4.7:1, where flat rust manages 2.2:1 */
+    --torf-on-rust: #d6cfc0;
+
+    --torf-strata-1: #323a2a;
+    --torf-strata-2: #272d20;
+    --torf-strata-3: #3a4430;
+    --torf-strata-4: #2a3022;
+  }
+}
+
 html {
   -webkit-text-size-adjust: 100%;
-  background-color: var(--color-ground);
+  background-color: var(--torf-ground);
 }
 
 /*
@@ -62,10 +106,10 @@ html {
 .tex-strata {
   background-image: repeating-linear-gradient(
     to bottom,
-    #323a2a 0 7px,
-    #272d20 7px 12px,
-    #3a4430 12px 15px,
-    #2a3022 15px 24px
+    var(--torf-strata-1) 0 7px,
+    var(--torf-strata-2) 7px 12px,
+    var(--torf-strata-3) 12px 15px,
+    var(--torf-strata-4) 15px 24px
   );
 }
 
@@ -122,10 +166,6 @@ html {
     linear-gradient(to top, var(--color-ground) 0%, transparent 35%);
 }
 
-/*
- * Sat on the darkest part of the scrim, a rule-coloured bar disappears —
- * the inactive state needs moss to stay findable before it is clicked.
- */
 .hero-dot {
   inline-size: 2.75rem;
   block-size: 3px;
@@ -210,6 +250,10 @@ html {
   background-color: var(--color-ground);
 }
 
+.nav-panel[hidden] {
+  display: none;
+}
+
 /*
  * The panel lives inside the sticky header, which has its own stacking
  * context — a z-index on the panel itself cannot escape it and the consent
@@ -218,10 +262,6 @@ html {
  */
 .nav-open header {
   z-index: 60;
-}
-
-.nav-panel[hidden] {
-  display: none;
 }
 
 /* Holds the page still behind the open overlay. */
