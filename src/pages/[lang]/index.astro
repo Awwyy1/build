@@ -14,11 +14,15 @@ export function getStaticPaths() {
 const locale = Astro.params.lang as Locale;
 const t = useTranslations(locale);
 
-/** Placeholder figures until the real ones are supplied. */
+/*
+ * Figures the company can stand behind today. Deliberately no "years in
+ * business" — the company is young, and its case is the work it is on, not
+ * how long it has been at it.
+ */
 const stats = [
-  { value: String(new Date().getFullYear() - company.founded), label: t('about.stat1') },
-  { value: '40+', label: t('about.stat2') },
-  { value: '11', label: t('about.stat3') },
+  { value: '21', label: t('about.stat1') },
+  { value: String(services.length), label: t('about.stat2') },
+  { value: '2', label: t('about.stat3') },
 ];
 ---
 
@@ -38,16 +42,15 @@ const stats = [
       </h1>
       <p class="mt-6 max-w-xl text-lg text-muted">{t('hero.body')}</p>
 
+      {/*
+        The quote button is parked for now; projects carry the pitch better
+        while the photography is still going in. Its string is kept in the
+        catalogue so it can come back without a re-translation.
+      */}
       <div class="mt-10 flex flex-wrap gap-4">
         <a
-          href="#contact"
-          class="bg-rust px-6 py-3 font-semibold text-ink transition hover:brightness-110"
-        >
-          {t('hero.cta')}
-        </a>
-        <a
           href="#projects"
-          class="border border-rule px-6 py-3 transition hover:border-moss"
+          class="bg-rust px-6 py-3 font-semibold text-ink transition hover:brightness-110"
         >
           {t('hero.cta2')}
         </a>

@@ -27,13 +27,13 @@ export const homeSections = ['services', 'projects', 'about', 'contact'] as cons
 export type HomeSection = (typeof homeSections)[number];
 
 /** Service rows, in display order. */
-export const services = ['restoration', 'roofs', 'masonry', 'joinery'] as const;
+export const services = ['roofs', 'cladding', 'fitout', 'general'] as const;
 
 /** Project cards, in display order. */
 export const projects = ['kringlan', 'atnorth', 'hlidar'] as const;
 
 /** Open roles listed on the Careers page. */
-export const roles = ['carpenter', 'mason', 'roofer'] as const;
+export const roles = ['roofer', 'cladder', 'carpenter'] as const;
 
 type Strings = Record<string, string>;
 
@@ -50,82 +50,86 @@ export const ui: Record<Locale, Strings> = {
     'nav.careers': 'Störf',
     'nav.contact': 'Hafa samband',
 
-    'site.tagline': 'Endurgerð og viðhald í Reykjavík',
+    'site.tagline': 'Verktakafyrirtæki í Reykjavík',
     'media.placeholder': 'Ljósmynd',
 
-    'hero.eyebrow': 'Endurgerð og viðhald síðan 2007',
-    'hero.title': 'Við gerum upp hús sem eiga að standa áfram',
+    'hero.eyebrow': 'Frá gagnaverum að einbýlishúsum',
+    'hero.title': 'Þök á verslunarmiðstöðvar, veggir í gagnaver',
     'hero.body':
-      'Við komum á staðinn, skoðum og gerum tilboð. Engin yfirborðsvinna — við lögum það sem er að.',
+      'Við erum verktakafyrirtæki í Reykjavík með tuttugu og einn starfsmann og okkar eigin vinnuflokka. Stór verk og þröng tímamörk — og sömu flokkar skipta um þak á húsinu þínu.',
     'hero.cta': 'Fá tilboð',
     'hero.cta2': 'Sjá verkefni',
-    'hero.slide1.alt': 'Bárujárnshús í endurgerð',
-    'hero.slide2.alt': 'Þakskipti í vinnslu',
-    'hero.slide3.alt': 'Múrviðgerð á fjölbýli',
+    'hero.slide1.alt': 'Þakskipti í Kringlunni',
+    'hero.slide2.alt': 'Uppsetning eininga í gagnaveri',
+    'hero.slide3.alt': 'Vinnuflokkur á staðnum',
 
     'services.title': 'Þjónusta',
-    'services.lead': 'Fjögur svið. Allt unnið af okkar eigin mönnum.',
-    'services.photo.alt': 'Handverk á staðnum',
-    'service.restoration.title': 'Endurgerð',
-    'service.restoration.body':
-      'Gömul hús, upprunaleg efni. Við vinnum með það sem fyrir er í stað þess að rífa það burt.',
+    'services.lead': 'Fjögur svið sem við vinnum mest í. Listinn er ekki takmörkun — spurðu okkur.',
+    'services.photo.alt': 'Vinna á staðnum',
     'service.roofs.title': 'Þök',
     'service.roofs.body':
-      'Þakskipti og viðgerðir á bárujárni. Við þéttum áður en vatnið finnur leiðina.',
-    'service.masonry.title': 'Múrverk',
-    'service.masonry.body':
-      'Sprungur, múrviðgerðir og steining. Við lögum orsökina, ekki bara ummerkin.',
-    'service.joinery.title': 'Tréverk',
-    'service.joinery.body': 'Gluggar, hurðir og innréttingar smíðaðar eftir máli.',
+      'Heildarskipti á þakklæðningu á verslunarmiðstöðvum, fjölbýli og einbýlishúsum. Gamla efnið af, nýtt á, þétt áður en við förum.',
+    'service.cladding.title': 'Klæðningar og einingar',
+    'service.cladding.body':
+      'Samlokueiningar á iðnaðarhús og gagnaver. Þétt, rétt og á áætlun.',
+    'service.fitout.title': 'Milliveggir og innréttingar',
+    'service.fitout.body':
+      'Innveggir, milliveggir og frágangur — hlutinn sem flestir verktakar senda áfram. Við höldum honum hjá okkur.',
+    'service.general.title': 'Hús og almenn verktaka',
+    'service.general.body':
+      'Viðbyggingar, viðgerðir, tréverk og steypuvinna. Ef þetta er byggingarvinna, spurðu — og við segjum hreint út ef verkið á ekki heima hjá okkur.',
 
     'projects.title': 'Verkefni',
-    'projects.lead': 'Verk í vinnslu og nýlega lokið.',
+    'projects.lead': 'Það sem við erum í núna.',
     'project.kringlan.kind': 'Þök',
     'project.kringlan.title': 'Kringlan verslunarmiðstöð, Reykjavík',
     'project.kringlan.status': 'Í vinnslu',
     'project.kringlan.body':
-      'Heildarendurnýjun þakklæðningar: eldra þakefni rifið af og nýtt lagt í staðinn.',
+      'Heildarendurnýjun þakklæðningar: eldra þakefni rifið af og nýtt lagt í staðinn, á miðstöð sem er opin á meðan.',
     'project.atnorth.kind': 'Iðnaðarbygging',
     'project.atnorth.title': 'atNorth Mega Data Center, Keflavík',
     'project.atnorth.status': 'Í vinnslu',
     'project.atnorth.body':
       'Uppsetning samlokueininga, milliveggir og önnur verk á byggingarstað.',
-    'project.hlidar.kind': 'Múrverk',
-    'project.hlidar.title': 'Múrviðgerð, Hlíðar',
-    'project.hlidar.status': 'Lokið 2025',
-    'project.hlidar.body': 'Sprungur þéttar, múr endurnýjaður og fjölbýlið steinað upp á nýtt.',
+    'project.hlidar.kind': 'Einbýlishús',
+    'project.hlidar.title': 'Þakskipti, Hlíðar',
+    'project.hlidar.status': 'Lokið',
+    'project.hlidar.body':
+      'Þakskipti og viðgerðir utanhúss á einbýlishúsi — sami flokkur og vinnur stóru verkin.',
 
     'about.title': 'Um okkur',
     'about.body':
-      'Við erum lítið verktakafyrirtæki í Reykjavík. Sömu menn mæta á staðinn frá fyrstu skoðun til lokaúttektar.',
+      'Bergverk er ungt fyrirtæki með tuttugu og einn starfsmann. Við erum ný og vinnum eftir því: við mætum, höldum verkinu gangandi og þögnum ekki milli áfanga.',
     'about.body2':
-      'Við tökum að okkur færri verk en við gætum, því við klárum hvert og eitt áður en það næsta byrjar.',
-    'about.photo.alt': 'Starfsfólk Bergverks',
-    'about.stat1': 'Ár í rekstri',
-    'about.stat2': 'Verk á ári',
-    'about.stat3': 'Fastir starfsmenn',
+      'Öll fögin eru okkar eigin. Þeir sem verðleggja verkið standa sjálfir í því, og þess vegna getum við staðið við tilboðið.',
+    'about.photo.alt': 'Vinnuflokkur Bergverks',
+    'about.stat1': 'Starfsmenn',
+    'about.stat2': 'Fög innanhúss',
+    'about.stat3': 'Verk í gangi',
 
     'careers.title': 'Störf',
     'careers.lead':
-      'Bergverk er lítið verktakafyrirtæki í Reykjavík sem sérhæfir sig í endurgerð og viðhaldi eldri húsa. Við erum að stækka og leitum að fólki sem kann til verka.',
-    'careers.teaser': 'Við ráðum smiði, múrara og þaksmiði.',
+      'Við erum að stækka hratt og ráðum til okkar. Bergverk vinnur á verslunarmiðstöðvum, í gagnaverum og við einbýlishús á höfuðborgarsvæðinu, og okkur vantar fólk sem gengur í verkin án þess að staðið sé yfir því.',
+    'careers.teaser': 'Við ráðum þaksmiði, einingamenn og smiði.',
     'careers.photo.alt': 'Vinnuflokkur á staðnum',
     'careers.roles.title': 'Laus störf',
+    'role.roofer.title': 'Þaksmiður',
+    'role.roofer.body':
+      'Niðurrif þaka og ný klæðning á stórum atvinnuþökum. Vinna í hæð, í öllum veðrum.',
+    'role.cladder.title': 'Einingamaður',
+    'role.cladder.body':
+      'Samlokueiningar og klæðningar á iðnaðarsvæðum. Bæði nákvæmni og hraði skipta máli.',
     'role.carpenter.title': 'Smiður',
     'role.carpenter.body':
-      'Endurgerð glugga, hurða og innréttinga. Reynsla af gömlum húsum er kostur.',
-    'role.mason.title': 'Múrari',
-    'role.mason.body': 'Múrviðgerðir, steining og sprunguviðgerðir á eldri húsum.',
-    'role.roofer.title': 'Þaksmiður',
-    'role.roofer.body': 'Þakskipti og viðgerðir á bárujárni. Vinna í hæð.',
+      'Milliveggir, innréttingar og almenn byggingarvinna, bæði á atvinnuhúsnæði og einbýlishúsum.',
     'careers.how.title': 'Hvernig sækir þú um',
     'careers.how.body':
-      'Sendu okkur ferilskrá og stutta lýsingu á því sem þú hefur unnið við. Við svörum öllum umsóknum.',
+      'Sendu okkur ferilskrá og stutta lýsingu á því sem þú hefur unnið við. Við lesum allt og svörum.',
     'careers.cta': 'Senda ferilskrá',
     'careers.back': 'Til baka á forsíðu',
 
     'contact.title': 'Hafa samband',
-    'contact.body': 'Segðu okkur frá húsinu. Við komum, skoðum og sendum tilboð.',
+    'contact.body': 'Segðu okkur frá húsinu. Við komum, skoðum og sendum verð.',
     'contact.phone': 'Sími',
     'contact.email': 'Netfang',
     'contact.address': 'Heimilisfang',
@@ -164,83 +168,86 @@ export const ui: Record<Locale, Strings> = {
     'nav.careers': 'Careers',
     'nav.contact': 'Contact',
 
-    'site.tagline': 'Restoration and maintenance in Reykjavík',
+    'site.tagline': 'Building contractor in Reykjavík',
     'media.placeholder': 'Photograph',
 
-    'hero.eyebrow': 'Restoration and maintenance since 2007',
-    'hero.title': 'We restore houses that are meant to keep standing',
+    'hero.eyebrow': 'From data centres to private homes',
+    'hero.title': 'Roofs on shopping centres, walls in data centres',
     'hero.body':
-      'We come out, look at the building and quote. No cosmetic work — we fix what is actually wrong.',
+      'We are a Reykjavík contractor with twenty-one people and our own crews. Large envelopes and tight programmes — and the same crews will re-roof your house.',
     'hero.cta': 'Request a quote',
     'hero.cta2': 'See projects',
-    'hero.slide1.alt': 'Iron-clad house under restoration',
-    'hero.slide2.alt': 'Roof replacement in progress',
-    'hero.slide3.alt': 'Render repair on an apartment block',
+    'hero.slide1.alt': 'Roof replacement at Kringlan',
+    'hero.slide2.alt': 'Panel installation at a data centre',
+    'hero.slide3.alt': 'A crew on site',
 
     'services.title': 'Services',
-    'services.lead': 'Four trades. All of it done by our own people.',
+    'services.lead': 'The four things we do most. The list is not a limit — ask.',
     'services.photo.alt': 'Work on site',
-    'service.restoration.title': 'Restoration',
-    'service.restoration.body':
-      'Old houses, original materials. We work with what is already there instead of tearing it out.',
-    'service.roofs.title': 'Roofs',
+    'service.roofs.title': 'Roofing',
     'service.roofs.body':
-      'Corrugated iron replacement and repair. We seal it before the water finds its way in.',
-    'service.masonry.title': 'Masonry',
-    'service.masonry.body':
-      'Cracks, render repair and pebbledash. We fix the cause, not just the marks it left.',
-    'service.joinery.title': 'Joinery',
-    'service.joinery.body': 'Windows, doors and fittings built to measure.',
+      'Full roof replacement on shopping centres, apartment blocks and houses. Old covering off, new one on, watertight before we leave.',
+    'service.cladding.title': 'Cladding and panels',
+    'service.cladding.body':
+      'Sandwich panel envelopes for industrial buildings and data centres. Sealed, square and to programme.',
+    'service.fitout.title': 'Partitions and fit-out',
+    'service.fitout.body':
+      'Internal walls, partitions and finishing — the part most contractors hand to somebody else. We keep it in-house.',
+    'service.general.title': 'Houses and general building',
+    'service.general.body':
+      'Extensions, repairs, joinery, concrete work. If it is building work, ask — and we will say plainly when a job is not for us.',
 
     'projects.title': 'Projects',
-    'projects.lead': 'Work in progress and recently finished.',
-    'project.kringlan.kind': 'Roofs',
+    'projects.lead': 'What we are on right now.',
+    'project.kringlan.kind': 'Roofing',
     'project.kringlan.title': 'Kringlan shopping centre, Reykjavík',
     'project.kringlan.status': 'In progress',
     'project.kringlan.body':
-      'Full replacement of the roof covering: the old covering stripped off and a new one laid.',
+      'Full replacement of the roof covering: the old covering stripped off and a new one laid, over a centre that stays open throughout.',
     'project.atnorth.kind': 'Industrial build',
     'project.atnorth.title': 'atNorth Mega Data Center, Keflavík',
     'project.atnorth.status': 'In progress',
     'project.atnorth.body':
       'Sandwich panel installation, internal partitions and further works on site.',
-    'project.hlidar.kind': 'Masonry',
-    'project.hlidar.title': 'Render repair, Hlíðar',
-    'project.hlidar.status': 'Completed 2025',
+    'project.hlidar.kind': 'Private home',
+    'project.hlidar.title': 'House re-roof, Hlíðar',
+    'project.hlidar.status': 'Completed',
     'project.hlidar.body':
-      'Cracks sealed, render renewed and the whole block finished in fresh pebbledash.',
+      'A full re-roof and exterior repairs on a family house — the same crew that works the large sites.',
 
     'about.title': 'About us',
     'about.body':
-      'We are a small contractor in Reykjavík. The same people who survey the building are the ones who finish it.',
+      'Bergverk is a young company with twenty-one people on the books. We are new and we work like it: we turn up, we keep the site moving, and we do not go quiet between stages.',
     'about.body2':
-      'We take on fewer jobs than we could, because we finish each one before the next begins.',
-    'about.photo.alt': 'The Bergverk team',
-    'about.stat1': 'Years trading',
-    'about.stat2': 'Jobs a year',
-    'about.stat3': 'People on staff',
+      'Every trade is our own. The people who price a job are the people standing on it, which is why we can answer for what we quote.',
+    'about.photo.alt': 'The Bergverk crew',
+    'about.stat1': 'People on staff',
+    'about.stat2': 'Trades in-house',
+    'about.stat3': 'Sites running now',
 
     'careers.title': 'Careers',
     'careers.lead':
-      'Bergverk is a small contractor in Reykjavík specialising in the restoration and upkeep of older buildings. We are growing and looking for people who know the work.',
-    'careers.teaser': 'We are hiring carpenters, masons and roofers.',
+      'We are growing fast and hiring. Bergverk works on shopping centres, data centres and private houses around Reykjavík, and we need people who get on with the work without being watched.',
+    'careers.teaser': 'We are hiring roofers, panel fitters and carpenters.',
     'careers.photo.alt': 'A crew on site',
     'careers.roles.title': 'Open roles',
+    'role.roofer.title': 'Roofer',
+    'role.roofer.body':
+      'Strip-out and new coverings on large commercial roofs. Work at height, in all weather.',
+    'role.cladder.title': 'Panel fitter',
+    'role.cladder.body':
+      'Sandwich panel envelopes and cladding on industrial sites. Precision and pace both matter.',
     'role.carpenter.title': 'Carpenter',
     'role.carpenter.body':
-      'Restoring windows, doors and fittings. Experience with old buildings is an advantage.',
-    'role.mason.title': 'Mason',
-    'role.mason.body': 'Render repair, pebbledash and crack work on older buildings.',
-    'role.roofer.title': 'Roofer',
-    'role.roofer.body': 'Corrugated iron replacement and repair. Work at height.',
+      'Partitions, fit-out and general building, on commercial sites and private houses alike.',
     'careers.how.title': 'How to apply',
     'careers.how.body':
-      'Send us your CV and a short note on what you have worked on. We reply to every application.',
+      'Send us your CV and a short note on what you have worked on. We read everything and we reply.',
     'careers.cta': 'Send your CV',
     'careers.back': 'Back to the home page',
 
     'contact.title': 'Contact',
-    'contact.body': 'Tell us about the building. We come out, look and send a quote.',
+    'contact.body': 'Tell us about the building. We come out, look at it and send a price.',
     'contact.phone': 'Phone',
     'contact.email': 'Email',
     'contact.address': 'Address',
@@ -279,77 +286,81 @@ export const ui: Record<Locale, Strings> = {
     'nav.careers': 'Praca',
     'nav.contact': 'Kontakt',
 
-    'site.tagline': 'Renowacje i remonty w Reykjavíku',
+    'site.tagline': 'Firma budowlana w Reykjavíku',
     'media.placeholder': 'Zdjęcie',
 
-    'hero.eyebrow': 'Renowacje i remonty od 2007 roku',
-    'hero.title': 'Remontujemy domy, które mają stać dalej',
+    'hero.eyebrow': 'Od centrów danych po domy prywatne',
+    'hero.title': 'Dachy na centrach handlowych, ściany w centrach danych',
     'hero.body':
-      'Przyjeżdżamy, oglądamy budynek i wyceniamy. Bez prac pozornych — naprawiamy to, co faktycznie nie działa.',
+      'Jesteśmy firmą budowlaną z Reykjavíku — dwadzieścia jeden osób i własne ekipy. Duże obiekty i napięte terminy, a te same ekipy wymienią dach w Twoim domu.',
     'hero.cta': 'Poproś o wycenę',
     'hero.cta2': 'Zobacz realizacje',
-    'hero.slide1.alt': 'Dom w blasze w trakcie renowacji',
-    'hero.slide2.alt': 'Wymiana dachu w toku',
-    'hero.slide3.alt': 'Naprawa tynku na bloku mieszkalnym',
+    'hero.slide1.alt': 'Wymiana dachu w Kringlan',
+    'hero.slide2.alt': 'Montaż płyt w centrum danych',
+    'hero.slide3.alt': 'Ekipa na budowie',
 
     'services.title': 'Usługi',
-    'services.lead': 'Cztery specjalności. Wszystko robią nasi ludzie.',
+    'services.lead': 'Cztery rzeczy, które robimy najczęściej. Ta lista nie jest granicą — pytaj.',
     'services.photo.alt': 'Praca na budowie',
-    'service.restoration.title': 'Renowacje',
-    'service.restoration.body':
-      'Stare domy, oryginalne materiały. Pracujemy z tym, co zastajemy, zamiast to wyrywać.',
     'service.roofs.title': 'Dachy',
     'service.roofs.body':
-      'Wymiana i naprawa blachy falistej. Uszczelniamy, zanim woda znajdzie drogę.',
-    'service.masonry.title': 'Murarstwo',
-    'service.masonry.body':
-      'Pęknięcia, naprawa tynków i wypraw. Usuwamy przyczynę, nie tylko jej ślady.',
-    'service.joinery.title': 'Stolarka',
-    'service.joinery.body': 'Okna, drzwi i zabudowa robione na wymiar.',
+      'Pełna wymiana pokrycia dachowego na centrach handlowych, blokach i domach. Stare zdejmujemy, nowe kładziemy, szczelnie — zanim zejdziemy z budowy.',
+    'service.cladding.title': 'Okładziny i płyty warstwowe',
+    'service.cladding.body':
+      'Obudowy z płyt warstwowych dla obiektów przemysłowych i centrów danych. Szczelnie, równo i w terminie.',
+    'service.fitout.title': 'Ścianki działowe i wykończenia',
+    'service.fitout.body':
+      'Ściany wewnętrzne, ścianki działowe i wykończenia — część, którą większość firm oddaje podwykonawcom. My robimy ją sami.',
+    'service.general.title': 'Domy i prace ogólnobudowlane',
+    'service.general.body':
+      'Rozbudowy, remonty, stolarka, betony. Jeśli to prace budowlane — pytaj, a powiemy wprost, kiedy coś nie jest dla nas.',
 
     'projects.title': 'Realizacje',
-    'projects.lead': 'Prace w toku i niedawno ukończone.',
+    'projects.lead': 'Nad czym pracujemy teraz.',
     'project.kringlan.kind': 'Dachy',
     'project.kringlan.title': 'Centrum handlowe Kringlan, Reykjavík',
     'project.kringlan.status': 'W trakcie',
     'project.kringlan.body':
-      'Pełna wymiana pokrycia dachowego: demontaż starego pokrycia i montaż nowego.',
+      'Pełna wymiana pokrycia dachowego: demontaż starego pokrycia i montaż nowego, na obiekcie czynnym przez cały czas prac.',
     'project.atnorth.kind': 'Budownictwo przemysłowe',
     'project.atnorth.title': 'atNorth Mega Data Center, Keflavík',
     'project.atnorth.status': 'W trakcie',
     'project.atnorth.body':
       'Montaż płyt warstwowych, ścianek działowych i pozostałe prace na obiekcie.',
-    'project.hlidar.kind': 'Murarstwo',
-    'project.hlidar.title': 'Naprawa tynku, Hlíðar',
-    'project.hlidar.status': 'Ukończono 2025',
+    'project.hlidar.kind': 'Dom prywatny',
+    'project.hlidar.title': 'Wymiana dachu, Hlíðar',
+    'project.hlidar.status': 'Ukończono',
     'project.hlidar.body':
-      'Uszczelnione pęknięcia, odnowiony tynk i cały blok wykończony nową wyprawą.',
+      'Pełna wymiana dachu i naprawy elewacji domu jednorodzinnego — ta sama ekipa, co na dużych obiektach.',
 
     'about.title': 'O nas',
     'about.body':
-      'Jesteśmy małą firmą budowlaną w Reykjavíku. Ci sami ludzie, którzy oglądają budynek, kończą potem robotę.',
+      'Bergverk to młoda firma zatrudniająca dwadzieścia jeden osób. Jesteśmy nowi i tak właśnie pracujemy: przyjeżdżamy, pilnujemy tempa i nie znikamy między etapami.',
     'about.body2':
-      'Bierzemy mniej zleceń, niż moglibyśmy, bo każde kończymy, zanim zaczniemy następne.',
-    'about.photo.alt': 'Zespół Bergverk',
-    'about.stat1': 'Lat na rynku',
-    'about.stat2': 'Realizacji rocznie',
-    'about.stat3': 'Osób na etacie',
+      'Wszystkie branże mamy u siebie. Ludzie, którzy wyceniają robotę, stoją potem na budowie — dlatego możemy za nią odpowiadać.',
+    'about.photo.alt': 'Ekipa Bergverk',
+    'about.stat1': 'Osób w firmie',
+    'about.stat2': 'Branż u siebie',
+    'about.stat3': 'Budów w toku',
 
     'careers.title': 'Praca',
     'careers.lead':
-      'Bergverk to mała firma budowlana w Reykjavíku, specjalizująca się w renowacji i utrzymaniu starszych budynków. Rozwijamy się i szukamy ludzi, którzy znają fach.',
-    'careers.teaser': 'Szukamy cieśli, murarzy i dekarzy.',
+      'Szybko rośniemy i rekrutujemy. Bergverk pracuje na centrach handlowych, w centrach danych i przy domach prywatnych w rejonie Reykjavíku. Szukamy ludzi, którzy robią swoje bez pilnowania.',
+    'careers.teaser': 'Szukamy dekarzy, monterów płyt i cieśli.',
     'careers.photo.alt': 'Ekipa na budowie',
     'careers.roles.title': 'Otwarte stanowiska',
-    'role.carpenter.title': 'Cieśla',
-    'role.carpenter.body': 'Renowacja okien, drzwi i zabudowy. Doświadczenie ze starymi domami mile widziane.',
-    'role.mason.title': 'Murarz',
-    'role.mason.body': 'Naprawa tynków, wyprawy i pęknięć w starszych budynkach.',
     'role.roofer.title': 'Dekarz',
-    'role.roofer.body': 'Wymiana i naprawa blachy falistej. Praca na wysokości.',
+    'role.roofer.body':
+      'Demontaż i montaż pokryć na dużych dachach komercyjnych. Praca na wysokości, w każdą pogodę.',
+    'role.cladder.title': 'Monter płyt warstwowych',
+    'role.cladder.body':
+      'Obudowy z płyt warstwowych i okładziny na obiektach przemysłowych. Liczy się precyzja i tempo.',
+    'role.carpenter.title': 'Cieśla',
+    'role.carpenter.body':
+      'Ścianki działowe, wykończenia i prace ogólnobudowlane, na obiektach i w domach.',
     'careers.how.title': 'Jak aplikować',
     'careers.how.body':
-      'Wyślij nam CV i krótko napisz, przy czym pracowałeś. Odpowiadamy na każde zgłoszenie.',
+      'Wyślij nam CV i krótko napisz, przy czym pracowałeś. Czytamy wszystko i odpowiadamy.',
     'careers.cta': 'Wyślij CV',
     'careers.back': 'Powrót na stronę główną',
 
@@ -393,81 +404,86 @@ export const ui: Record<Locale, Strings> = {
     'nav.careers': 'Karjera',
     'nav.contact': 'Kontakti',
 
-    'site.tagline': 'Restaurācija un remonts Reikjavīkā',
+    'site.tagline': 'Būvuzņēmums Reikjavīkā',
     'media.placeholder': 'Fotogrāfija',
 
-    'hero.eyebrow': 'Restaurācija un remonts kopš 2007. gada',
-    'hero.title': 'Mēs atjaunojam mājas, kurām jāstāv arī turpmāk',
+    'hero.eyebrow': 'No datu centriem līdz privātmājām',
+    'hero.title': 'Jumti tirdzniecības centriem, sienas datu centriem',
     'hero.body':
-      'Mēs atbraucam, apskatām ēku un sagatavojam tāmi. Nekādu virspusēju darbu — labojam to, kas patiešām nav kārtībā.',
+      'Mēs esam būvuzņēmums Reikjavīkā — divdesmit viens cilvēks un savas brigādes. Lieli objekti un saspringti termiņi, un tās pašas brigādes nomainīs jumtu tavai mājai.',
     'hero.cta': 'Pieprasīt tāmi',
     'hero.cta2': 'Skatīt projektus',
-    'hero.slide1.alt': 'Skārda apšuvuma māja restaurācijā',
-    'hero.slide2.alt': 'Jumta nomaiņa procesā',
-    'hero.slide3.alt': 'Apmetuma remonts daudzdzīvokļu namā',
+    'hero.slide1.alt': 'Jumta nomaiņa Kringlan',
+    'hero.slide2.alt': 'Paneļu montāža datu centrā',
+    'hero.slide3.alt': 'Brigāde objektā',
 
     'services.title': 'Pakalpojumi',
-    'services.lead': 'Četri virzieni. Visu dara mūsu pašu cilvēki.',
+    'services.lead': 'Četri virzieni, ko darām visbiežāk. Saraksts nav robeža — jautā.',
     'services.photo.alt': 'Darbs objektā',
-    'service.restoration.title': 'Restaurācija',
-    'service.restoration.body':
-      'Vecas mājas, oriģinālie materiāli. Strādājam ar to, kas jau ir, nevis izraujam to ārā.',
     'service.roofs.title': 'Jumti',
-    'service.roofs.body': 'Profilētā skārda nomaiņa un remonts. Noblīvējam, pirms ūdens atrod ceļu.',
-    'service.masonry.title': 'Mūrēšana',
-    'service.masonry.body':
-      'Plaisas, apmetuma remonts un fasādes. Novēršam cēloni, nevis tikai tā pēdas.',
-    'service.joinery.title': 'Kokdarbi',
-    'service.joinery.body': 'Logi, durvis un iebūvējamās mēbeles pēc izmēra.',
+    'service.roofs.body':
+      'Pilnīga jumta seguma nomaiņa tirdzniecības centriem, daudzdzīvokļu namiem un privātmājām. Veco nost, jauno virsū, hermētiski, pirms aizejam.',
+    'service.cladding.title': 'Apšuvumi un paneļi',
+    'service.cladding.body':
+      'Sendviča paneļu apvalki rūpnieciskām ēkām un datu centriem. Hermētiski, precīzi un laikā.',
+    'service.fitout.title': 'Starpsienas un iekšdarbi',
+    'service.fitout.body':
+      'Iekšējās sienas, starpsienas un apdare — daļa, ko lielākā daļa uzņēmumu nodod apakšuzņēmējiem. Mēs to paturam pie sevis.',
+    'service.general.title': 'Mājas un vispārējie būvdarbi',
+    'service.general.body':
+      'Piebūves, remonti, kokdarbi, betona darbi. Ja tie ir būvdarbi — jautā, un mēs godīgi pateiksim, ja darbs nav mūsu.',
 
     'projects.title': 'Projekti',
-    'projects.lead': 'Darbi procesā un nesen pabeigtie.',
+    'projects.lead': 'Pie kā strādājam šobrīd.',
     'project.kringlan.kind': 'Jumti',
     'project.kringlan.title': 'Tirdzniecības centrs Kringlan, Reikjavīkā',
     'project.kringlan.status': 'Procesā',
     'project.kringlan.body':
-      'Pilnīga jumta seguma nomaiņa: vecais segums demontēts un ieklāts jauns.',
+      'Pilnīga jumta seguma nomaiņa: vecais segums demontēts un ieklāts jauns, objektā, kas visu laiku paliek atvērts.',
     'project.atnorth.kind': 'Rūpnieciskā būvniecība',
     'project.atnorth.title': 'atNorth Mega Data Center, Keflavīkā',
     'project.atnorth.status': 'Procesā',
     'project.atnorth.body':
       'Sendviča paneļu montāža, starpsienas un citi darbi objektā.',
-    'project.hlidar.kind': 'Mūrēšana',
-    'project.hlidar.title': 'Apmetuma remonts, Hlíðar',
-    'project.hlidar.status': 'Pabeigts 2025',
+    'project.hlidar.kind': 'Privātmāja',
+    'project.hlidar.title': 'Jumta nomaiņa, Hlíðar',
+    'project.hlidar.status': 'Pabeigts',
     'project.hlidar.body':
-      'Noblīvētas plaisas, atjaunots apmetums un visa ēka no jauna apstrādāta ar fasādes segumu.',
+      'Pilnīga jumta nomaiņa un fasādes remonts ģimenes mājai — tā pati brigāde, kas strādā lielajos objektos.',
 
     'about.title': 'Par mums',
     'about.body':
-      'Mēs esam neliels būvuzņēmums Reikjavīkā. Tie paši cilvēki, kas apseko ēku, arī pabeidz darbu.',
+      'Bergverk ir jauns uzņēmums ar divdesmit vienu darbinieku. Mēs esam jauni un arī strādājam tā: ierodamies, turam objektu kustībā un nepazūdam starp posmiem.',
     'about.body2':
-      'Mēs uzņemamies mazāk darbu, nekā varētu, jo katru pabeidzam, pirms sākas nākamais.',
-    'about.photo.alt': 'Bergverk komanda',
-    'about.stat1': 'Gadi darbībā',
-    'about.stat2': 'Objekti gadā',
-    'about.stat3': 'Pastāvīgie darbinieki',
+      'Visi amati ir mūsu pašu. Tie, kas sastāda tāmi, paši arī stāv objektā — tāpēc mēs varam par to atbildēt.',
+    'about.photo.alt': 'Bergverk brigāde',
+    'about.stat1': 'Darbinieki',
+    'about.stat2': 'Amati uzņēmumā',
+    'about.stat3': 'Objekti procesā',
 
     'careers.title': 'Karjera',
     'careers.lead':
-      'Bergverk ir neliels būvuzņēmums Reikjavīkā, kas specializējas vecāku ēku restaurācijā un uzturēšanā. Mēs augam un meklējam cilvēkus, kas prot savu darbu.',
-    'careers.teaser': 'Meklējam namdarus, mūrniekus un jumiķus.',
+      'Mēs strauji augam un pieņemam darbā. Bergverk strādā tirdzniecības centros, datu centros un pie privātmājām Reikjavīkas apkaimē, un mums vajag cilvēkus, kas dara savu darbu bez uzraudzības.',
+    'careers.teaser': 'Meklējam jumiķus, paneļu montētājus un namdarus.',
     'careers.photo.alt': 'Brigāde objektā',
     'careers.roles.title': 'Vakances',
-    'role.carpenter.title': 'Namdaris',
-    'role.carpenter.body': 'Logu, durvju un iebūvējamo mēbeļu atjaunošana. Pieredze ar vecām ēkām ir priekšrocība.',
-    'role.mason.title': 'Mūrnieks',
-    'role.mason.body': 'Apmetuma remonts, fasādes un plaisu darbi vecākās ēkās.',
     'role.roofer.title': 'Jumiķis',
-    'role.roofer.body': 'Profilētā skārda nomaiņa un remonts. Darbs augstumā.',
+    'role.roofer.body':
+      'Jumta demontāža un jauni segumi lielos komercobjektos. Darbs augstumā, jebkuros laikapstākļos.',
+    'role.cladder.title': 'Paneļu montētājs',
+    'role.cladder.body':
+      'Sendviča paneļu apvalki un apšuvumi rūpnieciskos objektos. Svarīga gan precizitāte, gan temps.',
+    'role.carpenter.title': 'Namdaris',
+    'role.carpenter.body':
+      'Starpsienas, iekšdarbi un vispārējie būvdarbi komercobjektos un privātmājās.',
     'careers.how.title': 'Kā pieteikties',
     'careers.how.body':
-      'Atsūti mums savu CV un īsu aprakstu par to, ar ko esi strādājis. Mēs atbildam uz katru pieteikumu.',
+      'Atsūti mums savu CV un īsu aprakstu par to, ar ko esi strādājis. Mēs izlasām visu un atbildam.',
     'careers.cta': 'Nosūtīt CV',
     'careers.back': 'Atpakaļ uz sākumlapu',
 
     'contact.title': 'Kontakti',
-    'contact.body': 'Pastāsti mums par ēku. Mēs atbrauksim, apskatīsim un nosūtīsim tāmi.',
+    'contact.body': 'Pastāsti mums par ēku. Mēs atbrauksim, apskatīsim un nosūtīsim cenu.',
     'contact.phone': 'Tālrunis',
     'contact.email': 'E-pasts',
     'contact.address': 'Adrese',

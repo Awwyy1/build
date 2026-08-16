@@ -31,8 +31,12 @@ export const company = {
   /** Careers inbox — CV submissions land here, not in the general inbox. */
   emailCareers: 'storf@bergverk.is',
 
-  /** Year the company started, shown in the footer and the about section. */
-  founded: 2007,
+  /**
+   * Year the company started. Not shown anywhere: the company is young and
+   * the site leads on the work rather than on a founding date. Kept because
+   * it is real company metadata, not because a page reads it.
+   */
+  founded: 2024,
 } as const;
 
 /** Single-line postal address, e.g. "Súðarvogur 7, 104 Reykjavík". */
