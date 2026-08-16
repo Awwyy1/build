@@ -47,6 +47,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.menu': 'Valmynd',
     'a11y.close': 'Loka',
     'a11y.slide': 'Mynd',
+    'theme.dark': 'Skipta yfir í dökkt þema',
+    'theme.light': 'Skipta yfir í ljóst þema',
 
     'nav.services': 'Þjónusta',
     'nav.projects': 'Verkefni',
@@ -165,6 +167,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.menu': 'Menu',
     'a11y.close': 'Close',
     'a11y.slide': 'Slide',
+    'theme.dark': 'Switch to the dark theme',
+    'theme.light': 'Switch to the light theme',
 
     'nav.services': 'Services',
     'nav.projects': 'Projects',
@@ -283,6 +287,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.menu': 'Menu',
     'a11y.close': 'Zamknij',
     'a11y.slide': 'Zdjęcie',
+    'theme.dark': 'Przełącz na ciemny motyw',
+    'theme.light': 'Przełącz na jasny motyw',
 
     'nav.services': 'Usługi',
     'nav.projects': 'Realizacje',
@@ -401,6 +407,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.menu': 'Izvēlne',
     'a11y.close': 'Aizvērt',
     'a11y.slide': 'Attēls',
+    'theme.dark': 'Pārslēgt uz tumšo tēmu',
+    'theme.light': 'Pārslēgt uz gaišo tēmu',
 
     'nav.services': 'Pakalpojumi',
     'nav.projects': 'Projekti',

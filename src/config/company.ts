@@ -18,10 +18,10 @@ export const company = {
   },
 
   phone: {
-    /** Dial-ready form for tel: links. */
-    href: '+3545550182',
-    /** Display form, grouped the way Icelandic numbers are written. */
-    label: '+354 555 0182',
+    /** Dial-ready form for tel: links: no spaces, leading plus. */
+    href: '+37127531082',
+    /** Display form. */
+    label: '+371 27 531 082',
   },
 
   email: 'hallo@bergverk.is',

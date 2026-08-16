@@ -55,9 +55,32 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    {/* Daylight is the default; the dark value only applies where the system asks for it. */}
-    <meta name="theme-color" content="#efebe0" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#1e2219" media="(prefers-color-scheme: dark)" />
+    {/* Kept in step with the resolved theme by the script below. */}
+    <meta name="theme-color" id="theme-color" content="#efebe0" />
+
+    {/*
+      Runs before the page paints, so a visitor who chose dark never sees a
+      flash of the light ground first. Inline and un-bundled on purpose: a
+      deferred module would arrive too late to prevent it.
+    */}
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var chosen = null;
+        try {
+          chosen = localStorage.getItem('bergverk.theme');
+        } catch (error) {
+          /* Storage blocked; fall through to the system preference. */
+        }
+        if (chosen === 'dark' || chosen === 'light') root.dataset.theme = chosen;
+
+        var dark =
+          chosen === 'dark' ||
+          (chosen !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.getElementById('theme-color');
+        if (meta) meta.setAttribute('content', dark ? '#1e2219' : '#efebe0');
+      })();
+    </script>
     <link rel="sitemap" href="/sitemap-index.xml" />
     {
       /* Tell search engines about every translation of this page. */
@@ -125,6 +148,44 @@ const year = new Date().getFullYear();
           }
         </ul>
 
+        {/*
+          Offers the theme you are not currently in. Both labels are handed
+          over as data attributes so the script stays free of translations.
+        */}
+        <button
+          type="button"
+          id="theme-toggle"
+          class="flex size-9 items-center justify-center border border-rule text-muted transition hover:border-moss hover:text-ink"
+          data-label-dark={t('theme.dark')}
+          data-label-light={t('theme.light')}
+          aria-label={t('theme.dark')}
+        >
+          <svg
+            class="theme-moon size-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            aria-hidden="true"
+          >
+            <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" />
+          </svg>
+          <svg
+            class="theme-sun size-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4.2" />
+            <path
+              d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+
         {/* Mobile trigger. Hidden from desktop, where the full nav shows. */}
         <button
           type="button"
@@ -184,6 +245,41 @@ const year = new Date().getFullYear();
     <CookieBanner locale={locale} />
 
     <script>
+      /* ---- Theme switch ---- */
+      const themeToggle = document.getElementById('theme-toggle');
+
+      if (themeToggle) {
+        const root = document.documentElement;
+        const meta = document.getElementById('theme-color');
+        const system = window.matchMedia('(prefers-color-scheme: dark)');
+
+        /* What is on screen right now, whether chosen or inherited. */
+        const active = () => root.dataset.theme || (system.matches ? 'dark' : 'light');
+
+        const describe = () => {
+          const next = active() === 'dark' ? 'light' : 'dark';
+          const label = themeToggle.dataset[next === 'dark' ? 'labelDark' : 'labelLight'];
+          if (label) themeToggle.setAttribute('aria-label', label);
+          if (meta) meta.setAttribute('content', active() === 'dark' ? '#1e2219' : '#efebe0');
+        };
+
+        themeToggle.addEventListener('click', () => {
+          const next = active() === 'dark' ? 'light' : 'dark';
+          root.dataset.theme = next;
+          try {
+            localStorage.setItem('bergverk.theme', next);
+          } catch (error) {
+            /* Storage blocked; the choice still holds for this page view. */
+          }
+          describe();
+        });
+
+        /* Until a choice is made the page follows the system, so track it. */
+        system.addEventListener('change', describe);
+        describe();
+      }
+
+      /* ---- Mobile navigation ---- */
       const toggle = document.getElementById('nav-toggle');
       const panel = document.getElementById('nav-panel');
 

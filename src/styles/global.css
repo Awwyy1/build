@@ -56,9 +56,18 @@
   --torf-strata-4: #e2ddce;
 }
 
-/* ---- Dark: offered to systems that ask for it ----------------------- */
+/*
+ * ---- Dark ------------------------------------------------------------
+ *
+ * Three states, not two. Most visitors never touch the switch and carry no
+ * data-theme attribute at all, so the system preference has to work on its
+ * own; the two explicit states then have to beat the system in both
+ * directions. Hence the same declarations twice: once behind the media
+ * query for the untouched case, guarded so an explicit light choice wins,
+ * and once behind the attribute for a deliberate one.
+ */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --torf-ground: #1e2219;
     --torf-surface: #2a3022;
     --torf-ink: #d6cfc0;
@@ -74,6 +83,57 @@
     --torf-strata-3: #3a4430;
     --torf-strata-4: #2a3022;
   }
+}
+
+:root[data-theme='dark'] {
+  --torf-ground: #1e2219;
+  --torf-surface: #2a3022;
+  --torf-ink: #d6cfc0;
+  --torf-muted: #a29c8b;
+  --torf-rule: #3b4431;
+  --torf-moss: #5f7048;
+  --torf-rust: #9c4e2c;
+  --torf-rust-text: #c97a4e;
+  --torf-on-rust: #d6cfc0;
+
+  --torf-strata-1: #323a2a;
+  --torf-strata-2: #272d20;
+  --torf-strata-3: #3a4430;
+  --torf-strata-4: #2a3022;
+}
+
+/*
+ * The switch offers the theme you are not in, so its icon follows the same
+ * three states as the palette above.
+ */
+.theme-sun {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .theme-sun {
+    display: block;
+  }
+
+  :root:not([data-theme='light']) .theme-moon {
+    display: none;
+  }
+}
+
+:root[data-theme='dark'] .theme-sun {
+  display: block;
+}
+
+:root[data-theme='dark'] .theme-moon {
+  display: none;
+}
+
+:root[data-theme='light'] .theme-sun {
+  display: none;
+}
+
+:root[data-theme='light'] .theme-moon {
+  display: block;
 }
 
 html {
