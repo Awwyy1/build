@@ -27,20 +27,26 @@ const categories = [
 ] as const;
 ---
 
-{/* Hidden until the script confirms no choice is stored, so returning
-    visitors never see it flash. */}
+{/*
+  A card in the bottom corner rather than a full-width bar. Spanning the
+  viewport put its rust "accept" button directly under the hero's rust
+  call to action, and the two read as one stack of buttons.
+
+  Hidden until the script confirms no choice is stored, so returning
+  visitors never see it flash.
+*/}
 <div
   id="cookie-banner"
-  class="fixed inset-x-0 bottom-0 z-50 border-t border-rule bg-surface"
+  class="fixed inset-x-4 bottom-4 z-50 max-h-[80svh] overflow-y-auto border border-rule bg-surface shadow-xl sm:inset-x-auto sm:end-4 sm:w-[26rem]"
   role="dialog"
   aria-modal="false"
   aria-label={t('cookies.settings')}
   hidden
 >
-  <div class="mx-auto max-w-6xl px-5 py-5">
-    <p class="max-w-4xl text-sm leading-relaxed text-muted">{t('cookies.text')}</p>
+  <div class="p-5">
+    <p class="text-sm leading-relaxed text-muted">{t('cookies.text')}</p>
 
-    <div id="cookie-options" class="mt-5 grid gap-5 border-t border-rule pt-5 sm:grid-cols-3" hidden>
+    <div id="cookie-options" class="mt-5 grid gap-4 border-t border-rule pt-5" hidden>
       {
         categories.map((category) => (
           <div>
