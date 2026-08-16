@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://byggingakerfi.vercel.app/sitemap-index.xml

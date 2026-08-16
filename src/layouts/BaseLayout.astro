@@ -15,6 +15,7 @@ import '../styles/global.css';
 import CookieBanner from '../components/CookieBanner.astro';
 import { company, formatAddress } from '../config/company';
 import {
+  defaultLocale,
   homeSections,
   localeNames,
   localePath,
@@ -87,12 +88,22 @@ const year = new Date().getFullYear();
     */}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {/*
+      Names this page's own address, so a search engine reaching it through
+      a tracking parameter or a stray trailing variant still credits one URL
+      rather than treating each as a separate page.
+    */}
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
     {
       /* Tell search engines about every translation of this page. */
       locales.map((alt) => (
         <link rel="alternate" hreflang={alt} href={new URL(localePath(alt), Astro.site)} />
       ))
     }
+    {/* Which translation to serve when none of the four is a match. */}
+    <link rel="alternate" hreflang="x-default" href={new URL(localePath(defaultLocale), Astro.site)} />
   </head>
   <body class="bg-ground text-ink font-sans antialiased">
     <a

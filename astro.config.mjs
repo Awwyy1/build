@@ -3,8 +3,13 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-// Replace with the production domain once it is registered.
-const SITE = 'https://example.is';
+/*
+ * Absolute base for the sitemap, the hreflang alternates and the canonical
+ * tag. It has to be the address the site is actually served from, or those
+ * point somewhere that does not exist. Swap this for the .is domain when it
+ * is registered; nothing else needs touching.
+ */
+const SITE = 'https://byggingakerfi.vercel.app';
 
 export default defineConfig({
   site: SITE,
