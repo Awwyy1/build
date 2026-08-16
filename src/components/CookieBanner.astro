@@ -6,7 +6,7 @@
  * records a choice rather than gating anything today. Before adding any
  * script that does set them, read the stored consent and gate on it:
  *
- *   if (window.bergverkConsent?.analytics) { ...load analytics... }
+ *   if (window.siteConsent?.analytics) { ...load analytics... }
  *
  * The `consent:change` event fires whenever the visitor decides, so a
  * script can react without a reload.
@@ -110,7 +110,7 @@ const categories = [
 </div>
 
 <script>
-  const STORAGE_KEY = 'bergverk.consent';
+  const STORAGE_KEY = 'site.consent';
 
   const banner = document.getElementById('cookie-banner');
   const options = document.getElementById('cookie-options');
@@ -135,7 +135,7 @@ const categories = [
   }
 
   function publish(consent: Consent) {
-    (window as unknown as { bergverkConsent?: Consent }).bergverkConsent = consent;
+    (window as unknown as { siteConsent?: Consent }).siteConsent = consent;
     window.dispatchEvent(new CustomEvent('consent:change', { detail: consent }));
   }
 

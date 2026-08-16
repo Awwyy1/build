@@ -1,15 +1,14 @@
 /**
  * Company details.
  *
- * PLACEHOLDER DATA — every value below is invented for layout purposes.
- * The kennitala, phone number and addresses belong to no real company and
- * must all be replaced before this site is published.
+ * Name, kennitala and phone number are the real ones. The street address
+ * and both email addresses are still placeholders and have to be replaced
+ * before this site is published.
  */
 
 export const company = {
-  name: 'Bergverk ehf.',
-  /** Placeholder. Icelandic company kennitalar carry +40 on the day field. */
-  kennitala: '540719-1130',
+  name: 'Byggingakerfi ehf.',
+  kennitala: '481225-0780',
   address: {
     street: 'Súðarvogur 7',
     postcode: '104',
@@ -24,9 +23,9 @@ export const company = {
     label: '+371 27 531 082',
   },
 
-  email: 'hallo@bergverk.is',
+  email: 'hallo@byggingakerfi.is',
   /** Careers inbox — CV submissions land here, not in the general inbox. */
-  emailCareers: 'storf@bergverk.is',
+  emailCareers: 'storf@byggingakerfi.is',
 
   /**
    * Year the company started. Not shown anywhere: the company is young and

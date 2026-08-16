@@ -2,9 +2,13 @@
 /**
  * A photograph, or a labelled placeholder while none exists yet.
  *
- * Fills its container, so the parent controls the shape. Pass `eager` for
- * imagery above the fold — everything else loads lazily.
+ * Fills its container, so the parent controls the shape. Images go through
+ * Astro's pipeline: each is re-encoded to WebP and emitted at several
+ * widths, and the browser picks one using `sizes`. Give `sizes` the width
+ * the image will actually occupy, or the browser will assume the full
+ * viewport and fetch more than it needs.
  */
+import { Image } from 'astro:assets';
 import type { PhotoSrc } from '../config/media';
 
 interface Props {
@@ -13,17 +17,29 @@ interface Props {
   alt: string;
   /** Translated word for "photograph", shown on the empty slot. */
   placeholder: string;
+  /** Rendered width at each breakpoint. Defaults to a full-width block. */
+  sizes?: string;
   eager?: boolean;
 }
 
-const { src, alt, placeholder, eager = false } = Astro.props;
+const { src, alt, placeholder, sizes = '100vw', eager = false } = Astro.props;
+
+/*
+ * Widths to emit. Capped at 1600: beyond that the file grows faster than
+ * the picture improves at the sizes this layout uses.
+ */
+const widths = [480, 800, 1200, 1600];
 ---
 
 {
   src ? (
-    <img
+    <Image
       src={src}
       alt={alt}
+      widths={widths}
+      sizes={sizes}
+      format="webp"
+      quality={78}
       loading={eager ? 'eager' : 'lazy'}
       decoding="async"
       class="h-full w-full object-cover"

@@ -49,6 +49,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.slide': 'Mynd',
     'gallery.previous': 'Fyrri mynd',
     'gallery.next': 'Næsta mynd',
+    'theme.label': 'Þema',
+    'contact.whatsapp': 'WhatsApp',
     'theme.dark': 'Skipta yfir í dökkt þema',
     'theme.light': 'Skipta yfir í ljóst þema',
 
@@ -107,16 +109,16 @@ export const ui: Record<Locale, Strings> = {
 
     'about.title': 'Um okkur',
     'about.body':
-      'Bergverk er ungt og framsækið byggingarfyrirtæki með rúmlega tuttugu starfsmenn. Við tökum að okkur allar tegundir byggingarvinnu.',
+      'Byggingakerfi er ungt og framsækið byggingarfyrirtæki með rúmlega tuttugu starfsmenn. Við tökum að okkur allar tegundir byggingarvinnu.',
     'about.body2':
       'Þeir sem verðleggja verkið vinna sjálfir í því. Þess vegna getum við ábyrgst bæði nákvæmni tilboðsins og tæknilegt eftirlit með framkvæmdinni.',
-    'about.photo.alt': 'Vinnuflokkur Bergverks',
+    'about.photo.alt': 'Vinnuflokkur Byggingakerfis',
     'about.stat1': 'Starfsmenn',
     'about.stat2': 'Verk unnin',
 
     'careers.title': 'Störf',
     'careers.lead':
-      'Við erum að stækka hratt og ráðum til okkar. Bergverk vinnur á verslunarmiðstöðvum, í gagnaverum og við einbýlishús á höfuðborgarsvæðinu. Okkur vantar fólk sem gengur í verkin án þess að staðið sé yfir því.',
+      'Við erum að stækka hratt og ráðum til okkar. Byggingakerfi vinnur á verslunarmiðstöðvum, í gagnaverum og við einbýlishús á höfuðborgarsvæðinu. Okkur vantar fólk sem gengur í verkin án þess að staðið sé yfir því.',
     'careers.teaser': 'Við ráðum þaksmiði, einingamenn og smiði.',
     'careers.more': 'Sjá laus störf',
     'careers.photo.alt': 'Vinnuflokkur á staðnum',
@@ -171,6 +173,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.slide': 'Slide',
     'gallery.previous': 'Previous photograph',
     'gallery.next': 'Next photograph',
+    'theme.label': 'Theme',
+    'contact.whatsapp': 'WhatsApp',
     'theme.dark': 'Switch to the dark theme',
     'theme.light': 'Switch to the light theme',
 
@@ -229,16 +233,16 @@ export const ui: Record<Locale, Strings> = {
 
     'about.title': 'About us',
     'about.body':
-      'Bergverk is a young, forward-looking construction company with more than twenty people on staff. We carry out every kind of construction work.',
+      'Byggingakerfi is a young, forward-looking construction company with more than twenty people on staff. We carry out every kind of construction work.',
     'about.body2':
       'The people who price a job are the people who work on it. That is why we can stand behind both the accuracy of our estimates and the technical supervision on site.',
-    'about.photo.alt': 'The Bergverk crew',
+    'about.photo.alt': 'The Byggingakerfi crew',
     'about.stat1': 'People on staff',
     'about.stat2': 'Projects delivered',
 
     'careers.title': 'Careers',
     'careers.lead':
-      'We are growing fast and hiring. Bergverk works on shopping centres, data centres and private houses around Reykjavík. We need people who get on with the work without being watched.',
+      'We are growing fast and hiring. Byggingakerfi works on shopping centres, data centres and private houses around Reykjavík. We need people who get on with the work without being watched.',
     'careers.teaser': 'We are hiring roofers, panel fitters and carpenters.',
     'careers.more': 'See open roles',
     'careers.photo.alt': 'A crew on site',
@@ -293,6 +297,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.slide': 'Zdjęcie',
     'gallery.previous': 'Poprzednie zdjęcie',
     'gallery.next': 'Następne zdjęcie',
+    'theme.label': 'Motyw',
+    'contact.whatsapp': 'WhatsApp',
     'theme.dark': 'Przełącz na ciemny motyw',
     'theme.light': 'Przełącz na jasny motyw',
 
@@ -351,16 +357,16 @@ export const ui: Record<Locale, Strings> = {
 
     'about.title': 'O nas',
     'about.body':
-      'Bergverk to młoda, nowoczesna firma budowlana zatrudniająca ponad dwadzieścia osób. Wykonujemy wszystkie rodzaje prac budowlanych.',
+      'Byggingakerfi to młoda, nowoczesna firma budowlana zatrudniająca ponad dwadzieścia osób. Wykonujemy wszystkie rodzaje prac budowlanych.',
     'about.body2':
       'Wyceny przygotowują ci, którzy potem pracują na budowie. Dlatego możemy ręczyć zarówno za dokładność kosztorysu, jak i za nadzór techniczny nad realizacją.',
-    'about.photo.alt': 'Ekipa Bergverk',
+    'about.photo.alt': 'Ekipa Byggingakerfi',
     'about.stat1': 'Osób w firmie',
     'about.stat2': 'Zrealizowanych obiektów',
 
     'careers.title': 'Praca',
     'careers.lead':
-      'Szybko rośniemy i rekrutujemy. Bergverk pracuje na centrach handlowych, w centrach danych i przy domach prywatnych w rejonie Reykjavíku. Szukamy ludzi, którzy robią swoje bez pilnowania.',
+      'Szybko rośniemy i rekrutujemy. Byggingakerfi pracuje na centrach handlowych, w centrach danych i przy domach prywatnych w rejonie Reykjavíku. Szukamy ludzi, którzy robią swoje bez pilnowania.',
     'careers.teaser': 'Szukamy dekarzy, monterów płyt i cieśli.',
     'careers.more': 'Zobacz oferty pracy',
     'careers.photo.alt': 'Ekipa na budowie',
@@ -415,6 +421,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.slide': 'Attēls',
     'gallery.previous': 'Iepriekšējais attēls',
     'gallery.next': 'Nākamais attēls',
+    'theme.label': 'Tēma',
+    'contact.whatsapp': 'WhatsApp',
     'theme.dark': 'Pārslēgt uz tumšo tēmu',
     'theme.light': 'Pārslēgt uz gaišo tēmu',
 
@@ -473,16 +481,16 @@ export const ui: Record<Locale, Strings> = {
 
     'about.title': 'Par mums',
     'about.body':
-      'Bergverk ir jauns un progresīvs būvuzņēmums ar vairāk nekā divdesmit darbiniekiem. Mēs veicam visu veidu būvdarbus.',
+      'Byggingakerfi ir jauns un progresīvs būvuzņēmums ar vairāk nekā divdesmit darbiniekiem. Mēs veicam visu veidu būvdarbus.',
     'about.body2':
       'Tāmes sagatavo tie paši cilvēki, kas strādā objektā. Tāpēc mēs varam galvot gan par tāmes precizitāti, gan par tehnisko uzraudzību būvlaukumā.',
-    'about.photo.alt': 'Bergverk brigāde',
+    'about.photo.alt': 'Byggingakerfi brigāde',
     'about.stat1': 'Darbinieki',
     'about.stat2': 'Pabeigti objekti',
 
     'careers.title': 'Karjera',
     'careers.lead':
-      'Mēs strauji augam un pieņemam darbā. Bergverk strādā tirdzniecības centros, datu centros un pie privātmājām Reikjavīkas apkaimē. Mums vajag cilvēkus, kas dara savu darbu bez uzraudzības.',
+      'Mēs strauji augam un pieņemam darbā. Byggingakerfi strādā tirdzniecības centros, datu centros un pie privātmājām Reikjavīkas apkaimē. Mums vajag cilvēkus, kas dara savu darbu bez uzraudzības.',
     'careers.teaser': 'Meklējam jumiķus, paneļu montētājus un namdarus.',
     'careers.more': 'Skatīt vakances',
     'careers.photo.alt': 'Brigāde objektā',

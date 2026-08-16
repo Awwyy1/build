@@ -2,54 +2,43 @@
  * Photography slots.
  *
  * Slots fill themselves from the file name. Drop a photo into
- * `public/photos/` named after its slot — `about.jpg`, `vesturbaer.jpg`,
- * `hero-1.jpg` — and it appears; nothing here needs editing. A slot with no
- * matching file renders a labelled placeholder instead of a broken image.
+ * `src/assets/photos/` named after its slot, and it appears; nothing here
+ * needs editing. A slot with no matching file renders a labelled
+ * placeholder instead of a broken image.
  *
- * A descriptive prefix is allowed and ignored, so `projectPhotos.vesturbaer.jpg`
- * and `vesturbaer.jpg` both land in the same slot. Matching is on the part
- * after the last dot and is case-insensitive.
+ * Files live under `src/` rather than `public/` so that Astro processes
+ * them: each one is resized, re-encoded and served at the size the layout
+ * actually asks for, which is why a 2 MB photograph off a phone can be
+ * dropped in as-is. Anything in `public/` would be served untouched.
  *
- * The directory is read at build time, so a newly added photo shows up on
- * the next build — restart `npm run dev` after copying one in.
+ * A descriptive prefix is allowed and ignored, so `projectPhotos.house.jpg`
+ * and `house.jpg` both fill the same slot. Matching is on the part after
+ * the last dot and is case-insensitive.
  *
  * Alt text is not here; it is translated, and lives in `src/i18n/ui.ts`.
  */
-import fs from 'node:fs';
-import path from 'node:path';
 
-export type PhotoSrc = string | null;
+export type PhotoSrc = ImageMetadata | null;
 
-const PHOTO_DIR = path.join(process.cwd(), 'public', 'photos');
-const EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif']);
+/*
+ * Vite reads the directory at build time. The glob has to be a literal, so
+ * the extension list lives here rather than in a variable.
+ */
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/photos/*.{jpg,jpeg,png,webp,avif}',
+  { eager: true }
+);
 
-/** Maps slot name -> public URL, for every usable file in the directory. */
-function discover(): Record<string, string> {
-  const found: Record<string, string> = {};
+/** Maps slot name -> processed image, for every file in the directory. */
+const discovered: Record<string, ImageMetadata> = {};
 
-  let entries: string[];
-  try {
-    entries = fs.readdirSync(PHOTO_DIR);
-  } catch {
-    // No directory yet: every slot simply stays empty.
-    return found;
-  }
-
-  for (const entry of entries) {
-    const extension = path.extname(entry).toLowerCase();
-    if (!EXTENSIONS.has(extension)) continue;
-
-    const base = entry.slice(0, entry.length - extension.length);
-    // "projectPhotos.vesturbaer" -> "vesturbaer"; "hero-1" stays "hero-1".
-    const slot = base.split('.').pop()!.toLowerCase();
-
-    found[slot] = `/photos/${entry}`;
-  }
-
-  return found;
+for (const [path, module] of Object.entries(files)) {
+  const filename = path.split('/').pop() ?? '';
+  const base = filename.replace(/\.[^.]+$/, '');
+  // "projectPhotos.house" -> "house"; "hero-1" stays "hero-1".
+  const slot = base.split('.').pop()!.toLowerCase();
+  discovered[slot] = module.default;
 }
-
-const discovered = discover();
 
 /** First name that matches a file on disk, or null if none do. */
 function pick(...names: (string | null)[]): PhotoSrc {
@@ -62,10 +51,10 @@ function pick(...names: (string | null)[]): PhotoSrc {
 }
 
 /**
- * A fixed-length run of slots for one project's gallery: `kringlan-1`,
- * `kringlan-2`, `kringlan-3`. The first also answers to the bare project
- * name. Empty slots stay in place as placeholders, so the number of slides
- * does not change as photographs trickle in.
+ * A fixed-length run of slots for one project's gallery: `house-1`,
+ * `house-2`, `house-3`. The first also answers to the bare project name.
+ * Empty slots stay in place as placeholders, so the number of slides does
+ * not change as photographs trickle in.
  */
 function gallery(name: string, count: number): PhotoSrc[] {
   return Array.from({ length: count }, (_, index) =>
