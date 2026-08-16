@@ -142,6 +142,55 @@ html {
   background-color: var(--color-rust);
 }
 
+/* ---- Project gallery ------------------------------------------------ */
+
+.gallery-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  /* The indicator bars report position, so the scrollbar is redundant. */
+  scrollbar-width: none;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+/* Thin rules under the photo: one per slide, filled for the current one. */
+.gallery-bars {
+  display: flex;
+  gap: 0.25rem;
+  margin-block-start: 0.5rem;
+}
+
+.gallery-bar {
+  flex: 1 1 0;
+  block-size: 2px;
+  background-color: var(--color-rule);
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.gallery-bar:hover {
+  background-color: var(--color-moss);
+}
+
+.gallery-bar[aria-selected='true'] {
+  background-color: var(--color-rust);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-track {
+    scroll-behavior: auto;
+  }
+}
+
 /* ---- Mobile navigation ---------------------------------------------- */
 
 /*

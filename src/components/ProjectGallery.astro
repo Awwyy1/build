@@ -1,0 +1,122 @@
+---
+/**
+ * A swipeable run of photographs for one project card.
+ *
+ * Built on native scroll snapping rather than a JS carousel: touch swipe,
+ * trackpad and keyboard scrolling all work before any script loads, and
+ * without one the gallery is still a scrollable strip. The script only
+ * keeps the indicator bars in step and makes them clickable.
+ */
+import Photo from './Photo.astro';
+import type { PhotoSrc } from '../config/media';
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  /** One entry per slide; null entries render as placeholders. */
+  photos: readonly PhotoSrc[];
+  /** Describes the project, used to build each slide's alt text. */
+  label: string;
+}
+
+const { locale, photos, label } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<div class="gallery" data-gallery>
+  <div
+    class="gallery-track"
+    role="group"
+    aria-roledescription="carousel"
+    aria-label={label}
+    tabindex="0"
+  >
+    {
+      photos.map((src, index) => (
+        <div
+          class="gallery-slide aspect-[4/3]"
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${t('a11y.slide')} ${index + 1} / ${photos.length}`}
+        >
+          <Photo
+            src={src}
+            alt={`${label} — ${t('a11y.slide')} ${index + 1}`}
+            placeholder={t('media.placeholder')}
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    photos.length > 1 && (
+      <div class="gallery-bars" role="tablist" aria-label={label}>
+        {photos.map((_, index) => (
+          <button
+            type="button"
+            class="gallery-bar"
+            data-index={index}
+            role="tab"
+            aria-label={`${t('a11y.slide')} ${index + 1}`}
+            aria-selected={index === 0 ? 'true' : 'false'}
+          />
+        ))}
+      </div>
+    )
+  }
+</div>
+
+<script>
+  for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) {
+    const track = gallery.querySelector<HTMLElement>('.gallery-track');
+    const bars = [...gallery.querySelectorAll<HTMLElement>('.gallery-bar')];
+    if (!track || bars.length === 0) continue;
+
+    const mark = (index: number) =>
+      bars.forEach((bar, i) => bar.setAttribute('aria-selected', String(i === index)));
+
+    /*
+     * Which slide is showing is derived from scroll position rather than
+     * tracked separately, so a swipe, a keypress and a click on a bar all
+     * end up at the same answer.
+     */
+    const currentIndex = () => {
+      const slide = track.clientWidth || 1;
+      return Math.max(0, Math.min(bars.length - 1, Math.round(track.scrollLeft / slide)));
+    };
+
+    let queued = false;
+    track.addEventListener(
+      'scroll',
+      () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(() => {
+          queued = false;
+          mark(currentIndex());
+        });
+      },
+      { passive: true }
+    );
+
+    bars.forEach((bar, index) =>
+      bar.addEventListener('click', () => {
+        track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
+        mark(index);
+      })
+    );
+
+    // A resize changes the slide width, so the old scroll offset no longer
+    // lands on a boundary. Snap back to the slide that was showing.
+    let width = track.clientWidth;
+    new ResizeObserver(() => {
+      if (track.clientWidth === width) return;
+      const index = width ? Math.round(track.scrollLeft / width) : 0;
+      width = track.clientWidth;
+      track.scrollTo({ left: index * width, behavior: 'instant' as ScrollBehavior });
+    }).observe(track);
+
+    mark(currentIndex());
+  }
+</script>

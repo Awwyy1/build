@@ -52,12 +52,25 @@ function discover(): Record<string, string> {
 const discovered = discover();
 
 /** First name that matches a file on disk, or null if none do. */
-function pick(...names: string[]): PhotoSrc {
+function pick(...names: (string | null)[]): PhotoSrc {
   for (const name of names) {
+    if (!name) continue;
     const hit = discovered[name.toLowerCase()];
     if (hit) return hit;
   }
   return null;
+}
+
+/**
+ * A fixed-length run of slots for one project's gallery: `kringlan-1`,
+ * `kringlan-2`, `kringlan-3`. The first also answers to the bare project
+ * name. Empty slots stay in place as placeholders, so the number of slides
+ * does not change as photographs trickle in.
+ */
+function gallery(name: string, count: number): PhotoSrc[] {
+  return Array.from({ length: count }, (_, index) =>
+    pick(`${name}-${index + 1}`, index === 0 ? name : null)
+  );
 }
 
 /** Hero slideshow, in order. Name files `hero-1`, `hero-2`, `hero-3`. */
@@ -74,11 +87,14 @@ export const sectionPhotos: Record<'services' | 'about' | 'careers', PhotoSrc> =
   careers: pick('careers'),
 };
 
-/** One photo per project card. Keys match the `projects` list in the i18n module. */
-export const projectPhotos: Record<string, PhotoSrc> = {
-  vesturbaer: pick('vesturbaer'),
-  akranes: pick('akranes'),
-  hlidar: pick('hlidar'),
+/** How many slides each project card carries. */
+export const projectSlideCount = 3;
+
+/** A gallery per project. Keys match the `projects` list in the i18n module. */
+export const projectPhotos: Record<string, PhotoSrc[]> = {
+  kringlan: gallery('kringlan', projectSlideCount),
+  atnorth: gallery('atnorth', projectSlideCount),
+  hlidar: gallery('hlidar', projectSlideCount),
 };
 
 /** How long each hero slide holds, in milliseconds. */

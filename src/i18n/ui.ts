@@ -30,7 +30,7 @@ export type HomeSection = (typeof homeSections)[number];
 export const services = ['restoration', 'roofs', 'masonry', 'joinery'] as const;
 
 /** Project cards, in display order. */
-export const projects = ['vesturbaer', 'akranes', 'hlidar'] as const;
+export const projects = ['kringlan', 'atnorth', 'hlidar'] as const;
 
 /** Open roles listed on the Careers page. */
 export const roles = ['carpenter', 'mason', 'roofer'] as const;
@@ -79,19 +79,20 @@ export const ui: Record<Locale, Strings> = {
     'service.joinery.body': 'Gluggar, hurðir og innréttingar smíðaðar eftir máli.',
 
     'projects.title': 'Verkefni',
-    'projects.lead': 'Þrjú nýleg verk.',
-    'project.vesturbaer.kind': 'Endurgerð',
-    'project.vesturbaer.title': 'Bárujárnshús, Vesturbær',
-    'project.vesturbaer.meta': 'Lokið 2024',
-    'project.vesturbaer.body':
-      'Skiptum um bárujárn, endurnýjuðum glugga og lagfærðum burðarvirki í kjallara.',
-    'project.akranes.kind': 'Þök',
-    'project.akranes.title': 'Þakskipti, Akranes',
-    'project.akranes.meta': 'Lokið 2023',
-    'project.akranes.body': 'Nýtt þak yfir 320 m², ný rennukerfi og einangrun endurnýjuð að fullu.',
+    'projects.lead': 'Verk í vinnslu og nýlega lokið.',
+    'project.kringlan.kind': 'Þök',
+    'project.kringlan.title': 'Kringlan verslunarmiðstöð, Reykjavík',
+    'project.kringlan.status': 'Í vinnslu',
+    'project.kringlan.body':
+      'Heildarendurnýjun þakklæðningar: eldra þakefni rifið af og nýtt lagt í staðinn.',
+    'project.atnorth.kind': 'Iðnaðarbygging',
+    'project.atnorth.title': 'atNorth Mega Data Center, Keflavík',
+    'project.atnorth.status': 'Í vinnslu',
+    'project.atnorth.body':
+      'Uppsetning samlokueininga, milliveggir og önnur verk á byggingarstað.',
     'project.hlidar.kind': 'Múrverk',
     'project.hlidar.title': 'Múrviðgerð, Hlíðar',
-    'project.hlidar.meta': 'Lokið 2025',
+    'project.hlidar.status': 'Lokið 2025',
     'project.hlidar.body': 'Sprungur þéttar, múr endurnýjaður og fjölbýlið steinað upp á nýtt.',
 
     'about.title': 'Um okkur',
@@ -192,20 +193,20 @@ export const ui: Record<Locale, Strings> = {
     'service.joinery.body': 'Windows, doors and fittings built to measure.',
 
     'projects.title': 'Projects',
-    'projects.lead': 'Three recent jobs.',
-    'project.vesturbaer.kind': 'Restoration',
-    'project.vesturbaer.title': 'Iron-clad house, Vesturbær',
-    'project.vesturbaer.meta': 'Completed 2024',
-    'project.vesturbaer.body':
-      'Replaced the corrugated iron, renewed the windows and repaired the structure in the basement.',
-    'project.akranes.kind': 'Roofs',
-    'project.akranes.title': 'Roof replacement, Akranes',
-    'project.akranes.meta': 'Completed 2023',
-    'project.akranes.body':
-      'A new roof over 320 m², new guttering and the insulation renewed throughout.',
+    'projects.lead': 'Work in progress and recently finished.',
+    'project.kringlan.kind': 'Roofs',
+    'project.kringlan.title': 'Kringlan shopping centre, Reykjavík',
+    'project.kringlan.status': 'In progress',
+    'project.kringlan.body':
+      'Full replacement of the roof covering: the old covering stripped off and a new one laid.',
+    'project.atnorth.kind': 'Industrial build',
+    'project.atnorth.title': 'atNorth Mega Data Center, Keflavík',
+    'project.atnorth.status': 'In progress',
+    'project.atnorth.body':
+      'Sandwich panel installation, internal partitions and further works on site.',
     'project.hlidar.kind': 'Masonry',
     'project.hlidar.title': 'Render repair, Hlíðar',
-    'project.hlidar.meta': 'Completed 2025',
+    'project.hlidar.status': 'Completed 2025',
     'project.hlidar.body':
       'Cracks sealed, render renewed and the whole block finished in fresh pebbledash.',
 
@@ -307,19 +308,20 @@ export const ui: Record<Locale, Strings> = {
     'service.joinery.body': 'Okna, drzwi i zabudowa robione na wymiar.',
 
     'projects.title': 'Realizacje',
-    'projects.lead': 'Trzy ostatnie roboty.',
-    'project.vesturbaer.kind': 'Renowacja',
-    'project.vesturbaer.title': 'Dom w blasze, Vesturbær',
-    'project.vesturbaer.meta': 'Ukończono 2024',
-    'project.vesturbaer.body':
-      'Wymieniliśmy blachę falistą, odnowiliśmy okna i naprawiliśmy konstrukcję w piwnicy.',
-    'project.akranes.kind': 'Dachy',
-    'project.akranes.title': 'Wymiana dachu, Akranes',
-    'project.akranes.meta': 'Ukończono 2023',
-    'project.akranes.body': 'Nowy dach o powierzchni 320 m², nowe rynny i pełna wymiana izolacji.',
+    'projects.lead': 'Prace w toku i niedawno ukończone.',
+    'project.kringlan.kind': 'Dachy',
+    'project.kringlan.title': 'Centrum handlowe Kringlan, Reykjavík',
+    'project.kringlan.status': 'W trakcie',
+    'project.kringlan.body':
+      'Pełna wymiana pokrycia dachowego: demontaż starego pokrycia i montaż nowego.',
+    'project.atnorth.kind': 'Budownictwo przemysłowe',
+    'project.atnorth.title': 'atNorth Mega Data Center, Keflavík',
+    'project.atnorth.status': 'W trakcie',
+    'project.atnorth.body':
+      'Montaż płyt warstwowych, ścianek działowych i pozostałe prace na obiekcie.',
     'project.hlidar.kind': 'Murarstwo',
     'project.hlidar.title': 'Naprawa tynku, Hlíðar',
-    'project.hlidar.meta': 'Ukończono 2025',
+    'project.hlidar.status': 'Ukończono 2025',
     'project.hlidar.body':
       'Uszczelnione pęknięcia, odnowiony tynk i cały blok wykończony nową wyprawą.',
 
@@ -419,19 +421,20 @@ export const ui: Record<Locale, Strings> = {
     'service.joinery.body': 'Logi, durvis un iebūvējamās mēbeles pēc izmēra.',
 
     'projects.title': 'Projekti',
-    'projects.lead': 'Trīs nesenie darbi.',
-    'project.vesturbaer.kind': 'Restaurācija',
-    'project.vesturbaer.title': 'Skārda apšuvuma māja, Vesturbær',
-    'project.vesturbaer.meta': 'Pabeigts 2024',
-    'project.vesturbaer.body':
-      'Nomainījām profilēto skārdu, atjaunojām logus un salabojām nesošās konstrukcijas pagrabā.',
-    'project.akranes.kind': 'Jumti',
-    'project.akranes.title': 'Jumta nomaiņa, Akranes',
-    'project.akranes.meta': 'Pabeigts 2023',
-    'project.akranes.body': 'Jauns jumts 320 m² platībā, jaunas notekas un pilnībā atjaunota izolācija.',
+    'projects.lead': 'Darbi procesā un nesen pabeigtie.',
+    'project.kringlan.kind': 'Jumti',
+    'project.kringlan.title': 'Tirdzniecības centrs Kringlan, Reikjavīkā',
+    'project.kringlan.status': 'Procesā',
+    'project.kringlan.body':
+      'Pilnīga jumta seguma nomaiņa: vecais segums demontēts un ieklāts jauns.',
+    'project.atnorth.kind': 'Rūpnieciskā būvniecība',
+    'project.atnorth.title': 'atNorth Mega Data Center, Keflavīkā',
+    'project.atnorth.status': 'Procesā',
+    'project.atnorth.body':
+      'Sendviča paneļu montāža, starpsienas un citi darbi objektā.',
     'project.hlidar.kind': 'Mūrēšana',
     'project.hlidar.title': 'Apmetuma remonts, Hlíðar',
-    'project.hlidar.meta': 'Pabeigts 2025',
+    'project.hlidar.status': 'Pabeigts 2025',
     'project.hlidar.body':
       'Noblīvētas plaisas, atjaunots apmetums un visa ēka no jauna apstrādāta ar fasādes segumu.',
 

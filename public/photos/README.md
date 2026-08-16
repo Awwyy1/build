@@ -17,9 +17,17 @@ restart `npm run dev` (or rebuild) for it to appear.
 | `services` | Services section |
 | `about` | About section |
 | `careers` | Careers page |
-| `vesturbaer` | Project card — Vesturbær |
-| `akranes` | Project card — Akranes |
-| `hlidar` | Project card — Hlíðar |
+| `kringlan-1`, `-2`, `-3` | Project card — Kringlan |
+| `atnorth-1`, `-2`, `-3` | Project card — atNorth |
+| `hlidar-1`, `-2`, `-3` | Project card — Hlíðar |
+
+Each project card is a swipeable gallery of three slides. Fill them in any
+order — `atnorth-2.jpg` alone lands on the second slide and the other two
+keep their placeholders. The first slide also answers to the bare project
+name, so `kringlan.jpg` works in place of `kringlan-1.jpg`.
+
+To change how many slides a card has, edit `projectSlideCount` in
+`src/config/media.ts`.
 
 Extension can be `.jpg`, `.jpeg`, `.png`, `.webp` or `.avif`.
 

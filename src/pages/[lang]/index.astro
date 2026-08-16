@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSlideshow from '../../components/HeroSlideshow.astro';
 import Photo from '../../components/Photo.astro';
+import ProjectGallery from '../../components/ProjectGallery.astro';
 import { company, formatAddress } from '../../config/company';
 import { projectPhotos, sectionPhotos } from '../../config/media';
 import { locales, localePath, projects, services, useTranslations, type Locale } from '../../i18n/ui';
@@ -95,19 +96,17 @@ const stats = [
         {
           projects.map((project) => (
             <article>
-              <div class="aspect-[4/3]">
-                <Photo
-                  src={projectPhotos[project]}
-                  alt={t(`project.${project}.title`)}
-                  placeholder={t('media.placeholder')}
-                />
-              </div>
+              <ProjectGallery
+                locale={locale}
+                photos={projectPhotos[project]}
+                label={t(`project.${project}.title`)}
+              />
 
               <p class="mt-4 text-xs tracking-wide text-moss uppercase">
                 {t(`project.${project}.kind`)}
               </p>
               <h3 class="mt-1 font-display text-lg">{t(`project.${project}.title`)}</h3>
-              <p class="mt-1 text-sm text-rust-text">{t(`project.${project}.meta`)}</p>
+              <p class="mt-1 text-sm text-rust-text">{t(`project.${project}.status`)}</p>
               <p class="mt-3 text-sm text-muted">{t(`project.${project}.body`)}</p>
             </article>
           ))
