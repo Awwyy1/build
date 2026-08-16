@@ -4,8 +4,12 @@
  *
  * Built on native scroll snapping rather than a JS carousel: touch swipe,
  * trackpad and keyboard scrolling all work before any script loads, and
- * without one the gallery is still a scrollable strip. The script only
- * keeps the indicator bars in step and makes them clickable.
+ * without one the gallery is still a scrollable strip.
+ *
+ * A touch screen gets swiping for free, but a mouse has no equivalent
+ * gesture, so pointer devices also get arrows, arrow keys and drag. The
+ * arrows are only rendered where a pointer can hover, which keeps them off
+ * phones where they would sit on top of the photograph for no reason.
  */
 import Photo from './Photo.astro';
 import type { PhotoSrc } from '../config/media';
@@ -21,36 +25,66 @@ interface Props {
 
 const { locale, photos, label } = Astro.props;
 const t = useTranslations(locale);
+const many = photos.length > 1;
 ---
 
 <div class="gallery" data-gallery>
-  <div
-    class="gallery-track"
-    role="group"
-    aria-roledescription="carousel"
-    aria-label={label}
-    tabindex="0"
-  >
+  <div class="gallery-frame">
+    <div
+      class="gallery-track"
+      role="group"
+      aria-roledescription="carousel"
+      aria-label={label}
+      tabindex="0"
+    >
+      {
+        photos.map((src, index) => (
+          <div
+            class="gallery-slide aspect-[4/3]"
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${t('a11y.slide')} ${index + 1} / ${photos.length}`}
+          >
+            <Photo
+              src={src}
+              alt={`${label}, ${t('a11y.slide')} ${index + 1}`}
+              placeholder={t('media.placeholder')}
+            />
+          </div>
+        ))
+      }
+    </div>
+
     {
-      photos.map((src, index) => (
-        <div
-          class="gallery-slide aspect-[4/3]"
-          role="group"
-          aria-roledescription="slide"
-          aria-label={`${t('a11y.slide')} ${index + 1} / ${photos.length}`}
-        >
-          <Photo
-            src={src}
-            alt={`${label}, ${t('a11y.slide')} ${index + 1}`}
-            placeholder={t('media.placeholder')}
-          />
-        </div>
-      ))
+      many && (
+        <>
+          <button
+            type="button"
+            class="gallery-nav gallery-nav--prev"
+            data-step="-1"
+            aria-label={t('gallery.previous')}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M15 5 8 12l7 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="gallery-nav gallery-nav--next"
+            data-step="1"
+            aria-label={t('gallery.next')}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="m9 5 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </>
+      )
     }
   </div>
 
   {
-    photos.length > 1 && (
+    many && (
       <div class="gallery-bars" role="tablist" aria-label={label}>
         {photos.map((_, index) => (
           <button
@@ -71,19 +105,41 @@ const t = useTranslations(locale);
   for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) {
     const track = gallery.querySelector<HTMLElement>('.gallery-track');
     const bars = [...gallery.querySelectorAll<HTMLElement>('.gallery-bar')];
-    if (!track || bars.length === 0) continue;
+    const navs = [...gallery.querySelectorAll<HTMLElement>('.gallery-nav')];
+    if (!track) continue;
 
-    const mark = (index: number) =>
-      bars.forEach((bar, i) => bar.setAttribute('aria-selected', String(i === index)));
+    const count = track.children.length;
+    if (count < 2) continue;
 
     /*
      * Which slide is showing is derived from scroll position rather than
-     * tracked separately, so a swipe, a keypress and a click on a bar all
-     * end up at the same answer.
+     * tracked separately, so a swipe, a drag, a keypress, an arrow and a
+     * click on a bar all end up at the same answer.
      */
     const currentIndex = () => {
       const slide = track.clientWidth || 1;
-      return Math.max(0, Math.min(bars.length - 1, Math.round(track.scrollLeft / slide)));
+      return Math.max(0, Math.min(count - 1, Math.round(track.scrollLeft / slide)));
+    };
+
+    const sync = () => {
+      const index = currentIndex();
+      bars.forEach((bar, i) => bar.setAttribute('aria-selected', String(i === index)));
+      navs.forEach((nav) => {
+        const step = Number(nav.dataset.step);
+        const spent = step < 0 ? index === 0 : index === count - 1;
+        nav.setAttribute('aria-disabled', String(spent));
+      });
+    };
+
+    const goTo = (index: number, smooth = true) => {
+      const clamped = Math.max(0, Math.min(count - 1, index));
+      track.scrollTo({
+        left: clamped * track.clientWidth,
+        behavior: smooth ? 'smooth' : ('instant' as ScrollBehavior),
+      });
+      // Reflect the destination straight away rather than waiting for the
+      // scroll to land, so the bars never lag behind the click.
+      bars.forEach((bar, i) => bar.setAttribute('aria-selected', String(i === clamped)));
     };
 
     let queued = false;
@@ -94,18 +150,66 @@ const t = useTranslations(locale);
         queued = true;
         requestAnimationFrame(() => {
           queued = false;
-          mark(currentIndex());
+          sync();
         });
       },
       { passive: true }
     );
 
-    bars.forEach((bar, index) =>
-      bar.addEventListener('click', () => {
-        track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
-        mark(index);
+    bars.forEach((bar, index) => bar.addEventListener('click', () => goTo(index)));
+
+    navs.forEach((nav) =>
+      nav.addEventListener('click', () => {
+        if (nav.getAttribute('aria-disabled') === 'true') return;
+        goTo(currentIndex() + Number(nav.dataset.step));
       })
     );
+
+    /*
+     * A focused scroll container already answers the arrow keys, but it
+     * nudges by a fraction of a slide. Take them over so one press moves
+     * one photograph.
+     */
+    track.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      goTo(currentIndex() + (event.key === 'ArrowRight' ? 1 : -1));
+    });
+
+    /* Drag with a mouse, the desktop stand-in for a swipe. */
+    let dragging = false;
+    let originX = 0;
+    let originScroll = 0;
+
+    track.addEventListener('pointerdown', (event) => {
+      if (event.pointerType !== 'mouse' || event.button !== 0) return;
+      dragging = true;
+      originX = event.clientX;
+      originScroll = track.scrollLeft;
+      // Snapping fights a scrollLeft written on every frame, so suspend it
+      // for the duration of the drag and snap once on release.
+      track.classList.add('is-dragging');
+      track.setPointerCapture(event.pointerId);
+    });
+
+    track.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+      event.preventDefault();
+      track.scrollLeft = originScroll - (event.clientX - originX);
+    });
+
+    const endDrag = (event: PointerEvent) => {
+      if (!dragging) return;
+      dragging = false;
+      track.classList.remove('is-dragging');
+      if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+      goTo(currentIndex());
+    };
+
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    /* Dragging across a photograph must not start a native image drag. */
+    track.addEventListener('dragstart', (event) => event.preventDefault());
 
     // A resize changes the slide width, so the old scroll offset no longer
     // lands on a boundary. Snap back to the slide that was showing.
@@ -114,9 +218,9 @@ const t = useTranslations(locale);
       if (track.clientWidth === width) return;
       const index = width ? Math.round(track.scrollLeft / width) : 0;
       width = track.clientWidth;
-      track.scrollTo({ left: index * width, behavior: 'instant' as ScrollBehavior });
+      goTo(index, false);
     }).observe(track);
 
-    mark(currentIndex());
+    sync();
   }
 </script>

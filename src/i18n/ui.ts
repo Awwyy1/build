@@ -47,6 +47,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.menu': 'Valmynd',
     'a11y.close': 'Loka',
     'a11y.slide': 'Mynd',
+    'gallery.previous': 'Fyrri mynd',
+    'gallery.next': 'Næsta mynd',
     'theme.dark': 'Skipta yfir í dökkt þema',
     'theme.light': 'Skipta yfir í ljóst þema',
 
@@ -167,6 +169,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.menu': 'Menu',
     'a11y.close': 'Close',
     'a11y.slide': 'Slide',
+    'gallery.previous': 'Previous photograph',
+    'gallery.next': 'Next photograph',
     'theme.dark': 'Switch to the dark theme',
     'theme.light': 'Switch to the light theme',
 
@@ -287,6 +291,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.menu': 'Menu',
     'a11y.close': 'Zamknij',
     'a11y.slide': 'Zdjęcie',
+    'gallery.previous': 'Poprzednie zdjęcie',
+    'gallery.next': 'Następne zdjęcie',
     'theme.dark': 'Przełącz na ciemny motyw',
     'theme.light': 'Przełącz na jasny motyw',
 
@@ -407,6 +413,8 @@ export const ui: Record<Locale, Strings> = {
     'a11y.menu': 'Izvēlne',
     'a11y.close': 'Aizvērt',
     'a11y.slide': 'Attēls',
+    'gallery.previous': 'Iepriekšējais attēls',
+    'gallery.next': 'Nākamais attēls',
     'theme.dark': 'Pārslēgt uz tumšo tēmu',
     'theme.light': 'Pārslēgt uz gaišo tēmu',
 

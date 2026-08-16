@@ -157,10 +157,15 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
     </div>
   </section>
 
-  {/* ---- Careers: on the landing, ahead of contact --------------------- */}
+  {/*
+    ---- Careers: on the landing, ahead of contact ----------------------
+    About puts its photograph on the right, so this one goes left and the
+    bands keep alternating down the page. The text stays first in the
+    source, which is the order it should be read in when the columns stack.
+  */}
   <section id="careers" class="stratum scroll-mt-16">
     <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:gap-16">
-      <div>
+      <div class="lg:order-2">
         <h2 class="font-display text-3xl sm:text-4xl">{t('careers.title')}</h2>
         <p class="mt-6 text-lg text-muted">{t('careers.lead')}</p>
         <p class="mt-4 text-muted">{t('careers.teaser')}</p>
@@ -181,7 +186,7 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
         </div>
       </div>
 
-      <div class="h-full min-h-[20rem]">
+      <div class="h-full min-h-[20rem] lg:order-1">
         <Photo
           src={sectionPhotos.careers}
           alt={t('careers.photo.alt')}

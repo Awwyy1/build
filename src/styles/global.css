@@ -244,6 +244,10 @@ html {
 
 /* ---- Project gallery ------------------------------------------------ */
 
+.gallery-frame {
+  position: relative;
+}
+
 .gallery-track {
   display: flex;
   overflow-x: auto;
@@ -255,6 +259,92 @@ html {
 
 .gallery-track::-webkit-scrollbar {
   display: none;
+}
+
+/* Only a mouse can drag, so only a mouse is invited to. */
+@media (hover: hover) and (pointer: fine) {
+  .gallery-track {
+    cursor: grab;
+  }
+}
+
+.gallery-track.is-dragging {
+  cursor: grabbing;
+  /* Snapping fights a scrollLeft rewritten on every frame. */
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+/*
+ * Arrows exist for pointer devices. A touch screen swipes instead, and
+ * there the buttons would only cover part of the photograph.
+ */
+.gallery-nav {
+  display: none;
+  position: absolute;
+  inset-block-start: 50%;
+  translate: 0 -50%;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-rule);
+  background-color: color-mix(in srgb, var(--color-ground) 82%, transparent);
+  color: var(--color-ink);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 180ms ease,
+    background-color 180ms ease;
+}
+
+.gallery-nav > svg {
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gallery-nav {
+    display: flex;
+  }
+}
+
+/* Kept quiet until the card is under the cursor or holds focus. */
+.gallery:hover .gallery-nav,
+.gallery:focus-within .gallery-nav {
+  opacity: 1;
+}
+
+.gallery-nav:hover {
+  background-color: var(--color-ground);
+}
+
+.gallery-nav:focus-visible {
+  opacity: 1;
+}
+
+.gallery-nav[aria-disabled='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gallery:hover .gallery-nav[aria-disabled='true'],
+.gallery:focus-within .gallery-nav[aria-disabled='true'] {
+  opacity: 0.3;
+}
+
+.gallery-nav--prev {
+  inset-inline-start: 0.5rem;
+}
+
+.gallery-nav--next {
+  inset-inline-end: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-nav {
+    transition: none;
+  }
 }
 
 .gallery-slide {
