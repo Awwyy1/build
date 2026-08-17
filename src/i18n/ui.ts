@@ -66,7 +66,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.eyebrow': 'Frá gagnaverum að einbýlishúsum',
     'hero.title': 'Þök á verslunarmiðstöðvar, veggir í gagnaver',
     'hero.body':
-      'Við erum verktakafyrirtæki í Reykjavík. Við tökum að okkur stór verk, vinnum þau vel og skilum á þröngum tíma. Sömu flokkar skipta um þak á húsinu þínu.',
+      'Við erum verktakafyrirtæki í Reykjavík. Við tökum að okkur stór verk, vinnum þau vel og skilum á þröngum tíma.',
     'hero.cta': 'Fá tilboð',
     'hero.cta2': 'Sjá verkefni',
     'hero.slide1.alt': 'Þakskipti í Kringlunni',
@@ -90,14 +90,13 @@ export const ui: Record<Locale, Strings> = {
       'Sökklar, steypuvinna, viðbyggingar, viðgerðir og tréverk. Ef þetta er byggingarvinna, spurðu okkur.',
 
     'projects.title': 'Verkefni',
-    'projects.lead': 'Það sem við erum í núna.',
     'project.kringlan.kind': 'Þök',
     'project.kringlan.title': 'Kringlan verslunarmiðstöð, Reykjavík',
     'project.kringlan.status': 'Í vinnslu',
     'project.kringlan.body':
       'Heildarendurnýjun þakklæðningar: eldra þakefni rifið af og nýtt lagt í staðinn, á miðstöð sem er opin á meðan.',
     'project.atnorth.kind': 'Iðnaðarbygging',
-    'project.atnorth.title': 'atNorth Mega Data Center, Keflavík',
+    'project.atnorth.title': 'Gagnaver',
     'project.atnorth.status': 'Í vinnslu',
     'project.atnorth.body':
       'Uppsetning samlokueininga, milliveggir og önnur verk á byggingarstað.',
@@ -113,8 +112,6 @@ export const ui: Record<Locale, Strings> = {
     'about.body2':
       'Þeir sem verðleggja verkið vinna sjálfir í því. Þess vegna getum við ábyrgst bæði nákvæmni tilboðsins og tæknilegt eftirlit með framkvæmdinni.',
     'about.photo.alt': 'Vinnuflokkur Byggingakerfis',
-    'about.stat1': 'Starfsmenn',
-    'about.stat2': 'Verk unnin',
 
     'careers.title': 'Störf',
     'careers.lead':
@@ -190,7 +187,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.eyebrow': 'From data centres to private homes',
     'hero.title': 'Roofs on shopping centres, walls in data centres',
     'hero.body':
-      'We are a Reykjavík contractor. We take on large volumes of work, build them properly and deliver to tight deadlines. The same crews will re-roof your house.',
+      'We are a Reykjavík contractor. We take on large volumes of work, build them properly and deliver to tight deadlines.',
     'hero.cta': 'Request a quote',
     'hero.cta2': 'See projects',
     'hero.slide1.alt': 'Roof replacement at Kringlan',
@@ -214,14 +211,13 @@ export const ui: Record<Locale, Strings> = {
       'Foundations, concrete work, extensions, repairs and joinery. If it is building work, ask us.',
 
     'projects.title': 'Projects',
-    'projects.lead': 'What we are on right now.',
     'project.kringlan.kind': 'Roofing',
     'project.kringlan.title': 'Kringlan shopping centre, Reykjavík',
     'project.kringlan.status': 'In progress',
     'project.kringlan.body':
       'Full replacement of the roof covering: the old covering stripped off and a new one laid, over a centre that stays open throughout.',
     'project.atnorth.kind': 'Industrial build',
-    'project.atnorth.title': 'atNorth Mega Data Center, Keflavík',
+    'project.atnorth.title': 'Data centre',
     'project.atnorth.status': 'In progress',
     'project.atnorth.body':
       'Sandwich panel installation, internal partitions and further works on site.',
@@ -237,8 +233,6 @@ export const ui: Record<Locale, Strings> = {
     'about.body2':
       'The people who price a job are the people who work on it. That is why we can stand behind both the accuracy of our estimates and the technical supervision on site.',
     'about.photo.alt': 'The Byggingakerfi crew',
-    'about.stat1': 'People on staff',
-    'about.stat2': 'Projects delivered',
 
     'careers.title': 'Careers',
     'careers.lead':
@@ -314,7 +308,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.eyebrow': 'Od centrów danych po domy prywatne',
     'hero.title': 'Dachy na centrach handlowych, ściany w centrach danych',
     'hero.body':
-      'Jesteśmy firmą budowlaną z Reykjavíku. Bierzemy duże zakresy prac, wykonujemy je solidnie i oddajemy w krótkich terminach. Te same ekipy wymienią dach w Twoim domu.',
+      'Jesteśmy firmą budowlaną z Reykjavíku. Bierzemy duże zakresy prac, wykonujemy je solidnie i oddajemy w krótkich terminach.',
     'hero.cta': 'Poproś o wycenę',
     'hero.cta2': 'Zobacz realizacje',
     'hero.slide1.alt': 'Wymiana dachu w Kringlan',
@@ -338,14 +332,13 @@ export const ui: Record<Locale, Strings> = {
       'Fundamenty, betony, rozbudowy, remonty i stolarka. Jeśli to prace budowlane, pytaj.',
 
     'projects.title': 'Realizacje',
-    'projects.lead': 'Nad czym pracujemy teraz.',
     'project.kringlan.kind': 'Dachy',
     'project.kringlan.title': 'Centrum handlowe Kringlan, Reykjavík',
     'project.kringlan.status': 'W trakcie',
     'project.kringlan.body':
       'Pełna wymiana pokrycia dachowego: demontaż starego pokrycia i montaż nowego, na obiekcie czynnym przez cały czas prac.',
     'project.atnorth.kind': 'Budownictwo przemysłowe',
-    'project.atnorth.title': 'atNorth Mega Data Center, Keflavík',
+    'project.atnorth.title': 'Centrum danych',
     'project.atnorth.status': 'W trakcie',
     'project.atnorth.body':
       'Montaż płyt warstwowych, ścianek działowych i pozostałe prace na obiekcie.',
@@ -361,8 +354,6 @@ export const ui: Record<Locale, Strings> = {
     'about.body2':
       'Wyceny przygotowują ci, którzy potem pracują na budowie. Dlatego możemy ręczyć zarówno za dokładność kosztorysu, jak i za nadzór techniczny nad realizacją.',
     'about.photo.alt': 'Ekipa Byggingakerfi',
-    'about.stat1': 'Osób w firmie',
-    'about.stat2': 'Zrealizowanych obiektów',
 
     'careers.title': 'Praca',
     'careers.lead':
@@ -438,7 +429,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.eyebrow': 'No datu centriem līdz privātmājām',
     'hero.title': 'Jumti tirdzniecības centriem, sienas datu centriem',
     'hero.body':
-      'Mēs esam būvuzņēmums Reikjavīkā. Uzņemamies lielus darba apjomus, izpildām tos kvalitatīvi un nododam saspringtos termiņos. Tās pašas brigādes nomainīs jumtu tavai mājai.',
+      'Mēs esam būvuzņēmums Reikjavīkā. Uzņemamies lielus darba apjomus, izpildām tos kvalitatīvi un nododam saspringtos termiņos.',
     'hero.cta': 'Pieprasīt tāmi',
     'hero.cta2': 'Skatīt projektus',
     'hero.slide1.alt': 'Jumta nomaiņa Kringlan',
@@ -462,14 +453,13 @@ export const ui: Record<Locale, Strings> = {
       'Pamati, betona darbi, piebūves, remonti un kokdarbi. Ja tie ir būvdarbi, jautā mums.',
 
     'projects.title': 'Projekti',
-    'projects.lead': 'Pie kā strādājam šobrīd.',
     'project.kringlan.kind': 'Jumti',
     'project.kringlan.title': 'Tirdzniecības centrs Kringlan, Reikjavīkā',
     'project.kringlan.status': 'Procesā',
     'project.kringlan.body':
       'Pilnīga jumta seguma nomaiņa: vecais segums demontēts un ieklāts jauns, objektā, kas visu laiku paliek atvērts.',
     'project.atnorth.kind': 'Rūpnieciskā būvniecība',
-    'project.atnorth.title': 'atNorth Mega Data Center, Keflavīkā',
+    'project.atnorth.title': 'Datu centrs',
     'project.atnorth.status': 'Procesā',
     'project.atnorth.body':
       'Sendviča paneļu montāža, starpsienas un citi darbi objektā.',
@@ -485,8 +475,6 @@ export const ui: Record<Locale, Strings> = {
     'about.body2':
       'Tāmes sagatavo tie paši cilvēki, kas strādā objektā. Tāpēc mēs varam galvot gan par tāmes precizitāti, gan par tehnisko uzraudzību būvlaukumā.',
     'about.photo.alt': 'Byggingakerfi brigāde',
-    'about.stat1': 'Darbinieki',
-    'about.stat2': 'Pabeigti objekti',
 
     'careers.title': 'Karjera',
     'careers.lead':
