@@ -63,10 +63,10 @@ export const ui: Record<Locale, Strings> = {
     'site.tagline': 'Verktakafyrirtæki í Reykjavík',
     'media.placeholder': 'Ljósmynd',
 
-    'hero.eyebrow': 'Frá gagnaverum að einbýlishúsum',
-    'hero.title': 'Þök á verslunarmiðstöðvar, veggir í gagnaver',
+    'hero.eyebrow': 'Verktakafyrirtæki í Reykjavík',
+    'hero.title': 'Verslunarmiðstöðvar, gagnaver, einbýlishús',
     'hero.body':
-      'Við erum verktakafyrirtæki í Reykjavík. Við tökum að okkur stór verk, vinnum þau vel og skilum á þröngum tíma.',
+      'Við tökum að okkur stór verk, vinnum þau vel og skilum á þröngum tíma.',
     'hero.cta': 'Fá tilboð',
     'hero.cta2': 'Sjá verkefni',
     'hero.slide1.alt': 'Þakskipti í Kringlunni',
@@ -184,10 +184,10 @@ export const ui: Record<Locale, Strings> = {
     'site.tagline': 'Building contractor in Reykjavík',
     'media.placeholder': 'Photograph',
 
-    'hero.eyebrow': 'From data centres to private homes',
-    'hero.title': 'Roofs on shopping centres, walls in data centres',
+    'hero.eyebrow': 'Building contractor in Reykjavík',
+    'hero.title': 'Shopping centres, data centres, private homes',
     'hero.body':
-      'We are a Reykjavík contractor. We take on large volumes of work, build them properly and deliver to tight deadlines.',
+      'We take on large volumes of work, build them properly and deliver to tight deadlines.',
     'hero.cta': 'Request a quote',
     'hero.cta2': 'See projects',
     'hero.slide1.alt': 'Roof replacement at Kringlan',
@@ -305,10 +305,10 @@ export const ui: Record<Locale, Strings> = {
     'site.tagline': 'Firma budowlana w Reykjavíku',
     'media.placeholder': 'Zdjęcie',
 
-    'hero.eyebrow': 'Od centrów danych po domy prywatne',
-    'hero.title': 'Dachy na centrach handlowych, ściany w centrach danych',
+    'hero.eyebrow': 'Firma budowlana w Reykjavíku',
+    'hero.title': 'Centra handlowe, centra danych, domy prywatne',
     'hero.body':
-      'Jesteśmy firmą budowlaną z Reykjavíku. Bierzemy duże zakresy prac, wykonujemy je solidnie i oddajemy w krótkich terminach.',
+      'Bierzemy duże zakresy prac, wykonujemy je solidnie i oddajemy w krótkich terminach.',
     'hero.cta': 'Poproś o wycenę',
     'hero.cta2': 'Zobacz realizacje',
     'hero.slide1.alt': 'Wymiana dachu w Kringlan',
@@ -426,10 +426,10 @@ export const ui: Record<Locale, Strings> = {
     'site.tagline': 'Būvuzņēmums Reikjavīkā',
     'media.placeholder': 'Fotogrāfija',
 
-    'hero.eyebrow': 'No datu centriem līdz privātmājām',
-    'hero.title': 'Jumti tirdzniecības centriem, sienas datu centriem',
+    'hero.eyebrow': 'Būvuzņēmums Reikjavīkā',
+    'hero.title': 'Tirdzniecības centri, datu centri, privātmājas',
     'hero.body':
-      'Mēs esam būvuzņēmums Reikjavīkā. Uzņemamies lielus darba apjomus, izpildām tos kvalitatīvi un nododam saspringtos termiņos.',
+      'Uzņemamies lielus darba apjomus, izpildām tos kvalitatīvi un nododam saspringtos termiņos.',
     'hero.cta': 'Pieprasīt tāmi',
     'hero.cta2': 'Skatīt projektus',
     'hero.slide1.alt': 'Jumta nomaiņa Kringlan',

@@ -23,7 +23,7 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
 <BaseLayout
   locale={locale}
   title={`${company.name}, ${t('site.tagline')}`}
-  description={t('hero.body')}
+  description={`${t('site.tagline')}. ${t('hero.body')}`}
 >
   {/* ---- Hero: full screen, photography behind the headline ------------ */}
   <section class="relative flex screen items-center overflow-hidden">
