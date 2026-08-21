@@ -74,7 +74,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.slide3.alt': 'Vinnuflokkur á staðnum',
 
     'services.title': 'Þjónusta',
-    'services.lead': 'Fjögur svið sem við vinnum mest í. Listinn er ekki takmörkun. Spurðu okkur.',
+    'services.lead': 'Eigin vinnuflokkar á hverju sviði. Ef verkið kallar á meira tökum við að okkur aðalverktökuna.',
     'services.photo.alt': 'Vinna á staðnum',
     'service.roofs.title': 'Þök',
     'service.roofs.body':
@@ -87,7 +87,7 @@ export const ui: Record<Locale, Strings> = {
       'Innveggir, milliveggir og frágangur. Þetta er hlutinn sem flestir verktakar senda áfram. Við höldum honum hjá okkur.',
     'service.general.title': 'Hús og almenn verktaka',
     'service.general.body':
-      'Sökklar, steypuvinna, viðbyggingar, viðgerðir og tréverk. Ef þetta er byggingarvinna, spurðu okkur.',
+      'Sökklar, steypuvinna, viðbyggingar, viðgerðir og tréverk, bæði í nýbyggingum og í húsum sem þegar standa.',
 
     'projects.title': 'Verkefni',
     'project.kringlan.kind': 'Þök',
@@ -195,7 +195,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.slide3.alt': 'A crew on site',
 
     'services.title': 'Services',
-    'services.lead': 'The four things we do most. The list is not a limit. Ask us.',
+    'services.lead': 'Our own crews on every trade. Where a job needs more, we carry it as main contractor.',
     'services.photo.alt': 'Work on site',
     'service.roofs.title': 'Roofing',
     'service.roofs.body':
@@ -208,7 +208,7 @@ export const ui: Record<Locale, Strings> = {
       'Internal walls, partitions and finishing. This is the part most contractors hand to somebody else. We keep it in-house.',
     'service.general.title': 'Houses and general building',
     'service.general.body':
-      'Foundations, concrete work, extensions, repairs and joinery. If it is building work, ask us.',
+      'Foundations, concrete work, extensions, repairs and joinery, on new build and on buildings already standing.',
 
     'projects.title': 'Projects',
     'project.kringlan.kind': 'Roofing',
@@ -316,7 +316,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.slide3.alt': 'Ekipa na budowie',
 
     'services.title': 'Usługi',
-    'services.lead': 'Cztery rzeczy, które robimy najczęściej. Ta lista nie jest granicą. Pytaj.',
+    'services.lead': 'Na każdym kierunku własne ekipy. Jeśli budowa wymaga więcej, prowadzimy ją jako generalny wykonawca.',
     'services.photo.alt': 'Praca na budowie',
     'service.roofs.title': 'Dachy',
     'service.roofs.body':
@@ -329,7 +329,7 @@ export const ui: Record<Locale, Strings> = {
       'Ściany wewnętrzne, ścianki działowe i wykończenia. To część, którą większość firm oddaje podwykonawcom. My robimy ją sami.',
     'service.general.title': 'Domy i prace ogólnobudowlane',
     'service.general.body':
-      'Fundamenty, betony, rozbudowy, remonty i stolarka. Jeśli to prace budowlane, pytaj.',
+      'Fundamenty, betony, rozbudowy, remonty i stolarka, w nowych budynkach i w tych, które już stoją.',
 
     'projects.title': 'Realizacje',
     'project.kringlan.kind': 'Dachy',
@@ -437,7 +437,7 @@ export const ui: Record<Locale, Strings> = {
     'hero.slide3.alt': 'Brigāde objektā',
 
     'services.title': 'Pakalpojumi',
-    'services.lead': 'Četri virzieni, ko darām visbiežāk. Saraksts nav robeža. Jautā mums.',
+    'services.lead': 'Katrā virzienā savas brigādes. Ja objektam vajag vairāk, vadām to kā ģenerāluzņēmējs.',
     'services.photo.alt': 'Darbs objektā',
     'service.roofs.title': 'Jumti',
     'service.roofs.body':
@@ -450,7 +450,7 @@ export const ui: Record<Locale, Strings> = {
       'Iekšējās sienas, starpsienas un apdare. Šo daļu lielākā daļa uzņēmumu nodod apakšuzņēmējiem. Mēs to paturam pie sevis.',
     'service.general.title': 'Mājas un vispārējie būvdarbi',
     'service.general.body':
-      'Pamati, betona darbi, piebūves, remonti un kokdarbi. Ja tie ir būvdarbi, jautā mums.',
+      'Pamati, betona darbi, piebūves, remonti un kokdarbi, gan jaunbūvēs, gan jau uzceltās ēkās.',
 
     'projects.title': 'Projekti',
     'project.kringlan.kind': 'Jumti',
