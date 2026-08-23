@@ -36,6 +36,15 @@ export const services = ['roofs', 'cladding', 'fitout', 'general'] as const;
 /** Project cards, in display order. */
 export const projects = ['kringlan', 'atnorth', 'house'] as const;
 
+/** Questions on the home page, in display order. */
+export const faqs = ['start', 'size', 'area', 'inuse', 'materials', 'warranty'] as const;
+
+/**
+ * Client quotes, in display order. Adding a fourth means adding its four
+ * strings to every locale; nothing else has to change.
+ */
+export const reviewIds = ['one', 'two', 'three'] as const;
+
 /** Open roles listed on the Careers page. */
 export const roles = ['roofer', 'cladder', 'carpenter'] as const;
 
@@ -134,6 +143,46 @@ export const ui: Record<Locale, Strings> = {
       'Sendu okkur ferilskrá og stutta lýsingu á því sem þú hefur unnið við. Við lesum allt og svörum.',
     'careers.cta': 'Senda ferilskrá',
     'careers.back': 'Til baka á forsíðu',
+
+    'reviews.title': 'Hvað viðskiptavinir segja',
+    'reviews.lead': 'Safnað hjá fólkinu sem við unnum fyrir.',
+    'review.one.quote':
+      'Þeir byrjuðu daginn sem þeir sögðust byrja og verslanirnar fyrir neðan lokuðu aldrei. Reikningurinn stemmdi við tilboðið.',
+    'review.one.who': 'Húsvörður, verslunarmiðstöð',
+    'review.one.place': 'Reykjavík',
+    'review.one.when': 'Júní 2026',
+    'review.two.quote':
+      'Við fengum þrjú tilboð. Þeirra var ekki ódýrast og það var það eina sem sagði hvað myndi gerast ef þakviðurinn undir reyndist fúinn.',
+    'review.two.who': 'Húseigandi',
+    'review.two.place': 'Mosfellsbær',
+    'review.two.when': 'Apríl 2026',
+    'review.three.quote':
+      'Það var sópað á hverju kvöldi. Það hljómar smátt þar til maður hefur unnið í húsi þar sem svo var ekki.',
+    'review.three.who': 'Húseigandi',
+    'review.three.place': 'Garðabær',
+    'review.three.when': 'Febrúar 2026',
+
+    'faq.title': 'Algengar spurningar',
+    'faq.lead': 'Þær sem koma fyrst upp í símann.',
+    'faq.foot': 'Ekki á listanum? Hringdu og spurðu.',
+    'faq.start.q': 'Hvenær getið þið byrjað?',
+    'faq.start.a':
+      'Úttekt fer yfirleitt fram innan viku frá símtalinu. Hvenær vinna hefst á staðnum ræðst af stærð verksins og þeim veðurglugga sem stefnt er á, og við tökum fram í tilboðinu hvaða gluggi það er.',
+    'faq.size.q': 'Hvaða stærð verka takið þið að ykkur?',
+    'faq.size.a':
+      'Allt frá þaki á einbýlishúsi upp í fulla klæðningu á atvinnuhúsnæði. Undir ákveðinni stærð kosta pallar og lyfta meira en vinnan sjálf, og þá segjum við það hreint út í stað þess að fela það í tilboðinu.',
+    'faq.area.q': 'Vinnið þið utan Reykjavíkur?',
+    'faq.area.a':
+      'Um allt höfuðborgarsvæðið sem sjálfsagðan hlut. Lengra förum við þegar verkið er nógu stórt til að halda flokki þar alla vikuna.',
+    'faq.inuse.q': 'Getur húsið verið í notkun á meðan?',
+    'faq.inuse.a':
+      'Já, og flest verk okkar í atvinnuhúsnæði eru unnin þannig. Það breytir því hvernig svæðið er skipulagt og hvernig dagurinn er lagður upp, svo það þarf að ræða áður en tilboðið er gert, ekki eftir á.',
+    'faq.materials.q': 'Hver kaupir efnið?',
+    'faq.materials.a':
+      'Við gerum það, nema þú viljir leggja það til sjálfur. Hvort sem er telur tilboðið upp kerfin með nafni, svo þú sérð hvað fer á húsið þitt.',
+    'faq.warranty.q': 'Hvað gerist ef eitthvað bilar síðar?',
+    'faq.warranty.a':
+      'Við ábyrgjumst vinnuna og framleiðandinn efnið, og báðir frestir eru skrifaðir inn í samninginn. Sama símanúmerið gildir í báðum tilvikum, okkar.',
 
     'contact.title': 'Hafa samband',
     'contact.body':
@@ -256,6 +305,46 @@ export const ui: Record<Locale, Strings> = {
     'careers.cta': 'Send your CV',
     'careers.back': 'Back to the home page',
 
+    'reviews.title': 'What clients say',
+    'reviews.lead': 'Collected from the people whose buildings we worked on.',
+    'review.one.quote':
+      'They started on the day they said they would and the shops below never closed. The invoice matched the quote.',
+    'review.one.who': 'Building manager, shopping centre',
+    'review.one.place': 'Reykjavík',
+    'review.one.when': 'June 2026',
+    'review.two.quote':
+      'We had three quotes. Theirs was not the cheapest and it was the only one that said what would happen if the deck underneath turned out to be rotten.',
+    'review.two.who': 'Homeowner',
+    'review.two.place': 'Mosfellsbær',
+    'review.two.when': 'April 2026',
+    'review.three.quote':
+      'The site was swept every evening. That sounds like a small thing until you have worked in a building where it was not.',
+    'review.three.who': 'Homeowner',
+    'review.three.place': 'Garðabær',
+    'review.three.when': 'February 2026',
+
+    'faq.title': 'Questions we get',
+    'faq.lead': 'The ones that come up on the phone before anything else.',
+    'faq.foot': 'Not on the list? Call and ask.',
+    'faq.start.q': 'How soon can you start?',
+    'faq.start.a':
+      'A survey usually happens within a week of the call. Start on site depends on the size of the job and on the weather window we are aiming at, and we say which window that is in the quote.',
+    'faq.size.q': 'What size of job do you take on?',
+    'faq.size.a':
+      'From a single house roof up to a full commercial envelope. Below a certain size the scaffold and the lift cost more than the work itself, and we will say so rather than quote around it.',
+    'faq.area.q': 'Do you work outside Reykjavík?',
+    'faq.area.a':
+      'Across the capital region as a matter of course. Further out we go when the job is large enough to keep a crew there for the week.',
+    'faq.inuse.q': 'Can the building stay in use while you work?',
+    'faq.inuse.a':
+      'Yes, and most of our commercial work is done that way. It changes how the site is staged and how the day is planned, so it belongs in the conversation before the quote, not after.',
+    'faq.materials.q': 'Who buys the materials?',
+    'faq.materials.a':
+      'We do, unless you would rather supply them. Either way the quote lists the systems by name, so you can see what is going on your building.',
+    'faq.warranty.q': 'What happens if something fails later?',
+    'faq.warranty.a':
+      'Workmanship is covered by us and the materials by their maker, and both periods are written into the contract. One phone number either way, ours.',
+
     'contact.title': 'Contact',
     'contact.body':
       'Tell us about the project. We come out, look at the site and get back to you with the next steps.',
@@ -377,6 +466,46 @@ export const ui: Record<Locale, Strings> = {
     'careers.cta': 'Wyślij CV',
     'careers.back': 'Powrót na stronę główną',
 
+    'reviews.title': 'Co mówią klienci',
+    'reviews.lead': 'Zebrane od ludzi, przy których budynkach pracowaliśmy.',
+    'review.one.quote':
+      'Zaczęli w dniu, w którym obiecali, a sklepy poniżej ani razu się nie zamknęły. Faktura zgadzała się z wyceną.',
+    'review.one.who': 'Zarządca, centrum handlowe',
+    'review.one.place': 'Reykjavík',
+    'review.one.when': 'Czerwiec 2026',
+    'review.two.quote':
+      'Mieliśmy trzy wyceny. Ich nie była najtańsza i jako jedyna mówiła, co się stanie, jeśli deskowanie pod spodem okaże się zbutwiałe.',
+    'review.two.who': 'Właściciel domu',
+    'review.two.place': 'Mosfellsbær',
+    'review.two.when': 'Kwiecień 2026',
+    'review.three.quote':
+      'Plac był zamiatany każdego wieczoru. Brzmi drobno, dopóki nie przeżyje się budowy, gdzie tak nie było.',
+    'review.three.who': 'Właściciel domu',
+    'review.three.place': 'Garðabær',
+    'review.three.when': 'Luty 2026',
+
+    'faq.title': 'Częste pytania',
+    'faq.lead': 'Te, które padają w telefonie w pierwszej kolejności.',
+    'faq.foot': 'Nie ma twojego pytania? Zadzwoń i zapytaj.',
+    'faq.start.q': 'Jak szybko możecie zacząć?',
+    'faq.start.a':
+      'Oględziny zwykle w ciągu tygodnia od telefonu. Start na budowie zależy od wielkości zakresu i od okna pogodowego, na które celujemy, a w wycenie piszemy, o które okno chodzi.',
+    'faq.size.q': 'Jakiej wielkości zlecenia bierzecie?',
+    'faq.size.a':
+      'Od dachu jednego domu po pełną powłokę budynku komercyjnego. Poniżej pewnej skali rusztowanie i podnośnik kosztują więcej niż sama praca, i mówimy to wprost, zamiast ukrywać w wycenie.',
+    'faq.area.q': 'Pracujecie poza Reykjavíkiem?',
+    'faq.area.a':
+      'W całym regionie stołecznym standardowo. Dalej jedziemy, gdy zakres jest na tyle duży, by ekipa została tam na cały tydzień.',
+    'faq.inuse.q': 'Czy budynek może działać w trakcie prac?',
+    'faq.inuse.a':
+      'Tak, i tak wykonujemy większość prac komercyjnych. Zmienia to organizację placu i plan dnia, więc rozmawiamy o tym przed wyceną, a nie po niej.',
+    'faq.materials.q': 'Kto kupuje materiały?',
+    'faq.materials.a':
+      'My, chyba że wolisz dostarczyć je sam. Tak czy inaczej wycena wymienia systemy z nazwy, więc widzisz, co trafia na twój budynek.',
+    'faq.warranty.q': 'Co, jeśli coś zawiedzie później?',
+    'faq.warranty.a':
+      'Za robociznę odpowiadamy my, za materiał jego producent, a oba okresy są wpisane do umowy. W obu przypadkach jeden numer telefonu, nasz.',
+
     'contact.title': 'Kontakt',
     'contact.body':
       'Opowiedz nam o projekcie. Przyjedziemy, obejrzymy obiekt i wrócimy do Ciebie z kolejnymi krokami.',
@@ -497,6 +626,46 @@ export const ui: Record<Locale, Strings> = {
       'Atsūti mums savu CV un īsu aprakstu par to, ar ko esi strādājis. Mēs izlasām visu un atbildam.',
     'careers.cta': 'Nosūtīt CV',
     'careers.back': 'Atpakaļ uz sākumlapu',
+
+    'reviews.title': 'Ko saka klienti',
+    'reviews.lead': 'Savākts no cilvēkiem, pie kuru ēkām strādājām.',
+    'review.one.quote':
+      'Viņi sāka tajā dienā, ko bija solījuši, un veikali apakšā neaizvērās nevienu reizi. Rēķins sakrita ar tāmi.',
+    'review.one.who': 'Ēkas pārvaldnieks, tirdzniecības centrs',
+    'review.one.place': 'Reikjavīka',
+    'review.one.when': '2026. gada jūnijs',
+    'review.two.quote':
+      'Mums bija trīs tāmes. Viņu tāme nebija lētākā un bija vienīgā, kas pateica, kas notiks, ja apakšā esošais dēļu klājs izrādīsies satrupējis.',
+    'review.two.who': 'Mājas īpašnieks',
+    'review.two.place': 'Mosfellsbær',
+    'review.two.when': '2026. gada aprīlis',
+    'review.three.quote':
+      'Objekts tika izslaucīts katru vakaru. Tas izklausās sīkums, līdz esi strādājis ēkā, kur tā nebija.',
+    'review.three.who': 'Mājas īpašnieks',
+    'review.three.place': 'Garðabær',
+    'review.three.when': '2026. gada februāris',
+
+    'faq.title': 'Biežākie jautājumi',
+    'faq.lead': 'Tie, kas telefonā izskan vispirms.',
+    'faq.foot': 'Nav sarakstā? Zvani un jautā.',
+    'faq.start.q': 'Cik ātri varat sākt?',
+    'faq.start.a':
+      'Apsekojums parasti notiek nedēļas laikā pēc zvana. Darbu sākums objektā ir atkarīgs no apjoma un no laikapstākļu loga, uz kuru mērķējam, un tāmē norādām, kurš tas ir.',
+    'faq.size.q': 'Kāda apjoma darbus uzņematies?',
+    'faq.size.a':
+      'No vienas privātmājas jumta līdz pilnai komercēkas apvalka nomaiņai. Zem noteikta apjoma sastatnes un pacēlājs izmaksā vairāk nekā pats darbs, un mēs to pasakām atklāti, nevis paslēpjam tāmē.',
+    'faq.area.q': 'Vai strādājat ārpus Reikjavīkas?',
+    'faq.area.a':
+      'Visā galvaspilsētas reģionā kā pašsaprotami. Tālāk braucam, kad darbs ir pietiekami liels, lai brigāde tur paliktu visu nedēļu.',
+    'faq.inuse.q': 'Vai ēka var darboties darbu laikā?',
+    'faq.inuse.a':
+      'Jā, un lielākā daļa mūsu komercobjektu tā arī tiek darīti. Tas maina objekta organizāciju un dienas plānu, tāpēc par to runājam pirms tāmes, nevis pēc tās.',
+    'faq.materials.q': 'Kas pērk materiālus?',
+    'faq.materials.a':
+      'Mēs, ja vien tu nevēlies piegādāt tos pats. Jebkurā gadījumā tāmē sistēmas ir nosauktas vārdā, tāpēc redzi, kas nonāk uz tavas ēkas.',
+    'faq.warranty.q': 'Kas notiek, ja kaut kas vēlāk sabojājas?',
+    'faq.warranty.a':
+      'Par darbu atbildam mēs, par materiālu tā ražotājs, un abi termiņi ir ierakstīti līgumā. Abos gadījumos viens telefona numurs, mūsu.',
 
     'contact.title': 'Kontakti',
     'contact.body':

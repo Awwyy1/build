@@ -1,0 +1,44 @@
+---
+/**
+ * Questions and answers, one open at a time.
+ *
+ * The exclusive behaviour comes from the `name` attribute on `details`,
+ * which browsers treat as a radio group: opening one closes the rest with
+ * no script involved. Where that attribute is not understood the rows
+ * simply open independently, which is a fair fallback and still readable.
+ */
+import { company } from '../config/company';
+import { faqs, useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<div class="mt-10 max-w-3xl">
+  {
+    faqs.map((item, index) => (
+      <details
+        name="faq"
+        open={index === 0}
+        class="border-t border-rule last:border-b"
+      >
+        <summary class="faq-summary flex cursor-pointer items-baseline justify-between gap-6 py-5 font-display text-lg transition hover:text-rust-text">
+          {t(`faq.${item}.q`)}
+          <span class="faq-mark" aria-hidden="true" />
+        </summary>
+        <p class="max-w-2xl pb-6 text-muted">{t(`faq.${item}.a`)}</p>
+      </details>
+    ))
+  }
+</div>
+
+<p class="mt-8 text-muted">
+  {t('faq.foot')}{' '}
+  <a href={`tel:${company.phone.href}`} class="text-rust-text underline underline-offset-4">
+    {company.phone.label}
+  </a>
+</p>

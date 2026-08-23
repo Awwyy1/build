@@ -1,0 +1,36 @@
+---
+/**
+ * What clients said, in their own words.
+ *
+ * No score is shown. A number only means something when a reader can go
+ * and check it, and until the company has a public profile to check it
+ * against, the quotes have to carry the section on their own. The rule
+ * above each card is the only ornament, so a fourth quote can be added
+ * without the block being redesigned.
+ */
+import { reviewIds, useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<div class="mt-10 grid gap-10 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
+  {
+    reviewIds.map((review) => (
+      <figure class="flex h-full flex-col gap-4 border-t-2 border-rust pt-5">
+        <blockquote class="font-display text-lg leading-snug">
+          {t(`review.${review}.quote`)}
+        </blockquote>
+        {/* Quotes run to different lengths, so the names line up instead. */}
+        <figcaption class="mt-auto text-sm text-muted">
+          <span class="block text-ink">{t(`review.${review}.who`)}</span>
+          {t(`review.${review}.place`)}, {t(`review.${review}.when`)}
+        </figcaption>
+      </figure>
+    ))
+  }
+</div>

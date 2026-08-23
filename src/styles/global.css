@@ -381,6 +381,62 @@ html {
   }
 }
 
+/* ---- Questions ------------------------------------------------------ */
+
+/*
+ * The marker is drawn rather than typed: a plus that loses its upright
+ * when the row opens. Two rules, so it stays crisp at any size and picks
+ * up the rust from the palette in both themes.
+ */
+.faq-summary {
+  list-style: none;
+}
+
+.faq-summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-mark {
+  position: relative;
+  flex: none;
+  inline-size: 0.85rem;
+  block-size: 0.85rem;
+  translate: 0 0.15rem;
+}
+
+.faq-mark::before,
+.faq-mark::after {
+  content: '';
+  position: absolute;
+  background-color: var(--color-rust);
+  transition: transform 200ms ease;
+}
+
+.faq-mark::before {
+  inset-block-start: 50%;
+  inset-inline: 0;
+  block-size: 2px;
+  translate: 0 -1px;
+}
+
+.faq-mark::after {
+  inset-inline-start: 50%;
+  inset-block: 0;
+  inline-size: 2px;
+  translate: -1px 0;
+}
+
+details[open] > .faq-summary .faq-mark::after {
+  transform: scaleY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-mark::before,
+  .faq-mark::after {
+    transition: none;
+  }
+}
+
 /* ---- Mobile navigation ---------------------------------------------- */
 
 /*

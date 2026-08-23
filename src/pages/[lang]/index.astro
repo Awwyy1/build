@@ -1,10 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSlideshow from '../../components/HeroSlideshow.astro';
+import Faq from '../../components/Faq.astro';
 import Photo from '../../components/Photo.astro';
 import ProjectGallery from '../../components/ProjectGallery.astro';
+import Reviews from '../../components/Reviews.astro';
 import { company, formatAddress } from '../../config/company';
 import { projectPhotos, sectionPhotos } from '../../config/media';
+import { showReviews } from '../../config/reviews';
 import { locales, localePath, projects, services, useTranslations, type Locale } from '../../i18n/ui';
 
 export function getStaticPaths() {
@@ -13,6 +16,25 @@ export function getStaticPaths() {
 
 const locale = Astro.params.lang as Locale;
 const t = useTranslations(locale);
+
+/*
+ * Turf is laid in courses, so the raised and plain bands have to alternate
+ * all the way down. Leaving a section out shifts everything below it, so
+ * the sequence is derived from the order rather than written onto each
+ * section by hand. Services stays raised because it is the band the hero
+ * has to separate from.
+ */
+const bands: readonly string[] = [
+  'services',
+  'projects',
+  ...(showReviews ? ['reviews'] : []),
+  'about',
+  'careers',
+  'faq',
+  'contact',
+];
+
+const isRaised = (id: string) => bands.indexOf(id) % 2 === 0;
 
 /* Pre-fills the subject so applications stay out of the general inbox. */
 const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
@@ -53,7 +75,7 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
   </section>
 
   {/* ---- Services: full screen, photo alongside the trades ------------- */}
-  <section id="services" class="stratum stratum--raised scroll-mt-16">
+  <section id="services" class={`stratum scroll-mt-16 ${isRaised('services') ? 'stratum--raised' : ''}`}>
     <div class="mx-auto grid screen max-w-6xl items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:gap-16">
       <div class="order-2 h-full min-h-[22rem] lg:order-1">
         <Photo
@@ -83,7 +105,7 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
   </section>
 
   {/* ---- Projects: full screen, three jobs ----------------------------- */}
-  <section id="projects" class="stratum scroll-mt-16">
+  <section id="projects" class={`stratum scroll-mt-16 ${isRaised('projects') ? 'stratum--raised' : ''}`}>
     <div class="mx-auto flex screen max-w-6xl flex-col justify-center px-5 py-20">
       <div>
         <h2 class="font-display text-3xl sm:text-4xl">{t('projects.title')}</h2>
@@ -124,8 +146,22 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
     </div>
   </section>
 
+  {/* ---- Reviews: the work, in the client's words ---------------------- */}
+  {
+    showReviews && (
+      <section id="reviews" class={`stratum scroll-mt-16 ${isRaised('reviews') ? 'stratum--raised' : ''}`}>
+        <div class="mx-auto max-w-6xl px-5 py-20">
+          <h2 class="font-display text-3xl sm:text-4xl">{t('reviews.title')}</h2>
+          <p class="mt-3 max-w-2xl text-muted">{t('reviews.lead')}</p>
+
+          <Reviews locale={locale} />
+        </div>
+      </section>
+    )
+  }
+
   {/* ---- About: full screen, team photograph --------------------------- */}
-  <section id="about" class="stratum stratum--raised scroll-mt-16">
+  <section id="about" class={`stratum scroll-mt-16 ${isRaised('about') ? 'stratum--raised' : ''}`}>
     <div class="mx-auto grid screen max-w-6xl items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:gap-16">
       <div>
         <h2 class="font-display text-3xl sm:text-4xl">{t('about.title')}</h2>
@@ -150,7 +186,7 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
     bands keep alternating down the page. The text stays first in the
     source, which is the order it should be read in when the columns stack.
   */}
-  <section id="careers" class="stratum scroll-mt-16">
+  <section id="careers" class={`stratum scroll-mt-16 ${isRaised('careers') ? 'stratum--raised' : ''}`}>
     <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:gap-16">
       <div class="lg:order-2">
         <h2 class="font-display text-3xl sm:text-4xl">{t('careers.title')}</h2>
@@ -184,8 +220,18 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
     </div>
   </section>
 
+  {/* ---- Questions: the last doubts, ahead of the phone number --------- */}
+  <section id="faq" class={`stratum scroll-mt-16 ${isRaised('faq') ? 'stratum--raised' : ''}`}>
+    <div class="mx-auto max-w-6xl px-5 py-20">
+      <h2 class="font-display text-3xl sm:text-4xl">{t('faq.title')}</h2>
+      <p class="mt-3 max-w-2xl text-muted">{t('faq.lead')}</p>
+
+      <Faq locale={locale} />
+    </div>
+  </section>
+
   {/* ---- Contact: the page's only copy of the details ------------------ */}
-  <section id="contact" class="stratum--raised scroll-mt-16">
+  <section id="contact" class={`scroll-mt-16 ${isRaised('contact') ? 'stratum--raised' : ''}`}>
     <div class="mx-auto max-w-6xl px-5 py-20">
       <h2 class="font-display text-3xl sm:text-4xl">{t('contact.title')}</h2>
       <p class="mt-4 max-w-2xl text-lg text-muted">{t('contact.body')}</p>
