@@ -222,7 +222,9 @@ const applyHref = `mailto:${company.emailCareers}?subject=${encodeURIComponent(
 
   {/* ---- Questions: the last doubts, ahead of the phone number --------- */}
   <section id="faq" class={`stratum scroll-mt-16 ${isRaised('faq') ? 'stratum--raised' : ''}`}>
-    <div class="mx-auto max-w-6xl px-5 py-20">
+    {/* Narrower than the other bands and centred: a column of questions
+        reads better when it is not stranded against the left margin. */}
+    <div class="mx-auto max-w-3xl px-5 py-20">
       <h2 class="font-display text-3xl sm:text-4xl">{t('faq.title')}</h2>
       <p class="mt-3 max-w-2xl text-muted">{t('faq.lead')}</p>
 
